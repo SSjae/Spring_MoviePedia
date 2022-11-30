@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.moviepedia.mapper.AdminMapper">
+	<delete id="mdelete">
+		delete from movie
+	</delete>
+	<delete id="adelete">
+		delete from actor
+	</delete>
+	<delete id="pdelete">
+		delete from photo
+	</delete>
+	
+	<insert id="minsert">
+		insert into movie values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.moviecode}, #{item.movieKtitle}, #{item.movieEtitle},
+			#{item.moviegenre}, #{item.movienation}, #{item.movietime}, #{item.movierelease},
+			#{item.moviedirector}, #{item.moviegrade}, #{item.movieimg}, #{item.movieHsummary}, #{item.movieCsummary})
+		</foreach>
+	</insert>
+	
+	<insert id="ainsert">
+		insert into actor values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.actorcode}, #{item.moviecode}, #{item.actorKname}, #{item.actorEname},
+			#{item.actorpart}, #{item.actorrole}, #{item.actormovie}, #{item.actorimg})
+		</foreach>
+	</insert>
+	
+	<insert id="pinsert">
+		insert into photo(photoimg, moviecode) values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.photoimg}, #{item.moviecode})
+		</foreach>
+	</insert>
+</mapper>
