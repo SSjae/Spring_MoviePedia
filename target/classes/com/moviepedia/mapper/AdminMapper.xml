@@ -22,19 +22,27 @@
 			#{item.moviedirector}, #{item.moviegrade}, #{item.movieimg}, #{item.movieHsummary}, #{item.movieCsummary})
 		</foreach>
 	</insert>
-	
 	<insert id="ainsert">
-		insert into actor values
+		insert into actor(actorcode, moviecode, actorKname, actorEname, actorpart, actorrole, actormovie, actorimg) values
 		<foreach collection="list" item="item" separator=",">
 			(#{item.actorcode}, #{item.moviecode}, #{item.actorKname}, #{item.actorEname},
 			#{item.actorpart}, #{item.actorrole}, #{item.actormovie}, #{item.actorimg})
 		</foreach>
 	</insert>
-	
 	<insert id="pinsert">
 		insert into photo(photoimg, moviecode) values
 		<foreach collection="list" item="item" separator=",">
 			(#{item.photoimg}, #{item.moviecode})
 		</foreach>
 	</insert>
+	
+	<select id="mtotal" resultType="_int">
+		select count(*) from movie
+	</select>
+	<select id="atotal" resultType="_int">
+		select count(*) from actor
+	</select>
+	<select id="ptotal" resultType="_int">
+		select count(*) from photo
+	</select>
 </mapper>

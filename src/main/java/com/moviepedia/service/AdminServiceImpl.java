@@ -120,4 +120,19 @@ public class AdminServiceImpl implements AdminService{
 		mapper.ainsert(actor);
 		mapper.pinsert(photo);
 	}
+
+	@Override
+	public int mtotal() {
+		return mapper.mtotal();
+	}
+	
+	@Override
+	public int atotal() {
+		return mapper.atotal();
+	}
+	
+	@Override
+	public int ptotal() {
+		return mapper.ptotal();
+	}
 }

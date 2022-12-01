@@ -19,4 +19,9 @@ public interface AdminMapper {
 	
 	void pinsert(List<PhotoDTO> photo);
 
+	int mtotal();
+
+	int atotal();
+
+	int ptotal();
 }
