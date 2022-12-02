@@ -15,22 +15,21 @@
 			<img src="${cp}/resources/images/logo.png" alt="로고" />
 		</div>
 	</header>
-	<main class="login-layer">
+	<main class="join-layer">
 		<div class="logo">
 			<img src="${cp}/resources/images/logo.png" alt="로고" />
 		</div>
-		<div class="login-text">
-			로그인
+		<div class="join-text">
+			회원가입
 		</div>
-		<form action = "${cp}/user/login" method = "post">
+		<form action = "${cp}/user/join" method = "post">
 			<input type = "text" name = "userid" placeholder="이메일"/>
 			<input type = "password" name = "userpw" placeholder="비밀번호"/>
-			<button type="submit">로그인</button>
+			<input type = "text" name = "username" placeholder="이름"/>
+			<input type = "text" name = "userphone" placeholder="휴대폰 번호"/>		
+			<input type = "text" name = "userphone" placeholder="선호하는 장르"/>		
+			<button type="submit">회원가입</button>
 		</form>
-		<a href="#">비밀번호를 잊어버리셨나요?</a>
-		<div class="join-text">
-			계정이 없으신가요? <a href="${cp}/user/join">회원가입</a>
-		</div>
 	</main>
 </body>
 </html>

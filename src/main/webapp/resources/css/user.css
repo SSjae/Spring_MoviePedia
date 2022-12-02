@@ -1,0 +1,164 @@
+@charset "UTF-8";
+
+/* user 공통 헤더 */
+header {
+    position: fixed;
+    top: 0px;
+    left: 0;
+    z-index: 51;
+    background: #fff;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    height: 62px;
+    box-shadow: 0 1px 0 0 rgb(0 0 0 / 8%);
+}
+
+header > .head-logo {
+	width: 100%;
+    margin-right: 45px;
+    margin-left: 45px;
+}
+
+header > .head-logo > img {
+	width: 10%;
+    float: left;
+    margin: 8px 0 0 0;
+}
+
+/* 공통 부분 */
+.login-layer, .admin-layer, .join-layer {
+	width: 420px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 8%);
+    box-sizing: border-box;
+	text-align: center;
+	top: 50%;
+    padding: 46px 0 60px 0;
+}
+
+.login-layer form > button, .admin-layer > button, .join-layer form > button {
+	width: 347px;
+    height: 49px;
+    border: none;
+    border-radius: 6px;
+    margin-top: 10px;
+    background: #FF2F62;
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.login-layer form > input, .join-layer form > input {
+	width: 325px;
+    height: 50px;
+    margin-bottom: 10px;
+    border: none;
+    background: #F5f5f5;
+    border-radius: 6px;
+    padding: 0 12px;
+}
+
+/* login.jsp */
+.login-layer {
+	transform: translateY(36%);
+}
+
+.login-layer .logo {
+	text-align: center;
+    margin-top: 10px;
+}
+
+.login-layer .logo > img {
+	height: 65px;
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.login-layer .login-text {
+	font-weight: bold;
+	font-size: 18px;
+	margin: 15px 0 22px 0;
+}
+
+.login-layer form {
+	margin: 20px 0 20px 0;
+}
+
+.login-layer a {
+	color: #FF2F62;
+	text-decoration: none;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.login-layer .join-text {
+	margin-top: 18px;
+}
+
+/* admin.jsp */
+.admin-layer {
+	transform: translateY(50%);
+}
+
+.admin-layer .admin-text {
+	font-weight: bold;
+	font-size: 18px;
+	margin: -10px 0 22px 0;
+}
+
+.admin-layer > .text {
+	margin: 6px 0 16px 0;
+    font-size: 21px;
+}
+
+#loading {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	display: block;
+	opacity: 0.6;
+	background: #e4e4e4;
+	z-index: 99;
+	text-align: center;
+}
+
+#loading > img {
+	position: absolute;
+	top: 44%;
+	left: 48%;
+	z-index: 100;
+}
+
+#loading > p {
+ 	position: absolute;
+ 	top: 50%;
+ 	left: 42%;
+ 	z-index: 101;
+}
+
+/* join.jsp */
+.join-layer {
+	transform: translateY(13%);
+}
+
+.join-layer .logo {
+	text-align: center;
+    margin-top: 10px;
+}
+
+.join-layer .logo > img {
+	height: 65px;
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.join-layer .join-text {
+	font-weight: bold;
+	font-size: 18px;
+	margin: 15px 0 22px 0;
+}
