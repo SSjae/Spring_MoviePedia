@@ -7,6 +7,5 @@ public class UserDTO {
 	private String useremail;
     private String userpw;
     private String username;
-    private String userphone;
     private String prefergenre;
 }

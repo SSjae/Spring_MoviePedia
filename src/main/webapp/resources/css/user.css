@@ -38,7 +38,7 @@ header > .head-logo > img {
     padding: 46px 0 60px 0;
 }
 
-.login-layer form > button, .admin-layer > button, .join-layer form > button {
+.login-layer form > button, .admin-layer > button, .join-layer button {
 	width: 347px;
     height: 49px;
     border: none;
@@ -59,6 +59,39 @@ header > .head-logo > img {
     background: #F5f5f5;
     border-radius: 6px;
     padding: 0 12px;
+    caret-color: #FF2F62;
+}
+
+.login-layer form > .no, .join-layer form > .no {
+	background-image: url(../images/no.svg);
+    background-repeat: no-repeat;
+    background-position: 93% 52%;
+}
+
+.login-layer form > .ok, .join-layer form > .ok {
+	background-image: url(../images/ok.svg);
+    background-repeat: no-repeat;
+    background-position: 93% 52%;
+}
+
+.login-layer form > input:focus, .join-layer form > input:focus {
+	outline: none;
+}
+
+.login-layer form > .useremail-text, .userpw-text {
+	color: rgb(245, 0, 0);
+    font-size: 11px;
+    text-align: left;
+    margin: -4px 0px 13px 47px;
+    display: none;
+}
+
+.join-layer form > .useremail-text, .userpw-text, .username-text, .check-text {
+	color: rgb(245, 0, 0);
+    font-size: 11px;
+    text-align: left;
+    margin: -4px 0px 13px 47px;
+    display: none;
 }
 
 /* login.jsp */

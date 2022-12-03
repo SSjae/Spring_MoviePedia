@@ -6,18 +6,41 @@ import java.time.format.DateTimeFormatter;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.moviepedia.service.UserService;
+
+import lombok.Setter;
 
 @Controller
 @RequestMapping("/user/*")
 public class UserController {
+	@Setter(onMethod_ = @Autowired)
+	private UserService service;
 	
 	@GetMapping({"/login", "/join"})
 	public void replace() {
+	}
+	
+	// 아이디 중복 체크
+	@GetMapping("/check")
+	@ResponseBody
+	public String check(String useremail) {
+		int num = service.checkEmail(useremail);
+		// 중복 안됨
+		String result = "OK";
+		
+		if(num == 1) {
+			// 중복
+			result = "NO";
+		}
+		return result;
 	}
 	
 	// 로그인 시도
