@@ -51,7 +51,7 @@ header > .head-logo > img {
     cursor: pointer;
 }
 
-.login-layer form > input, .join-layer form > input {
+.login-layer form > div > input, .join-layer form > div > input {
 	width: 325px;
     height: 50px;
     margin-bottom: 10px;
@@ -62,23 +62,23 @@ header > .head-logo > img {
     caret-color: #FF2F62;
 }
 
-.login-layer form > .no, .join-layer form > .no {
+.login-layer form > div > .no, .join-layer form > div > .no {
 	background-image: url(../images/no.svg);
     background-repeat: no-repeat;
     background-position: 93% 52%;
 }
 
-.login-layer form > .ok, .join-layer form > .ok {
+.login-layer form > div > .ok, .join-layer form > div > .ok {
 	background-image: url(../images/ok.svg);
     background-repeat: no-repeat;
     background-position: 93% 52%;
 }
 
-.login-layer form > input:focus, .join-layer form > input:focus {
+.login-layer form > div > input:focus, .join-layer form > div > input:focus {
 	outline: none;
 }
 
-.login-layer form > .useremail-text, .userpw-text {
+.login-layer form > div > .useremail-text, .userpw-text {
 	color: rgb(245, 0, 0);
     font-size: 11px;
     text-align: left;
@@ -86,7 +86,7 @@ header > .head-logo > img {
     display: none;
 }
 
-.join-layer form > .useremail-text, .userpw-text, .username-text, .check-text {
+.join-layer form > div > .useremail-text, .userpw-text, .username-text, .check-text {
 	color: rgb(245, 0, 0);
     font-size: 11px;
     text-align: left;
@@ -194,4 +194,24 @@ header > .head-logo > img {
 	font-weight: bold;
 	font-size: 18px;
 	margin: 15px 0 22px 0;
+}
+
+.join-layer > #auth {
+	background: #f2f2f2;
+	cursor: default;
+}
+
+.join-layer > form > .authdiv {
+	display: none;
+	width: 420px;
+}
+
+.join-layer > form > .authdiv > #authnum {
+	width: 59%;
+}
+
+.join-layer > form > .authdiv > #authbt {
+	width: 17%;
+    height: 46px;
+    margin: 0;
 }

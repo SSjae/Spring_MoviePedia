@@ -23,10 +23,14 @@
 			로그인
 		</div>
 		<form action = "${cp}/user/login" method = "post">
-			<input id="useremail" type = "text" name = "useremail" placeholder="이메일" autofocus/>
-			<div class="useremail-text">정확하지 않은 이메일입니다.</div>
-			<input id="userpw" type = "password" name = "userpw" placeholder="비밀번호"/>
-			<div class="userpw-text">비밀번호는 최소 8자리 이상이어야 합니다.</div>
+			<div>
+				<input id="useremail" type = "text" name = "useremail" placeholder="이메일" autofocus/>
+				<div class="useremail-text">정확하지 않은 이메일입니다.</div>
+			</div>
+			<div>
+				<input id="userpw" type = "password" name = "userpw" placeholder="비밀번호"/>
+				<div class="userpw-text">비밀번호는 최소 8자리 이상이어야 합니다.</div>
+			</div>
 			<button id="form-bt" type="submit">로그인</button>
 		</form>
 		<a href="#">비밀번호를 잊어버리셨나요?</a>

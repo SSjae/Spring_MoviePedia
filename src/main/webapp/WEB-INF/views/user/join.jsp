@@ -23,16 +23,27 @@
 			회원가입
 		</div>
 		<form action = "${cp}/user/join" method = "post">
-			<input id="useremail" type = "text" name = "useremail" placeholder="이메일" autofocus/>
-			<div class="useremail-text">정확하지 않은 이메일입니다.</div>
-			<div class="check-text">이미 가입된 이메일입니다.</div>
-			<input id="userpw" type = "password" name = "userpw" placeholder="비밀번호"/>
-			<div class="userpw-text">비밀번호는 최소 8자리 이상이어야 합니다.</div>
-			<input id="username" type = "text" name = "username" placeholder="이름"/>
-			<div class="username-text">이름은 최소 두 글자 이상이어야 합니다.</div>
+			<div>
+				<input id="useremail" class="join" type = "text" name = "useremail" placeholder="이메일" autofocus/>
+				<div class="useremail-text">정확하지 않은 이메일입니다.</div>
+				<div class="check-text">이미 가입된 이메일입니다.</div>
+			</div>
+			<div class="authdiv">
+				<input id="authnum" type = "text" name = "authnum" placeholder="인증번호 확인"/>
+				<button id="authbt">인증</button>
+			</div>
+			<div>
+				<input id="userpw" type = "password" name = "userpw" placeholder="비밀번호"/>
+				<div class="userpw-text">비밀번호는 최소 8자리 이상이어야 합니다.</div>
+			</div>
+			<div>
+				<input id="username" type = "text" name = "username" placeholder="이름"/>
+				<div class="username-text">이름은 최소 두 글자 이상이어야 합니다.</div>
+			</div>
 			<input type = "text" name = "userphone" placeholder="선호하는 장르"/>		
 			<button id="form-bt" type="submit">회원가입</button>
 		</form>
+		<button id="auth" disabled>이메일 인증</button>
 		<button onclick="location.href='${cp}/user/login'">로그인 화면 가기</button>
 	</main>
 </body>
