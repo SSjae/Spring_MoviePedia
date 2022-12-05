@@ -2,7 +2,13 @@ package com.moviepedia.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
@@ -18,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.moviepedia.service.MovieService;
 import com.moviepedia.service.UserService;
 
 import lombok.Setter;
@@ -26,20 +33,56 @@ import lombok.Setter;
 @RequestMapping("/user/*")
 public class UserController {
 	@Setter(onMethod_ = @Autowired)
-	private UserService service;
+	private UserService uservice;
+	
+	@Setter(onMethod_ = @Autowired)
+	private MovieService mservice;
 	
 	@Setter(onMethod_ = @Autowired)
 	private JavaMailSender mailSender;
 	
-	@GetMapping({"/login", "/join"})
+	@GetMapping("/login")
 	public void replace() {
+	}
+	
+	// 회원가입 페이지(모든 장르 데이터 넘겨야됨)
+	@GetMapping("/join")
+	public String join(Model model) {
+		// DB에서 모든 영화 장르만 가져옴(한 영화에 장르가 여러개)
+		ArrayList<String> list = mservice.allGenre();
+		
+		List<String> newList = new ArrayList<String>();
+		for(int i = 0; i < list.size(); i++) {
+			String[] result = list.get(i).split(", ");
+			for(int j = 0; j < result.length; j++){
+				// 장르가 여러개 있기 때문에 ", " 기준으로 짤라서 다시 리스트에 넣음
+				newList.add(result[j]);
+			}
+		}
+		
+		// 중복 제거를 통해 모든 장르 뽑아냄
+		Set<String> set = new HashSet<String>(newList);
+		set.remove("");
+		
+		// 모든 장르 중에서 10개 이상인 것만 넘김
+		List<String> genres = new ArrayList<String>();
+        for (String str : set) {
+        	// 갯수
+        	if(Collections.frequency(newList, str) >= 10) {
+        		genres.add(str);
+        	}
+        }
+		
+		model.addAttribute("genres", genres);
+		
+		return "user/join";
 	}
 	
 	// 아이디 중복 체크
 	@GetMapping("/check")
 	@ResponseBody
 	public String check(String useremail) {
-		int num = service.checkEmail(useremail);
+		int num = uservice.checkEmail(useremail);
 		// 중복 안됨
 		String result = "OK";
 		
@@ -104,7 +147,7 @@ public class UserController {
 	        
 	        Cookie[] list = request.getCookies();
 			for(Cookie cookie:list) {
-				if(cookie.getName().equals("recentDate")) {
+				if(cookie.getName().equals("recentDate") && mservice.total() != 0) {
 					recentDate = cookie.getValue();
 				}
 			}

@@ -186,7 +186,8 @@ $("#authbt").click((e) => {
 		// auth-button 비활성
 		$("#authbt").css("background", "#F2F2F2");
 		$("#authbt").css("cursor", "default");
-		$("#authbt").attr("disabled","disabled");	
+		$("#authbt").attr("disabled","disabled");
+		$("#userpw").focus();
 	} else {
 		alert("이메일 인증에 실패하였습니다.");
 		$("#authnum").focus();

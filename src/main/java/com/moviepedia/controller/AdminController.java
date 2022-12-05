@@ -21,7 +21,7 @@ import lombok.Setter;
 @RequestMapping("/admin/*")
 public class AdminController {
 	@Setter(onMethod_ = @Autowired)
-	private AdminService service;
+	private AdminService aservice;
 	
 	// 현재 날짜 메소드
 	public String nowDate() {
@@ -46,7 +46,7 @@ public class AdminController {
 	//최신화 날짜 Cookie 생성
 	@GetMapping("/recent")
 	public String recent(HttpServletResponse response, Model model) {
-		service.recent();
+		aservice.recent();
 		
 		Cookie cookie = new Cookie("recentDate", nowDate());
 		cookie.setDomain("localhost");
@@ -54,9 +54,9 @@ public class AdminController {
 		cookie.setMaxAge(60*60*24*30*12);
 		response.addCookie(cookie);
 		
-		int mtotal = service.mtotal();
-		int atotal = service.atotal();
-		int ptotal = service.ptotal();
+		int mtotal = aservice.mtotal();
+		int atotal = aservice.atotal();
+		int ptotal = aservice.ptotal();
 		
 		model.addAttribute("msg", "영화 "+mtotal+"개, 출연자 "+atotal+"명, 포토 "+ptotal+"개 최신화가 완료되었습니다.");
 		model.addAttribute("url", "admin/page");

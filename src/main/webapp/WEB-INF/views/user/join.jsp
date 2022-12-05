@@ -40,7 +40,11 @@
 				<input id="username" type = "text" name = "username" placeholder="이름"/>
 				<div class="username-text">이름은 최소 두 글자 이상이어야 합니다.</div>
 			</div>
-			<input type = "text" name = "userphone" placeholder="선호하는 장르"/>		
+			<div>
+				<c:forEach items="${genres }" var="genre">
+					<div>${genre}</div>
+				</c:forEach>
+			</div>	
 			<button id="form-bt" type="submit">회원가입</button>
 		</form>
 		<button id="auth" disabled>이메일 인증</button>
