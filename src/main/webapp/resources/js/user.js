@@ -57,7 +57,6 @@ $("#useremail").keyup(() => {
 	let add = (c) => {$("#useremail").addClass(c)};
 	let remove = (c) => {$("#useremail").removeClass(c)};
 	
-	
 	if(value !== "" && expect.test(value) == false) {
 		auth("n");
 		$("#useremail").css("border","1px solid rgb(245, 0, 0)");
@@ -159,6 +158,7 @@ $("#auth").click(() => {
 			console.log(result);
 			authnum = result;
 			alert("인증번호가 발송되었습니다.");
+			
 			// 이메일 인증 버튼 없애고 인증번호 창 보이기
 			$("#auth").hide();
 			$(".authdiv").show();
