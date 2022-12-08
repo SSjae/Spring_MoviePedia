@@ -40,18 +40,19 @@
 				<input id="username" type = "text" name = "username" placeholder="이름"/>
 				<div class="username-text">이름은 최소 두 글자 이상이어야 합니다.</div>
 			</div>
+			<input type="hidden" id="prefergenre" name="prefergenre"/>
 			<div class="checkbox-card">
 				<fieldset>
 					<legend>선호하는 장르를 선택해주세요</legend>
 					<c:forEach items="${genres}" var="genre">
 						<div>
-							<input class="checkbox" type="checkbox" name="prefergenre" value="${genre}" id="${genre}">
+							<input class="checkbox" type="checkbox" name="prefer" value="${genre}" id="${genre}">
 							<label for="${genre}"><span></span>${genre}</label>
 						</div>
 					</c:forEach>
 				</fieldset>
 			</div>
-			<button id="form-bt" type="submit">회원가입</button>
+			<button id="form-bt" class="join-bt" type="submit">회원가입</button>
 		</form>
 		<button id="auth" disabled>이메일 인증</button>
 		<button onclick="location.href='${cp}/user/login'">로그인 화면 가기</button>

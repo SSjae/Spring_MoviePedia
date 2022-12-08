@@ -4,7 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.moviepedia.mapper.UserMapper">
+	<insert id="join">
+		insert into user values(#{useremail},#{userpw},#{username},#{prefergenre})
+	</insert>
+	
 	<select id="checkEmail" resultType="_int">
 		select count(*) from user where useremail=#{useremail}
 	</select>
+	
+	<select id="login" resultType="com.moviepedia.domain.UserDTO">
+		select * from user where useremail=#{useremail} and userpw=#{userpw}
+	</select>
+	
+	<update id="resetPw">
+		update user set userpw=#{userpw} where useremail=#{useremail}
+	</update>
 </mapper>

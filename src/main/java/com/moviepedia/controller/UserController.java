@@ -3,7 +3,6 @@ package com.moviepedia.controller;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +12,7 @@ import java.util.Set;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.moviepedia.domain.UserDTO;
 import com.moviepedia.service.MovieService;
 import com.moviepedia.service.UserService;
 
@@ -41,13 +42,13 @@ public class UserController {
 	@Setter(onMethod_ = @Autowired)
 	private JavaMailSender mailSender;
 	
-	@GetMapping("/login")
+	@GetMapping({"/login","findPw"})
 	public void replace() {
 	}
 	
-	// 회원가입 페이지(모든 장르 데이터 넘겨야됨)
+	// 회원가입 페이지로 이동(모든 장르 데이터 넘겨야됨)
 	@GetMapping("/join")
-	public String join(Model model) {
+	public String replaceJoin(Model model) {
 		// DB에서 모든 영화 장르만 가져옴(한 영화에 장르가 여러개)
 		ArrayList<String> list = mservice.allGenre();
 		
@@ -74,11 +75,10 @@ public class UserController {
         }
 		
 		model.addAttribute("genres", genres);
-		
 		return "user/join";
 	}
 	
-	// 아이디 중복 체크
+	// join-아이디 중복 체크
 	@GetMapping("/check")
 	@ResponseBody
 	public String check(String useremail) {
@@ -90,6 +90,49 @@ public class UserController {
 			// 중복
 			result = "NO";
 		}
+		return result;
+	}
+	
+	// 회원가입
+	@PostMapping("/join")
+	public String join(UserDTO user, Model model) {
+		if(uservice.join(user)) {
+			model.addAttribute("msg", "회원가입이 완료되었습니다.");
+			model.addAttribute("url", "/");			
+		} else {
+			model.addAttribute("msg", "회원가입에 실패하였습니다. 다시 시도해주세요.");
+			model.addAttribute("url", "user/join");		
+		}
+		
+		return "alert";
+	}
+	
+	// findPw-가입된 아이디인지 아닌지
+	@GetMapping("/check_findPw")
+	@ResponseBody
+	public String check_findPw(String useremail) {
+		int num = uservice.checkEmail(useremail);
+		// 아이디가 있음
+		String result = "OK";
+		
+		if(num == 0) {
+			// 아이디 없음
+			result = "NO";
+		}
+		return result;
+	}
+	
+	@PostMapping("/findPw")
+	@ResponseBody
+	public String findPw(String useremail, String userpw, Model model) {
+		// 설정 성공
+		String result = "success";
+		
+		if(!uservice.resetPw(useremail, userpw)) {
+			// 실패
+			result="fail";
+		}
+		
 		return result;
 	}
 	
@@ -120,14 +163,11 @@ public class UserController {
             helper.setSubject(title);
             helper.setText(content,true);
             mailSender.send(message);
-            
         }catch(Exception e) {
             e.printStackTrace();
         }
         
-        String num = Integer.toString(checkNum);
-        
-		return num;
+		return Integer.toString(checkNum);
 	}
 	
 	// 로그인 시도
@@ -155,9 +195,17 @@ public class UserController {
 	        model.addAttribute("recentDate", recentDate);
 			result = "user/admin";
 		} else {
-			result = "main";
+			UserDTO loginUser = uservice.login(useremail, userpw);
+			if(loginUser != null) {
+				HttpSession session = request.getSession();
+				session.setAttribute("loginUser", loginUser);
+				result = "main";
+			} else {
+				model.addAttribute("msg", "아이디 또는 비밀번호가 틀렸습니다. 다시 시도해주세요.");
+				model.addAttribute("url", "user/login");	
+				result = "alert";
+			}
 		}
-		
 		return result;
 	}
 }

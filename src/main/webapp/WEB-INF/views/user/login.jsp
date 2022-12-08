@@ -33,12 +33,15 @@
 			</div>
 			<button id="form-bt" type="submit">로그인</button>
 		</form>
-		<a href="#">비밀번호를 잊어버리셨나요?</a>
+		<a id="findPw">비밀번호를 잊어버리셨나요?</a>
 		<div class="join-text">
 			계정이 없으신가요? <a href="${cp}/user/join">회원가입</a>
 		</div>
 	</main>
 </body>
+<script type="text/javascript" charset="utf-8">
+	sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+</script>
 <script src="http://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript" src="${cp}/resources/js/user.js"></script>
 </html>
