@@ -199,7 +199,7 @@ public class UserController {
 			if(loginUser != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("loginUser", loginUser);
-				result = "main";
+				result = "redirect:/movie/main";
 			} else {
 				model.addAttribute("msg", "아이디 또는 비밀번호가 틀렸습니다. 다시 시도해주세요.");
 				model.addAttribute("url", "user/login");	

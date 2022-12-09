@@ -15,15 +15,14 @@ header {
 }
 
 header > .head-logo {
-	width: 100%;
-    margin-right: 45px;
-    margin-left: 45px;
+    max-width: 1320px;
+    margin: 0 auto;
 }
 
 header > .head-logo > img {
-	width: 10%;
+	width: 13%;
     float: left;
-    margin: 8px 0 0 0;
+    margin: 9px 0 0 0;
 }
 
 /* 공통 부분 */

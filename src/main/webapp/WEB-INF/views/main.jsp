@@ -7,9 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>MoviePedia</title>
+<link rel="stylesheet" href="${cp}/resources/css/main.css">
 </head>
 <body>
-	${loginUser.useremail}
-	${loginUser.userpw}
+	<c:import url="./header.jsp"></c:import>
 </body>
 </html>
