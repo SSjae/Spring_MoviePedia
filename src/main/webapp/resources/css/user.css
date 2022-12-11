@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
 /* user 공통 헤더 */
 header {
     position: fixed;

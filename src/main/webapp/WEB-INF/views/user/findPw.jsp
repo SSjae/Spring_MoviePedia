@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>MoviePedia</title>
+<link rel="stylesheet" href="${cp}/resources/css/font.css">
 <link rel="stylesheet" href="${cp}/resources/css/user.css">
 </head>
 <body id="findPw-body">
