@@ -96,7 +96,16 @@ footer {
 
 footer .foot-1 {
 	background: #101113;
-	height: 62px;
+    height: 62px;
+    color: #D1D1D2;
+    text-align: center;
+    line-height: 58px;
+    font-size: 19px;
+    font-weight: 500;
+}
+
+footer .foot-1 span {
+	color: #FF0558;
 }
 
 footer .foot-2 {

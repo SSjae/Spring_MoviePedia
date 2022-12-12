@@ -15,7 +15,7 @@
 	</delete>
 	
 	<insert id="minsert">
-		insert into movie values
+		insert into movie(moviecode, movieKtitle, movieEtitle, moviegenre, movienation, movietime, movierelease, moviedirector, moviegrade, movieimg, movieHsummary, movieCsummary) values
 		<foreach collection="list" item="item" separator=",">
 			(#{item.moviecode}, #{item.movieKtitle}, #{item.movieEtitle},
 			#{item.moviegenre}, #{item.movienation}, #{item.movietime}, #{item.movierelease},

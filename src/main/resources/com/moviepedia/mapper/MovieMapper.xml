@@ -4,11 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.moviepedia.mapper.MovieMapper">
-	<select id="total" resultType="_int">
+	<select id="mtotal" resultType="_int">
 		select count(*) from movie
 	</select>
 	
 	<select id="allGenre" resultType="string">
 		select moviegenre from movie
+	</select>
+	
+	<select id="top10" resultType="com.moviepedia.domain.MovieDTO">
+		select * from movie order by moviestar desc limit 0,10
 	</select>
 </mapper>

@@ -186,7 +186,7 @@ public class UserController {
 	        
 	        Cookie[] list = request.getCookies();
 			for(Cookie cookie:list) {
-				if(cookie.getName().equals("recentDate") && mservice.total() != 0) {
+				if(cookie.getName().equals("recentDate") && mservice.mtotal() != 0) {
 					recentDate = cookie.getValue();
 				}
 			}

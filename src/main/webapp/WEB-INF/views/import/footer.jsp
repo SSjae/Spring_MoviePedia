@@ -13,7 +13,7 @@
 <body>
 	<footer>
 		<div class="foot-1">
-			
+			지금까지 <span>★ ${param.mtotal} 개의 영화와 ${param.rtotal} 개의 평가가</span> 쌓였어요.
 		</div>
 		<div class="foot-2">
 			<div>
