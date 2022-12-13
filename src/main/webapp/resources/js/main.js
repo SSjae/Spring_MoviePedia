@@ -1,5 +1,7 @@
 $('.responsive').slick({
   infinite: false,
+  arrows : true,
+  draggable : false,
   speed: 300,
   slidesToShow: 6,
   slidesToScroll: 6,

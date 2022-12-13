@@ -1,7 +1,6 @@
 package com.moviepedia.service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.moviepedia.domain.MovieDTO;
 

@@ -15,7 +15,7 @@
 <body>
 	<c:import url="./import/header.jsp"></c:import>
 	<section>
-		<div class="card" style="width: 100%; height: 1500px;">
+		<div class="card">
 			<div class="card-text">
 				무비피디아 TOP 10 영화
 			</div>
@@ -23,9 +23,24 @@
 				<c:forEach items="${top10}" var="top10">
 					<div class="main">
 						<img src="${top10.movieimg }" alt="img">
-						<div class="text">
-							${top10.movieKtitle }
-						</div>
+						<div class="title">${top10.movieKtitle }</div>
+						<div class="year-nation">${top10.movierelease } ・ ${top10.movienation }</div>
+						<div class="rate">평균 ★${top10.moviestar }</div>
+					</div>			
+				</c:forEach>
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-text">
+				무비피디아 TOP 10 영화
+			</div>
+			<div class="card-main responsive">
+				<c:forEach items="${top10}" var="top10">
+					<div class="main">
+						<img src="${top10.movieimg }" alt="img">
+						<div class="title">${top10.movieKtitle }</div>
+						<div class="year-nation">${top10.movierelease } ・ ${top10.movienation }</div>
+						<div class="rate">평균 ★${top10.moviestar }</div>
 					</div>			
 				</c:forEach>
 			</div>
