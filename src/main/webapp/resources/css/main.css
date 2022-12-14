@@ -31,11 +31,24 @@ section .card .card-text {
     padding: 12px 0 14px 8px;
 }
 
+section .card .card-text a {
+	float: right;
+    text-decoration: none;
+    color: #74747B;
+    font-size: 15px;
+    font-weight: normal;
+    margin-right: 14px;
+}
+
 section .card .card-main .main {
 	width: 222px;
-	height: 417px;
+	height: 420px;
 	padding: 0 8px;
 	box-sizing: border-box;
+}
+
+section .card .card-main .main a {
+    text-decoration: none;
 }
 
 section .card .card-main .main img{
@@ -45,6 +58,7 @@ section .card .card-main .main img{
 }
 
 section .card .card-main .main .title{
+	display: block;
 	color: #292a32;
     font-size: 16px;
     font-weight: 520;
@@ -53,6 +67,7 @@ section .card .card-main .main .title{
 }
 
 section .card .card-main .main .year-nation {
+	display: block;
 	color: #292a32;
     font-size: 14px;
     font-weight: 400;
@@ -60,6 +75,7 @@ section .card .card-main .main .year-nation {
 }
 
 section .card .card-main .main .rate {
+	display: block;
 	color: #555765;
     font-size: 14px;
     font-weight: 400;

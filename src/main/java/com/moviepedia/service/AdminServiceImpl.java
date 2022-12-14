@@ -103,8 +103,12 @@ public class AdminServiceImpl implements AdminService{
 						
 						for(int k = 0; k < elemPhoto.size(); k++) {
 							String photoimg = elemPhoto.get(k).select("a > img").attr("src");
+							PhotoDTO p = null;
 							
-							PhotoDTO p = new PhotoDTO(photoimg, moviecode);
+							// 성인인증 포토 제외
+							if(!photoimg.equals("https://ssl.pstatic.net/static/movie/2012/06/adult_img221x150.png")) {
+								p = new PhotoDTO(photoimg, moviecode);								
+							}
 							
 							photo.add(p);
 						}

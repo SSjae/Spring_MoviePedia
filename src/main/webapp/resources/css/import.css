@@ -51,11 +51,11 @@ header .head ul .head-span span {
 }
 
 header .head ul .head-input {
-    margin: 0 0 0 auto;
+	margin: 0px 20px 0 auto;
 }
 
 header .head ul .head-input input {
-    width: 270px;
+    width: 250px;
     height: 25px;
     border: none;
     border-radius: 2px;
@@ -92,6 +92,7 @@ footer {
 	margin: 0;
 	width: 100%;
 	height: 300px;
+    margin-top: 25px;
 }
 
 footer .foot-1 {

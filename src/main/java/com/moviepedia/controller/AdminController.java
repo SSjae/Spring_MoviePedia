@@ -46,6 +46,7 @@ public class AdminController {
 	//최신화 날짜 Cookie 생성
 	@GetMapping("/recent")
 	public String recent(HttpServletResponse response, Model model) {
+		// 최신화
 		aservice.recent();
 		
 		Cookie cookie = new Cookie("recentDate", nowDate());

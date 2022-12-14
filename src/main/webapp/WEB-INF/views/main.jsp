@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>MoviePedia</title>
 <link rel="stylesheet" href="${cp}/resources/css/font.css">
+<link rel="stylesheet" href="${cp}/resources/css/import.css">
 <link rel="stylesheet" href="${cp}/resources/css/main.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
@@ -15,36 +16,27 @@
 <body>
 	<c:import url="./import/header.jsp"></c:import>
 	<section>
-		<div class="card">
-			<div class="card-text">
-				무비피디아 TOP 10 영화
+		<c:forEach items="${movieLists}" var="movieLists">
+			<div class="card">
+				<div class="card-text">
+					${movieLists.title }<a href="#">${movieLists.all == false ? "" : "모두 보기 > "}</a>
+				</div>
+				<div class="card-main responsive">
+					<c:forEach items="${movieLists.movies}" var="movie" varStatus="status">
+						<div class="main">
+							<a href="${cp}/movie/movieInfo?moviecode=${movie.moviecode}">
+								<img src="${movie.movieimg }" alt="img">
+								<span class="title">${movie.movieKtitle }</span>
+								<span class="year-nation">
+									${movieLists.releases.get(status.index) == "" ? "" : movieLists.releases.get(status.index) += " ・ "}${movie.movienation}
+								</span>
+								<span class="rate">평균 ★${movie.moviestar }</span>
+							</a>
+						</div>			
+					</c:forEach>
+				</div>
 			</div>
-			<div class="card-main responsive">
-				<c:forEach items="${top10}" var="top10">
-					<div class="main">
-						<img src="${top10.movieimg }" alt="img">
-						<div class="title">${top10.movieKtitle }</div>
-						<div class="year-nation">${top10.movierelease } ・ ${top10.movienation }</div>
-						<div class="rate">평균 ★${top10.moviestar }</div>
-					</div>			
-				</c:forEach>
-			</div>
-		</div>
-		<div class="card">
-			<div class="card-text">
-				무비피디아 TOP 10 영화
-			</div>
-			<div class="card-main responsive">
-				<c:forEach items="${top10}" var="top10">
-					<div class="main">
-						<img src="${top10.movieimg }" alt="img">
-						<div class="title">${top10.movieKtitle }</div>
-						<div class="year-nation">${top10.movierelease } ・ ${top10.movienation }</div>
-						<div class="rate">평균 ★${top10.moviestar }</div>
-					</div>			
-				</c:forEach>
-			</div>
-		</div>
+		</c:forEach>
 	</section>
 	<c:import url="./import/footer.jsp">
 		<c:param name="mtotal" value="${mtotal}"/>

@@ -7,14 +7,6 @@ function getContextPath() {
 // 클래스 no, ok에 따라 svg 이미지
 // keyup으로 한 글자씩 쓸때마다 유효성 검사
 $("#form-bt").click(() => {
-	// 선호 장르 한 문자열로 만들어 보내기
-	let prefergenre = "";
-	$("input:checkbox[name='prefer']:checked").each(function() {
-		prefergenre += "," + this.value;
-    })
-    prefergenre = prefergenre.substr(1);
-	$("#prefergenre").val(prefergenre);
-	
 	if($("#useremail").val() === "") {
 		alert("이메일을 입력해주세요")
 		$("#useremail").focus();
@@ -50,6 +42,18 @@ $("#form-bt").click(() => {
 		$("#authnum").focus();
 		return false;
 	}
+	if($("#form-bt").hasClass("join-bt") && $("input:checkbox[name='prefer']:checked").length < 2) {
+		alert("선호하는 장르 2개 이상 체크해주세요.");
+		return false;
+	}
+	
+	// 선호 장르 한 문자열로 만들어 보내기
+	let prefergenre = "";
+	$("input:checkbox[name='prefer']:checked").each(function() {
+		prefergenre += "," + this.value;
+    })
+    prefergenre = prefergenre.substr(1);
+	$("#prefergenre").val(prefergenre);
 	
 	
 })

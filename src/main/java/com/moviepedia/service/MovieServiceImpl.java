@@ -29,4 +29,31 @@ public class MovieServiceImpl implements MovieService{
 	public ArrayList<MovieDTO> top10() {
 		return mapper.top10();
 	}
+	
+	@Override
+	public ArrayList<MovieDTO> likeTop20() {
+		return mapper.likeTop20();
+	}
+	
+	@Override
+	public ArrayList<MovieDTO> genreMovie(String genre) {
+		return mapper.genreMovie(genre);
+	}
+	
+	@Override
+	public ArrayList<MovieDTO> reMovie() {
+		return mapper.reMovie();
+	}
+	
+	@Override
+	public ArrayList<MovieDTO> kMovie() {
+		return mapper.kMovie();
+	}
+	
+	@Override
+	public ArrayList<MovieDTO> fMovie() {
+		return mapper.fMovie();
+	}
+	
+	
 }

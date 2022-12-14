@@ -11,5 +11,15 @@ public interface MovieMapper {
 	int mtotal();
 
 	ArrayList<MovieDTO> top10();
+
+	ArrayList<MovieDTO> likeTop20();
+
+	ArrayList<MovieDTO> genreMovie(String genre);
+
+	ArrayList<MovieDTO> reMovie();
+
+	ArrayList<MovieDTO> kMovie();
+
+	ArrayList<MovieDTO> fMovie();
 	
 }
