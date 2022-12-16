@@ -15,7 +15,7 @@
 </head>
 <body>
 	<c:import url="./import/header.jsp"></c:import>
-	<section class="main-layer">
+	<section class=".main-layer">
 		<c:forEach items="${movieLists}" var="movieLists">
 			<div class="card">
 				<div class="card-text">

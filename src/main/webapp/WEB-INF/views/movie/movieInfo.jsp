@@ -10,8 +10,6 @@
 <link rel="stylesheet" href="${cp}/resources/css/font.css">
 <link rel="stylesheet" href="${cp}/resources/css/import.css">
 <link rel="stylesheet" href="${cp}/resources/css/movie.css">
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 </head>
 <body class="movieInfo">
 	<c:import url="../import/header.jsp"></c:import>
@@ -38,6 +36,5 @@
 	</c:import>
 </body>
 <script src="http://code.jquery.com/jquery-3.6.1.js"></script>
-<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> 
 <script type="text/javascript" src="${cp}/resources/js/movie.js"></script>
 </html>

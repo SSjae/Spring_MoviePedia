@@ -1,0 +1,83 @@
+/* main.jsp */
+.slick-prev {
+	left: 10px !important;
+}
+
+.slick-next {
+	right: 25px !important;
+}
+
+.slick-prev, .slick-next {
+    z-index: 1;
+    top: 39% !important;
+}
+
+.slick-prev:before, .slick-next:before {
+    font-size: 34px !important;
+    line-height: 0 !important;
+}
+
+.main-layer {
+	padding-top: 85px;
+    max-width: 1320px;
+    margin: 0 auto;
+}
+
+.main-layer .card .card-text {
+	font-size: 22px;
+	font-weight: 700;
+	color: #292a32;
+	letter-spacing: -0.4px;
+    line-height: 30px;
+    padding: 12px 0 14px 8px;
+}
+
+.main-layer .card .card-text a {
+	float: right;
+    text-decoration: none;
+    color: #74747B;
+    font-size: 15px;
+    font-weight: normal;
+    margin-right: 14px;
+}
+
+.main-layer .card .card-main .main {
+	width: 222px;
+	height: 420px;
+	padding: 0 8px;
+	box-sizing: border-box;
+}
+
+.main-layer .card .card-main .main a {
+    text-decoration: none;
+}
+
+.main-layer .card .card-main .main img{
+	width: 100%;
+	height: 300px;
+	border-radius: 5px;
+}
+
+.main-layer .card .card-main .main .title{
+	display: block;
+	color: #292a32;
+    font-size: 16px;
+    font-weight: 520;
+    margin-bottom: 3px;
+    margin-top: 5px;
+}
+
+.main-layer .card .card-main .main .year-nation {
+	display: block;
+	color: #292a32;
+    font-size: 14px;
+    font-weight: 400;
+    padding-bottom: 1px
+}
+
+.main-layer .card .card-main .main .rate {
+	display: block;
+	color: #555765;
+    font-size: 14px;
+    font-weight: 400;
+}

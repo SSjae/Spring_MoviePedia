@@ -79,7 +79,8 @@ public class MovieController {
 		int rtotal = rservice.rtotal();
 		MovieDTO movie = mservice.movie(moviecode);
 		String[] movieRelease = movie.getMovierelease().split(", ");
-		movie.getMoviegenre().replace(", ", "/");
+		movie.setMoviegenre(movie.getMoviegenre().replace(", ", "/"));
+		movie.setMovienation(movie.getMovienation().replace(" , ", "/"));
 		ArrayList<ActorDTO> actors = mservice.actors(moviecode);
 		ArrayList<PhotoDTO> photos = mservice.photos(moviecode);
 
