@@ -11,8 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.moviepedia.domain.ActorDTO;
 import com.moviepedia.domain.MainMovieListDTO;
 import com.moviepedia.domain.MovieDTO;
+import com.moviepedia.domain.PhotoDTO;
 import com.moviepedia.domain.UserDTO;
 import com.moviepedia.service.MovieService;
 import com.moviepedia.service.ReviewService;
@@ -73,8 +75,20 @@ public class MovieController {
 	// 영화 상세 정보
 	@GetMapping("/movieInfo")
 	public String movieInfo(String moviecode, Model model) {
-		
-		model.addAttribute("moviecode", moviecode);
+		int mtotal = mservice.mtotal();
+		int rtotal = rservice.rtotal();
+		MovieDTO movie = mservice.movie(moviecode);
+		String[] movieRelease = movie.getMovierelease().split(", ");
+		movie.getMoviegenre().replace(", ", "/");
+		ArrayList<ActorDTO> actors = mservice.actors(moviecode);
+		ArrayList<PhotoDTO> photos = mservice.photos(moviecode);
+
+		model.addAttribute("mtotal", mtotal);
+		model.addAttribute("rtotal", rtotal);
+		model.addAttribute("movie", movie);
+		model.addAttribute("movieRelease", movieRelease[movieRelease.length-1]);
+		model.addAttribute("actors", actors);
+		model.addAttribute("photos", photos);
 		return "movie/movieInfo";
 	}
 	

@@ -2,7 +2,9 @@ package com.moviepedia.mapper;
 
 import java.util.ArrayList;
 
+import com.moviepedia.domain.ActorDTO;
 import com.moviepedia.domain.MovieDTO;
+import com.moviepedia.domain.PhotoDTO;
 
 public interface MovieMapper {
 
@@ -21,5 +23,11 @@ public interface MovieMapper {
 	ArrayList<MovieDTO> kMovie();
 
 	ArrayList<MovieDTO> fMovie();
+
+	MovieDTO movie(String moviecode);
+
+	ArrayList<ActorDTO> actors(String moviecode);
+
+	ArrayList<PhotoDTO> photos(String moviecode);
 	
 }

@@ -35,4 +35,16 @@
 	<select id="fMovie" resultType="com.moviepedia.domain.MovieDTO">
 		select * from movie where movienation not like "%대한민국%" order by movierelease desc
 	</select>
+	
+	<select id="movie" resultType="com.moviepedia.domain.MovieDTO">
+		select * from movie where moviecode=#{moviecode}
+	</select>
+	
+	<select id="actors" resultType="com.moviepedia.domain.ActorDTO">
+		select * from actor where moviecode=#{moviecode}
+	</select>
+	
+	<select id="photos" resultType="com.moviepedia.domain.PhotoDTO">
+		select * from photo where moviecode=#{moviecode}
+	</select>
 </mapper>

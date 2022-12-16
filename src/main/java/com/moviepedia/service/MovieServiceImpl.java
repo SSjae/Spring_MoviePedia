@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.moviepedia.domain.ActorDTO;
 import com.moviepedia.domain.MovieDTO;
+import com.moviepedia.domain.PhotoDTO;
 import com.moviepedia.mapper.MovieMapper;
 
 import lombok.Setter;
@@ -55,5 +57,18 @@ public class MovieServiceImpl implements MovieService{
 		return mapper.fMovie();
 	}
 	
+	@Override
+	public MovieDTO movie(String moviecode) {
+		return mapper.movie(moviecode);
+	}
 	
+	@Override
+	public ArrayList<ActorDTO> actors(String moviecode) {
+		return mapper.actors(moviecode);
+	}
+	
+	@Override
+	public ArrayList<PhotoDTO> photos(String moviecode) {
+		return mapper.photos(moviecode);
+	}
 }
