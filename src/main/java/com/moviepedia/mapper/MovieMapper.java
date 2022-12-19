@@ -18,8 +18,6 @@ public interface MovieMapper {
 
 	ArrayList<MovieDTO> genreMovie(String genre);
 
-	ArrayList<MovieDTO> reMovie();
-
 	ArrayList<MovieDTO> kMovie();
 
 	ArrayList<MovieDTO> fMovie();

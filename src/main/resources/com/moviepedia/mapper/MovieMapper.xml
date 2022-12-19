@@ -24,10 +24,6 @@
 		select * from movie where moviegenre like concat("%",#{genre},"%") order by movierelease desc
 	</select>
 	
-	<select id="reMovie" resultType="com.moviepedia.domain.MovieDTO">
-		select * from movie where movierelease like "%재개봉%" order by movierelease desc
-	</select>
-	
 	<select id="kMovie" resultType="com.moviepedia.domain.MovieDTO">
 		select * from movie where movienation like "%대한민국%" order by movierelease desc
 	</select>

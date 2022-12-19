@@ -7,4 +7,8 @@
 	<select id="rtotal" resultType="_int">
 		select count(*) from review
 	</select>
+	
+	<select id="rMemberCnt" resultType="_int">
+		select count(*) from review where moviecode=#{moviecode}
+	</select>
 </mapper>

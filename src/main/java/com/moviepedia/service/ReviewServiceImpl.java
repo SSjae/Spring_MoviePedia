@@ -16,4 +16,9 @@ public class ReviewServiceImpl implements ReviewService {
 	public int rtotal() {
 		return mapper.rtotal();
 	}
+	
+	@Override
+	public int rMemberCnt(String moviecode) {
+		return mapper.rMemberCnt(moviecode);
+	}
 }

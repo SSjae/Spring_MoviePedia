@@ -4,4 +4,6 @@ public interface ReviewService {
 
 	int rtotal();
 
+	int rMemberCnt(String moviecode);
+
 }

@@ -21,7 +21,7 @@
 				<div class="card-text">
 					${movieLists.title }<a href="#">${movieLists.all == false ? "" : "모두 보기 > "}</a>
 				</div>
-				<div class="card-main responsive">
+				<div class="card-main main-movie">
 					<c:forEach items="${movieLists.movies}" var="movie" varStatus="status">
 						<div class="main">
 							<a href="${cp}/movie/movieInfo?moviecode=${movie.moviecode}">

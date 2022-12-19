@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="${cp}/resources/css/font.css">
 <link rel="stylesheet" href="${cp}/resources/css/import.css">
 <link rel="stylesheet" href="${cp}/resources/css/movie.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 </head>
 <body class="movieInfo">
 	<c:import url="../import/header.jsp"></c:import>
@@ -22,12 +24,52 @@
 				<div class="text">
 					<div class="text-title">${movie.movieKtitle }</div>
 					<div class="text-subTitle">${movie.movieEtitle == "" ? "" : movie.movieEtitle}</div>
-					<div class="text-etc">${movieRelease == "" ? "" : movieRelease += " ・ "}${movie.moviegenre } ・ ${movie.movienation }</div>
+					<div class="text-etc">${movie.movierelease == "" ? "" : movie.movierelease += " ・ "}${movie.moviegenre } ・ ${movie.movienation }</div>
+					<div class="text-star">평균 ★${movie.moviestar} (${rMemberCnt}명)</div>
 				</div>
 			</div>
 		</div>
 		<div class="info-main">
-		
+			<div>
+				<div class="main-text">기본 정보<a href="${cp}/movie/movieDetail?moviecode=${movie.moviecode}">더보기</a></div>
+				<div class="moviedetail">
+					${movie.movieKtitle }<br>
+					${movie.movierelease == "" ? "" : movie.movierelease += " ・ "}${movie.moviegenre } ・ ${movie.movienation }<br>
+					${movie.movietime } ・ ${movie.moviegrade }<br>
+					<div class="content">
+						<div>${movie.movieHsummary == "" ? "" : movie.movieHsummary}</div>
+						<div>${movie.movieCsummary }</div>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<div>
+				<div class="main-text">출연자</div>
+				<div class="actors">
+					
+				</div>
+			</div>
+			<hr>
+			<div>
+				<div class="main-text">갤러리</div>
+				<div class="photos">
+					
+				</div>
+			</div>
+			<hr>
+			<div>
+				<div class="main-text">리뷰</div>
+				<div class="reviews">
+				
+				</div>
+			</div>
+			<hr>
+			<div>
+				<div class="main-text">비슷한 장르 영화</div>
+				<div class="similars">
+				
+				</div>
+			</div>
 		</div>
 	</section> 
 	<c:import url="../import/footer.jsp">
@@ -36,5 +78,6 @@
 	</c:import>
 </body>
 <script src="http://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> 
 <script type="text/javascript" src="${cp}/resources/js/movie.js"></script>
 </html>

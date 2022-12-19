@@ -59,7 +59,11 @@ public class AdminServiceImpl implements AdminService{
 					String moviegenre = elemDetail.select(".mv_info_area .mv_info .info_spec dd:nth-of-type(1) span:nth-of-type(1)").text();
 					String movienation = elemDetail.select(".mv_info_area .mv_info .info_spec dd:nth-of-type(1) span:nth-of-type(2)").text();
 					String movietime = elemDetail.select(".mv_info_area .mv_info .info_spec dd:nth-of-type(1) span:nth-of-type(3)").text();
-					String movierelease = elemDetail.select(".mv_info_area .mv_info .info_spec dd:nth-of-type(1) span:nth-of-type(4)").text();
+					String[] release = elemDetail.select(".mv_info_area .mv_info .info_spec dd:nth-of-type(1) span:nth-of-type(4)").text().split(", ");
+					String movierelease = "";
+					if(release.length > 0) {
+						movierelease = release[release.length-1];
+					}
 					String moviedirector = elemDetail.select(".mv_info_area .mv_info .info_spec dd:nth-of-type(2) p").text();
 					String moviegrade = elemDetail.select(".mv_info_area .mv_info .info_spec dd:nth-of-type(4) p a:nth-of-type(1)").text();
 					String movieimg = elemDetail.select(".mv_info_area .poster > a > img").attr("src");

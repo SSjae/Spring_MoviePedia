@@ -1,4 +1,4 @@
-$('.responsive').slick({
+$('.main-movie').slick({
   infinite: false,
   arrows : true,
   draggable : false,

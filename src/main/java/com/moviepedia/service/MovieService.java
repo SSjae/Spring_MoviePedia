@@ -18,8 +18,6 @@ public interface MovieService {
 
 	ArrayList<MovieDTO> genreMovie(String genre);
 
-	ArrayList<MovieDTO> reMovie();
-
 	ArrayList<MovieDTO> kMovie();
 
 	ArrayList<MovieDTO> fMovie();

@@ -43,11 +43,6 @@ public class MovieServiceImpl implements MovieService{
 	}
 	
 	@Override
-	public ArrayList<MovieDTO> reMovie() {
-		return mapper.reMovie();
-	}
-	
-	@Override
 	public ArrayList<MovieDTO> kMovie() {
 		return mapper.kMovie();
 	}

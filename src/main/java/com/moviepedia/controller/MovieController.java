@@ -55,9 +55,6 @@ public class MovieController {
 			ArrayList<String> genreMovieRelease = relese(genreMovie);
 			movieLists.add(new MainMovieListDTO(genre+" 영화", genreMovie, genreMovieRelease, genre, true));
 		}
-		ArrayList<MovieDTO> reMovie = mservice.reMovie();
-		ArrayList<String> reMovieRelease = relese(reMovie);
-		movieLists.add(new MainMovieListDTO("다시 개봉한 영화", reMovie, reMovieRelease, "재개봉",true));
 		ArrayList<MovieDTO> kMovie = mservice.kMovie();
 		ArrayList<String> kMovieRelease = relese(kMovie);
 		movieLists.add(new MainMovieListDTO("한국 영화", kMovie, kMovieRelease, "대한민국",true));
@@ -77,20 +74,34 @@ public class MovieController {
 	public String movieInfo(String moviecode, Model model) {
 		int mtotal = mservice.mtotal();
 		int rtotal = rservice.rtotal();
+		
 		MovieDTO movie = mservice.movie(moviecode);
-		String[] movieRelease = movie.getMovierelease().split(", ");
 		movie.setMoviegenre(movie.getMoviegenre().replace(", ", "/"));
 		movie.setMovienation(movie.getMovienation().replace(" , ", "/"));
 		ArrayList<ActorDTO> actors = mservice.actors(moviecode);
 		ArrayList<PhotoDTO> photos = mservice.photos(moviecode);
+		int rMemberCnt = rservice.rMemberCnt(moviecode);
 
 		model.addAttribute("mtotal", mtotal);
 		model.addAttribute("rtotal", rtotal);
 		model.addAttribute("movie", movie);
-		model.addAttribute("movieRelease", movieRelease[movieRelease.length-1]);
+		model.addAttribute("rMemberCnt", rMemberCnt);
 		model.addAttribute("actors", actors);
 		model.addAttribute("photos", photos);
 		return "movie/movieInfo";
+	}
+	
+	// 영화 상세 기본 정보
+	@GetMapping("/movieDetail")
+	public String movieDetail(String moviecode, Model model) {
+		
+		MovieDTO movie = mservice.movie(moviecode);
+
+		model.addAttribute("movie", movie);
+		movie.setMoviegenre(movie.getMoviegenre().replace(", ", "/"));
+		movie.setMovienation(movie.getMovienation().replace(" , ", "/"));
+		
+		return "movie/movieDetail";
 	}
 	
 	// 재개봉으로 인한 개봉날짜가 여러 개인 것중 맨 처음에 개봉한 연도만 뽑아내기 위한 메소드
@@ -102,10 +113,10 @@ public class MovieController {
 			if(release.equals("")) {
 				releaseArr.add("");
 			}
-			else if(release.length() == 7 || release.substring(release.length()-9, release.length()-8).equals(",")) {
+			else if(release.length() == 7) {
 				// 1999 개봉
 				releaseArr.add(release.substring(release.length()-7, release.length()-3));
-			} else if (release.length() == 11 || release.substring(release.length()-13, release.length()-12).equals(",")) {
+			} else if (release.length() == 11) {
 				// 1999 .12 개봉
 				releaseArr.add(release.substring(release.length()-11, release.length()-7));
 			} else {
