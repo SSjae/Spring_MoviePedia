@@ -28,4 +28,6 @@ public interface MovieService {
 
 	ArrayList<PhotoDTO> photos(String moviecode);
 
+	ArrayList<MovieDTO> similarMovie(String moviecode, String genre);
+
 }

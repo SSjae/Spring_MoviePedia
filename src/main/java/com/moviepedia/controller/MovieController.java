@@ -81,6 +81,9 @@ public class MovieController {
 		ArrayList<ActorDTO> actors = mservice.actors(moviecode);
 		ArrayList<PhotoDTO> photos = mservice.photos(moviecode);
 		int rMemberCnt = rservice.rMemberCnt(moviecode);
+		
+		String genre = movie.getMoviegenre().split("/")[0];
+		ArrayList<MovieDTO> similar = mservice.similarMovie(moviecode, genre);
 
 		model.addAttribute("mtotal", mtotal);
 		model.addAttribute("rtotal", rtotal);
@@ -88,6 +91,7 @@ public class MovieController {
 		model.addAttribute("rMemberCnt", rMemberCnt);
 		model.addAttribute("actors", actors);
 		model.addAttribute("photos", photos);
+		model.addAttribute("similar", similar);
 		return "movie/movieInfo";
 	}
 	

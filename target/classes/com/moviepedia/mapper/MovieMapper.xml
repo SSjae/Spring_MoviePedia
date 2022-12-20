@@ -43,4 +43,8 @@
 	<select id="photos" resultType="com.moviepedia.domain.PhotoDTO">
 		select * from photo where moviecode=#{moviecode}
 	</select>
+	
+	<select id="similarMovie" resultType="com.moviepedia.domain.MovieDTO">
+		select * from movie where moviegenre like concat(#{genre},"%") and moviecode not in(#{moviecode}) order by movierelease desc
+	</select>
 </mapper>

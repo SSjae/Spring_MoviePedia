@@ -23,6 +23,9 @@
 				<span class="title">제목</span><span class="content">${movie.movieKtitle }</span>
 			</div>
 			<div>
+				<span class="title">감독</span><span class="content">${movie.moviedirector }</span>
+			</div>
+			<div>
 				<span class="title">개봉 날짜</span><span class="content">${movie.movierelease }</span>
 			</div>
 			<div>

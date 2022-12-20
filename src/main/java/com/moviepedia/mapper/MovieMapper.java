@@ -2,6 +2,8 @@ package com.moviepedia.mapper;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.moviepedia.domain.ActorDTO;
 import com.moviepedia.domain.MovieDTO;
 import com.moviepedia.domain.PhotoDTO;
@@ -27,5 +29,7 @@ public interface MovieMapper {
 	ArrayList<ActorDTO> actors(String moviecode);
 
 	ArrayList<PhotoDTO> photos(String moviecode);
+
+	ArrayList<MovieDTO> similarMovie(@Param("moviecode")String moviecode, @Param("genre")String genre);
 	
 }

@@ -66,4 +66,9 @@ public class MovieServiceImpl implements MovieService{
 	public ArrayList<PhotoDTO> photos(String moviecode) {
 		return mapper.photos(moviecode);
 	}
+	
+	@Override
+	public ArrayList<MovieDTO> similarMovie(String moviecode, String genre) {
+		return mapper.similarMovie(moviecode, genre);
+	}
 }

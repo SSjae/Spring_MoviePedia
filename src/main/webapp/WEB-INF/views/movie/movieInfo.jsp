@@ -42,18 +42,38 @@
 					</div>
 				</div>
 			</div>
-			<hr>
-			<div>
-				<div class="main-text">출연자</div>
-				<div class="actors">
-					
+			<c:if test="${actors.size() != 0}">
+				<hr>
+				<div>
+					<div class="main-text">출연자</div>
+					<ul class="actors-slick">
+						<c:forEach items="${actors}" var="actor" varStatus="status">
+							<c:if test="${status.index % 3 eq 0 }">
+								<li class="actors">
+									<c:forEach var="j" begin="${status.index}" end="${actors.size()-status.index > 3 ? status.index + (3 - 1) : actors.size()-1}" step="1">
+										<div class="actors-main">
+											<img src="${actors.get(j).actorimg }" alt="actorImg"/>
+											<div class="text">
+												<div class="kname">${actors.get(j).actorKname }</div>
+												<div class="part">${actors.get(j).actorpart } | ${actors.get(j).actorrole }</div>							
+											</div>
+										</div>
+									</c:forEach>
+								</li>
+							</c:if>
+						</c:forEach>
+					</ul>
 				</div>
-			</div>
+			</c:if>
 			<hr>
 			<div>
 				<div class="main-text">갤러리</div>
-				<div class="photos">
-					
+				<div class="photos photos-slick">
+					<c:forEach items="${photos}" var="photo" varStatus="status">
+						<div class="photos-main">
+							<img src="${photo.photoimg }" alt="photoImg"/>						
+						</div>
+					</c:forEach>
 				</div>
 			</div>
 			<hr>
@@ -67,7 +87,15 @@
 			<div>
 				<div class="main-text">비슷한 장르 영화</div>
 				<div class="similars">
-				
+					<c:forEach items="${similar}" var="movie" varStatus="status">
+						<div class="similars-main">
+							<a href="${cp}/movie/movieInfo?moviecode=${movie.moviecode}">
+								<img src="${movie.movieimg }" alt="img">
+								<span class="title">${movie.movieKtitle }</span>
+								<span class="rate">평균 ★${movie.moviestar }</span>
+							</a>
+						</div>			
+					</c:forEach>
 				</div>
 			</div>
 		</div>
