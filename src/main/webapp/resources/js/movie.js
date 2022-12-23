@@ -25,30 +25,30 @@ $('.photos-slick').slick({
   slidesToScroll: 3
  });
 
-
-
-// 비슷한 장르 영화 더보기
-$(document).ready(() => {
-	// 전체 영화 수
-	
-	// 조회 인덱스
-	let startIndex = 1;
-	let stepIndex = 15;
-	
-	
-	const similars = (startIndex) => {
-		let endIndex = startIndex + stepIndex - 1;
-		$.ajax({
-			url : ctx+"/movie/similars",
-			type : "get",
-			data : {"movieCode":$("#moviecode").val(), "startIndex":startIndex, "endIndex":endIndex},
-			success : function(result) {
-				console.log(result);
-			},
-			error : function() {
-				console.log("서버 ");
+// 더보기를 눌렀을 때 나머지 출력
+$(".add").click((e) => {
+	e.preventDefault();
+	$(".add").hide();
+	let content = "";
+	$.ajax({
+		url : ctx+"/movie/similars",
+		type : "get",
+        dataType:"json",
+		data : {"moviecode":$("#moviecode").val()},
+		success : function(result) {
+			for(let i = 0; i < result.length; i++) {
+				content += "<div class='similars-main'>";
+				content += "<a href="+ctx+"/movie/movieInfo?moviecode="+result[i].moviecode+">";
+				content += "<img src='"+result[i].movieimg+"'alt='img'>";
+				content += "<span class='title'>"+result[i].movieKtitle+"</span>";
+				content += "<span class='rate'>평균 ★"+result[i].moviestar+"</span>";
+				content += "</a>"
+				content += "</div>"
 			}
-		})
-	}
-	similars(startIndex);
+			$(".similars").append(content);
+		},
+		error : function() {
+			console.log("서버 ");
+		}
+	})
 })

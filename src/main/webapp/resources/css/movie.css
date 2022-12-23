@@ -215,14 +215,14 @@
 }
 
 .info-layer .info-main .similars {
-	margin: 0 20px;
+	margin: 0 0 20px 24px;
 	display: flex;
 	flex-wrap: wrap;
 }
 
 .info-layer .info-main .similars .similars-main {
     margin-bottom: 24px;
-    margin-right: 9px;
+    margin-right: 9.891px;
 }
 
 .info-layer .info-main .similars .similars-main a {
@@ -252,6 +252,25 @@
 	color: #555765;
     font-size: 14px;
     font-weight: 400;
+}
+
+.info-layer .info-main .similars .add {
+	display: flex;
+    align-items: center;
+    margin: 0 auto;
+    background: white;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+    width: calc(100% - 30px);
+    max-width: 172px;
+    min-width: 72px;
+    height: 34px;
+    border: 1px solid rgb(227, 227, 227);
+    justify-content: center;
+    padding-left: 10px;
 }
 
 /* movieDetail.jsp */

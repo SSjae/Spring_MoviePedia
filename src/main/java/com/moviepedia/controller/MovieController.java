@@ -1,6 +1,7 @@
 package com.moviepedia.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -82,9 +83,9 @@ public class MovieController {
 		ArrayList<ActorDTO> actors = mservice.actors(moviecode);
 		ArrayList<PhotoDTO> photos = mservice.photos(moviecode);
 		int rMemberCnt = rservice.rMemberCnt(moviecode);
-		
+
 		String genre = movie.getMoviegenre().split("/")[0];
-		ArrayList<MovieDTO> similar = mservice.similarMovie(moviecode, genre);
+		List<MovieDTO> similar = mservice.similarMovie(moviecode, genre);
 
 		model.addAttribute("mtotal", mtotal);
 		model.addAttribute("rtotal", rtotal);
@@ -112,14 +113,13 @@ public class MovieController {
 	// 비슷한 장르 더보기
 	@GetMapping("/similars")
 	@ResponseBody
-	public ArrayList<MovieDTO> similars(String moviecode, int startIndex, int endIndex) {
+	public List<MovieDTO> similars(String moviecode) {
 		MovieDTO movie = mservice.movie(moviecode);
+		movie.setMoviegenre(movie.getMoviegenre().replace(", ", "/"));
 		String genre = movie.getMoviegenre().split("/")[0];
-		ArrayList<MovieDTO> similar = mservice.similarMovie(moviecode, genre);
+		List<MovieDTO> similar = mservice.similarMovie(moviecode, genre);
 		
-		System.out.println(moviecode);
-		System.out.println(startIndex);
-		System.out.println(endIndex);
+		similar = similar.subList(15, similar.size());
 		
 		return similar;
 	}

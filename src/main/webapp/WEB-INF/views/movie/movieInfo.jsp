@@ -88,17 +88,19 @@
 				<div class="main-text">비슷한 장르 영화</div>
 				<input type="hidden" value="${movie.moviecode }" id="moviecode"/>
 				<div class="similars">
-					<c:forEach items="${similar}" var="movie" varStatus="status">
+					<c:forEach var="i" begin="0" end="${similar.size() > 15 ? 14 : similar.size() - 1}" step="1">
 						<div class="similars-main">
-							<a href="${cp}/movie/movieInfo?moviecode=${movie.moviecode}">
-								<img src="${movie.movieimg }" alt="img">
-								<span class="title">${movie.movieKtitle }</span>
-								<span class="rate">평균 ★${movie.moviestar }</span>
+							<a href="${cp}/movie/movieInfo?moviecode=${similar.get(i).moviecode}">
+								<img src="${similar.get(i).movieimg }" alt="img">
+								<span class="title">${similar.get(i).movieKtitle }</span>
+								<span class="rate">평균 ★${similar.get(i).moviestar }</span>
 							</a>
 						</div>			
 					</c:forEach>
+					<c:if test="${similar.size() > 15}">
+						<button class='add'>더보기 <img src="${cp}/resources/images/bottomarrow.svg" alt="아래화살표"></button>					
+					</c:if>
 				</div>
-				<button>더보기</button>
 			</div>
 		</div>
 	</section> 
