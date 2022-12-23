@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.moviepedia.domain.ActorDTO;
 import com.moviepedia.domain.MainMovieListDTO;
@@ -106,6 +107,21 @@ public class MovieController {
 		movie.setMovienation(movie.getMovienation().replace(" , ", "/"));
 		
 		return "movie/movieDetail";
+	}
+	
+	// 비슷한 장르 더보기
+	@GetMapping("/similars")
+	@ResponseBody
+	public ArrayList<MovieDTO> similars(String moviecode, int startIndex, int endIndex) {
+		MovieDTO movie = mservice.movie(moviecode);
+		String genre = movie.getMoviegenre().split("/")[0];
+		ArrayList<MovieDTO> similar = mservice.similarMovie(moviecode, genre);
+		
+		System.out.println(moviecode);
+		System.out.println(startIndex);
+		System.out.println(endIndex);
+		
+		return similar;
 	}
 	
 	// 재개봉으로 인한 개봉날짜가 여러 개인 것중 맨 처음에 개봉한 연도만 뽑아내기 위한 메소드

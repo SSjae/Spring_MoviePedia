@@ -86,6 +86,7 @@
 			<hr>
 			<div>
 				<div class="main-text">비슷한 장르 영화</div>
+				<input type="hidden" value="${movie.moviecode }" id="moviecode"/>
 				<div class="similars">
 					<c:forEach items="${similar}" var="movie" varStatus="status">
 						<div class="similars-main">
@@ -97,6 +98,7 @@
 						</div>			
 					</c:forEach>
 				</div>
+				<button>더보기</button>
 			</div>
 		</div>
 	</section> 
