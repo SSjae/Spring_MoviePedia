@@ -1,10 +1,10 @@
 /* main.jsp */
 .slick-prev {
-	left: 10px !important;
+	left: -29px !important;
 }
 
 .slick-next {
-	right: 25px !important;
+	right: -15px !important;
 }
 
 .slick-prev, .slick-next {
@@ -15,6 +15,7 @@
 .slick-prev:before, .slick-next:before {
     font-size: 34px !important;
     line-height: 0 !important;
+    color: rgb(0 0 0 / 20%) !important;
 }
 
 .main-layer {

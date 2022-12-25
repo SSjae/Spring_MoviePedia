@@ -1,4 +1,4 @@
-/* mainInfo.jsp */
+/* movieInfo.jsp */
 .movieInfo {
 	background-color: #F8F8F8;
 }
@@ -343,4 +343,74 @@
     white-space: pre-line;
 	margin-bottom: -10px;
     margin-top: -10px;
+}
+
+/* movieAll.jsp */
+.movieAll {
+	background-color: #F8F8F8;
+}
+
+.all-layer {
+	max-width: 960px;
+    background-color: white;
+    margin: 105px auto 0px;
+    border: 1px solid #e3e3e3;
+    border-radius: 6px;
+    padding: 8px 0 0;
+}
+
+.all-layer .all-head .text {
+	font-size: 22px;
+    font-weight: 700;
+    color: #292a32;
+    letter-spacing: -0.4px;
+    margin: 0 0 0 20px;
+}
+
+.all-layer .all-head .text span {
+	color: #a0a0a0;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    margin: 0px 0px 0px 7px;
+}
+
+.all-layer .all-main .allMovie {
+	margin: 17px 0 20px 24px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.all-layer .all-main .allMovie .allMovie-main {
+    margin-bottom: 24px;
+    margin-right: 9.891px;
+}
+
+.all-layer .all-main .allMovie .allMovie-main a {
+    text-decoration: none;
+}
+
+.all-layer .all-main .allMovie .allMovie-main img{
+	width: 174.12px;
+    height: 250px;
+    border-radius: 5px;
+}
+
+.all-layer .all-main .allMovie .allMovie-main .title{
+	display: block;
+	color: #292a32;
+    font-size: 16px;
+    font-weight: 520;
+    margin-bottom: 3px;
+    width: 174.12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.all-layer .all-main .allMovie .allMovie-main .rate {
+	display: block;
+	color: #555765;
+    font-size: 14px;
+    font-weight: 400;
 }

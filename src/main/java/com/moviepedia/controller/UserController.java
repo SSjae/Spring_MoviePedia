@@ -42,7 +42,7 @@ public class UserController {
 	@Setter(onMethod_ = @Autowired)
 	private JavaMailSender mailSender;
 	
-	@GetMapping({"/login","findPw"})
+	@GetMapping({"/login","/findPw"})
 	public void replace() {
 	}
 	

@@ -253,16 +253,13 @@ $(document).ready(function() {
     });
 });
 
-// 비밀번호 재설정 Popup창
-$("#findPw").click((e) => {
-	var ctx = getContextPath();
-	e.preventDefault();
-	var url = ctx+'/user/findPw';
-	var title = 'findPw';
-	var status = "toolbar=no,titlebar=no,location=no,scrollbars=no," +
-				"resizable=no,status=no,menubar=no," +
-				"width=462px, height=600px, top=150px,left=300px"; 
-	window.open(url,title,status);
+// 로그인 때 비밀번호 찾기 모달 띄우고 닫기
+$("#findPw").click(function(){
+	$(".modal").fadeIn();
+});
+  
+$(".x").click(() => {
+	$(".modal").fadeOut();
 })
 
 // 비밀번호 재설정 이메일 인증 버튼

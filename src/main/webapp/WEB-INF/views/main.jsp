@@ -19,7 +19,7 @@
 		<c:forEach items="${movieLists}" var="movieLists">
 			<div class="card">
 				<div class="card-text">
-					${movieLists.title }<a href="#">${movieLists.all == false ? "" : "모두 보기 > "}</a>
+					${movieLists.title }<a href="${cp}/movie/movieAll?title=${movieLists.title}">${movieLists.all == false ? "" : "모두 보기 > "}</a>
 				</div>
 				<div class="card-main main-movie">
 					<c:forEach items="${movieLists.movies}" var="movie" varStatus="status">

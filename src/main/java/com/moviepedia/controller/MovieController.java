@@ -124,6 +124,29 @@ public class MovieController {
 		return similar;
 	}
 	
+	// 영화 모두보기
+	@GetMapping("/movieAll")
+	public String movieAll(String title, Model model) {
+		int mtotal = mservice.mtotal();
+		int rtotal = rservice.rtotal();
+		
+		ArrayList<MovieDTO> movies = new ArrayList<MovieDTO>();
+		
+		if(title.equals("한국 영화")) {
+			movies = mservice.kMovie();
+		} else if (title.equals("해외 영화")) {
+			movies = mservice.fMovie();
+		} else {
+			movies = mservice.genreMovie(title.substring(0, title.length()-3));
+		}
+		
+		model.addAttribute("mtotal", mtotal);
+		model.addAttribute("rtotal", rtotal);
+		model.addAttribute("title", title);
+		model.addAttribute("movies", movies);
+		return "movie/movieAll";
+	}
+	
 	// 재개봉으로 인한 개봉날짜가 여러 개인 것중 맨 처음에 개봉한 연도만 뽑아내기 위한 메소드
 	public ArrayList<String> relese(ArrayList<MovieDTO> movies) {
 		ArrayList<String> releaseArr = new ArrayList<String>();

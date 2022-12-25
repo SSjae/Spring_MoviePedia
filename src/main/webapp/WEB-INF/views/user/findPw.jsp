@@ -22,7 +22,7 @@
 		</div>
 		<form>
 			<div>
-				<input id="useremail" class="findPw" type = "text" name = "useremail" placeholder="이메일" autofocus/>
+				<input id="useremail" class="findPw" type = "text" name="useremail" placeholder="이메일" autofocus/>
 				<div class="useremail-text">정확하지 않은 이메일입니다.</div>
 				<div class="check-text">가입되지 않은 이메일입니다.</div>
 			</div>

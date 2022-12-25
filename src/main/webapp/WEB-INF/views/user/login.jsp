@@ -39,6 +39,13 @@
 			계정이 없으신가요? <a href="${cp}/user/join">회원가입</a>
 		</div>
 	</main>
+	
+	<div class="modal">
+		<div class="modal_content">
+			<img class="x" src="${cp}/resources/images/x.svg" alt="x">
+			<iframe  width="390" height="500" frameborder=0 src="${cp}/user/findPw"></iframe>
+		</div>
+	</div>
 </body>
 <script type="text/javascript" charset="utf-8">
 	sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
