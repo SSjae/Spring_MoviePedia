@@ -3,7 +3,7 @@ package com.moviepedia.domain;
 import lombok.Data;
 
 @Data
-public class LikemovieDTO {
+public class LikeMovieDTO {
 	private int likemovienum;
 	private String useremail;
 	private String moviecode;

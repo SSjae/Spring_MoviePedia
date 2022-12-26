@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.moviepedia.domain.ActorDTO;
+import com.moviepedia.domain.LikeMovieDTO;
 import com.moviepedia.domain.MovieDTO;
 import com.moviepedia.domain.PhotoDTO;
 import com.moviepedia.mapper.MovieMapper;
@@ -70,5 +71,21 @@ public class MovieServiceImpl implements MovieService{
 	@Override
 	public ArrayList<MovieDTO> similarMovie(String moviecode, String genre) {
 		return mapper.similarMovie(moviecode, genre);
+	}
+	
+	@Override
+	public LikeMovieDTO getLikeMovie(String moviecode, String useremail) {
+		return mapper.getLikeMovie(moviecode, useremail);
+	}
+	
+	@Override
+	public void addLike(String moviecode, String useremail) {
+		mapper.addLike(moviecode, useremail);
+	}
+	
+	@Override
+	public void removeLike(String moviecode, String useremail) {
+		mapper.removeLike(moviecode, useremail);
+		
 	}
 }

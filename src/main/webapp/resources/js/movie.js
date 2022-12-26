@@ -52,3 +52,87 @@ $(".add").click((e) => {
 		}
 	})
 })
+
+// 별점 보이게 하기(메세지)
+let starMemo = [
+	"평가하기",
+	"최악이에요",
+	"싫어요",
+	"재미없어요",
+	"별로예요",
+	"부족해요",
+	"보통이에요",
+	"볼만해요",
+	"재미있어요",
+	"훌륭해요!",
+	"최고예요!"
+]
+
+const drawStar = (target) => {
+	$(".star span").css("width",target.value*10 + "%");
+	$(".starMemo").text(starMemo[target.value]);
+}
+
+// 로드 될 때 좋아요 있는지 없는지 확인
+$(document).ready(() => {
+	$.ajax({
+		url : ctx+"/movie/likeOk",
+		type : "get",
+		data : {"moviecode":$("#moviecode").val(), "useremail":$("#useremail").val()},
+		success : function(result) {
+			if(result === "ok") {				
+				$(".plus").hide();
+				$(".flag").show();
+				$(".review-like").css("color", "#ff2f6e");
+				$(".review-like").addClass("ok");
+			} else {
+				$(".plus").show();
+				$(".flag").hide();
+				$(".review-like").css("color", "rgb(41, 42, 50)");
+				$(".review-like").addClass("no");
+			}
+		},
+		error : function() {
+			console.log("서버 ");
+		}
+	})
+})
+
+// 보고싶어요 클릭
+$(".review-like").click(() => {
+	// ajax로 보낸 데이터인 status에 따라 보고싶어요 추가인지 취소인지 구별
+	let status = "";
+	if($(".review-like").hasClass("ok")) {
+		// 이미 보고싶어요를 한 상태이면
+		status = "like";
+	} else {
+		// 보고싶어요를 한 상태가 아니면
+		status = "hate";
+	}
+	
+	$.ajax({
+		url : ctx+"/movie/like",
+		type : "get",
+		data : {"status":status, "moviecode":$("#moviecode").val(), "useremail":$("#useremail").val()},
+		success : function(result) {
+			if(result === "ok") {				
+				// status가 hate로 가서 보고싶어요를 추가한 상태
+				$(".plus").hide();
+				$(".flag").show();
+				$(".review-like").css("color", "#ff2f6e");
+				$(".review-like").addClass("ok");
+				$(".review-like").removeClass("no");
+			} else {
+				// status가 like로 가서 보고싶어요를 취소한 상태
+				$(".plus").show();
+				$(".flag").hide();
+				$(".review-like").css("color", "rgb(41, 42, 50)");
+				$(".review-like").addClass("no");
+				$(".review-like").removeClass("ok");
+			}
+		},
+		error : function() {
+			console.log("서버 ");
+		}
+	})
+})

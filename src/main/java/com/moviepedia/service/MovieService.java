@@ -3,6 +3,7 @@ package com.moviepedia.service;
 import java.util.ArrayList;
 
 import com.moviepedia.domain.ActorDTO;
+import com.moviepedia.domain.LikeMovieDTO;
 import com.moviepedia.domain.MovieDTO;
 import com.moviepedia.domain.PhotoDTO;
 
@@ -29,5 +30,11 @@ public interface MovieService {
 	ArrayList<PhotoDTO> photos(String moviecode);
 
 	ArrayList<MovieDTO> similarMovie(String moviecode, String genre);
+
+	LikeMovieDTO getLikeMovie(String moviecode, String useremail);
+
+	void addLike(String moviecode, String useremail);
+
+	void removeLike(String moviecode, String useremail);
 
 }

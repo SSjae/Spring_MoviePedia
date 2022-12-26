@@ -26,6 +26,33 @@
 					<div class="text-subTitle">${movie.movieEtitle == "" ? "" : movie.movieEtitle}</div>
 					<div class="text-etc">${movie.movierelease == "" ? "" : movie.movierelease += " ・ "}${movie.moviegenre } ・ ${movie.movienation }</div>
 					<div class="text-star">평균 ★${movie.moviestar} (${rMemberCnt}명)</div>
+					<div class="text-review">
+						<div class="review-star">
+							<div class="starMemo">평가하기</div>
+							<span class="star">
+								★★★★★
+								<span>★★★★★</span>
+								<input type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
+							</span>
+						</div>
+						<div class="review-like">
+							<input id="useremail" type="hidden" value="${loginUser.useremail}">
+							<svg class="plus" width="24" height="24">
+								<path d="M20.5 13.0929H13.1428V20.5H10.8571V13.0929H3.5V10.8071H10.8571V3.5H13.1428V10.8071H20.5V13.0929Z" fill="currentColor"></path>
+							</svg>
+							<svg class="flag" width="24" height="24">
+								<path d="M18.5969 7.14941H5.26761C5.0139 7.14941 4.80798 7.35533 4.80798 7.60904V20.0365C4.80798 20.4098 5.22901 20.6267 5.53328 20.4107L11.9323 15.8705L18.3312 20.4107C18.6355 20.6267 19.0565 20.4098 19.0565 20.0365V7.60904C19.0565 7.35533 18.8506 7.14941 18.5969 7.14941Z" fill="currentColor"></path>
+								<path d="M18.1373 3H5.72725C5.21889 3 4.80798 3.41183 4.80798 3.91926V5.29815C4.80798 5.55187 5.0139 5.75779 5.26761 5.75779H18.5969C18.8506 5.75779 19.0565 5.55187 19.0565 5.29815V3.91926C19.0565 3.41183 18.6447 3 18.1373 3Z" fill="currentColor"></path>
+							</svg>
+							<span>보고싶어요</span>
+						</div>
+						<div class="review-comment">
+							<svg class="pencil" width="24" height="24">
+								<path d="M3 17.2525V21.0025H6.75L17.81 9.9425L14.06 6.1925L3 17.2525ZM20.71 7.0425C21.1 6.6525 21.1 6.0225 20.71 5.6325L18.37 3.2925C17.98 2.9025 17.35 2.9025 16.96 3.2925L15.13 5.1225L18.88 8.8725L20.71 7.0425Z" fill="currentColor"></path>
+							</svg>
+							<span>코멘트</span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
