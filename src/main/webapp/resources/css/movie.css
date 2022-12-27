@@ -141,6 +141,94 @@
     margin-right: 9px;
 }
 
+/* 코멘트 모달 */
+.modal{ 
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 2;
+}
+
+.modal_content{
+	width: 500px;
+    height: 480px;
+    background: #fff;
+    border-radius: 10px;
+    position: relative;
+    top: 25%;
+    left: 36%;
+    box-sizing: border-box;
+    padding: 16px 20px 18px;
+}
+
+.x {
+	cursor: pointer;
+	padding-left: 15px;
+}
+
+.modal .modal_content .modal_head {
+	display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.modal .modal_content .modal_head span {
+    color: rgb(41, 42, 50);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 27px;
+    text-align: left;
+}
+
+.modal .modal_content textarea {
+	font-weight: 400;
+    font-size: 17px;
+    letter-spacing: -0.6px;
+    line-height: 21px;
+    width: 100%;
+    min-height: 360px;
+    border: 0px;
+    outline: none;
+    margin: 1px 0px;
+    resize: none;
+    overflow: auto;
+}
+
+.modal .modal_content .modal_footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.modal .modal_content .modal_footer span {
+	font-size: 13px;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    color: rgb(94, 94, 100);
+    line-height: 16px;
+}
+
+.modal .modal_content .modal_footer input {
+	background: #F2F2F2;
+    border: none;
+    margin: 0 0px 0px 15px;
+    cursor: default;
+    position: relative;
+    z-index: 51;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    letter-spacing: -0.3px;
+    line-height: 18px;
+    height: 38px;
+    padding: 0px 40px;
+    border-radius: 7px;
+}
+
 .info-layer .info-main {
 	max-width: 960px;
 	background-color: white;

@@ -56,6 +56,19 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal">
+			<div class="modal_content">
+				<div class="modal_head">
+					<span>${movie.movieKtitle}</span>
+					<img class="x" src="${cp}/resources/images/x.svg" alt="x">				
+				</div>
+				<textarea class="comment" maxlength="10000" placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요."></textarea>
+				<div class="modal_footer">
+					<span class="comment_len">0</span><span>/10000</span>
+					<input class="comment_btn" type='button' disabled="disabled" value='저장'/>	
+				</div>
+			</div>
+		</div>
 		<div class="info-main">
 			<div>
 				<div class="main-text">기본 정보<a href="${cp}/movie/movieDetail?moviecode=${movie.moviecode}">더보기</a></div>

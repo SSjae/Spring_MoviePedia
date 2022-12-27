@@ -47,16 +47,4 @@
 	<select id="similarMovie" resultType="com.moviepedia.domain.MovieDTO">
 		select * from movie where moviegenre like concat(#{genre},"%") and moviecode not in(#{moviecode}) order by movierelease desc
 	</select>
-	
-	<select id="getLikeMovie" resultType="com.moviepedia.domain.LikeMovieDTO">
-		select * from likemovie where moviecode=#{moviecode} and useremail=#{useremail}
-	</select>
-	
-	<select id="addLike">
-		insert into likemovie(moviecode, useremail) values(#{moviecode}, #{useremail})
-	</select>
-	
-	<select id="removeLike">
-		delete from likemovie where moviecode=#{moviecode} and useremail=#{useremail}
-	</select>
 </mapper>

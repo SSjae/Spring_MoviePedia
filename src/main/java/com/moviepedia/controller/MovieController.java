@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.moviepedia.domain.ActorDTO;
-import com.moviepedia.domain.LikeMovieDTO;
 import com.moviepedia.domain.MainMovieListDTO;
 import com.moviepedia.domain.MovieDTO;
 import com.moviepedia.domain.PhotoDTO;
@@ -96,38 +95,6 @@ public class MovieController {
 		model.addAttribute("photos", photos);
 		model.addAttribute("similar", similar);
 		return "movie/movieInfo";
-	}
-	
-	// 보고싶어요를 했는지 안했는지 확인
-	@GetMapping("/likeOk")
-	@ResponseBody
-	public String likeOk(String moviecode, String useremail) {
-		LikeMovieDTO like = mservice.getLikeMovie(moviecode, useremail);
-		
-		String result = "no";
-		if(like != null) {
-			result = "ok";
-		}
-		
-		return result;
-	}
-	
-	// 보고싶어요 추가 혹은 취소
-	@GetMapping("/like")
-	@ResponseBody
-	public String like(String status, String moviecode, String useremail) {
-		String result = "";
-		
-		// status가 hate로 오면 보고싶어요 추가
-		if(status.equals("hate")) {
-			mservice.addLike(moviecode, useremail);
-			result = "ok";
-		} else {
-			mservice.removeLike(moviecode, useremail);
-			result = "no";
-		}
-		
-		return result;
 	}
 	
 	// 영화 상세 기본 정보

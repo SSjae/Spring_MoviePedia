@@ -76,7 +76,7 @@ const drawStar = (target) => {
 // 로드 될 때 좋아요 있는지 없는지 확인
 $(document).ready(() => {
 	$.ajax({
-		url : ctx+"/movie/likeOk",
+		url : ctx+"/likemovie/likeOk",
 		type : "get",
 		data : {"moviecode":$("#moviecode").val(), "useremail":$("#useremail").val()},
 		success : function(result) {
@@ -111,7 +111,7 @@ $(".review-like").click(() => {
 	}
 	
 	$.ajax({
-		url : ctx+"/movie/like",
+		url : ctx+"/likemovie/like",
 		type : "get",
 		data : {"status":status, "moviecode":$("#moviecode").val(), "useremail":$("#useremail").val()},
 		success : function(result) {
@@ -135,4 +135,30 @@ $(".review-like").click(() => {
 			console.log("서버 ");
 		}
 	})
+})
+
+// 코멘트 모달 띄우고 닫기
+$(".review-comment").click(function(){
+	$(".modal").fadeIn();
+	$(".comment").focus();
+});
+  
+$(".x").click(() => {
+	$(".modal").fadeOut();
+})
+
+$(".comment").keyup((e) => {
+	let content = $(".comment").val();
+	
+	if(content.length === 0 || content === "") {
+		$(".comment_len").text("0");
+		$(".comment_btn").css("background", "#F2F2F2");
+		$(".comment_btn").css("cursor", "default");
+		$(".comment_btn").attr("disabled","disabled");
+	} else {
+		$(".comment_len").text(content.length);
+		$(".comment_btn").css("background", "rgb(255, 47, 110)");
+		$(".comment_btn").css("cursor", "pointer");
+		$(".comment_btn").removeAttr("disabled");
+	}
 })
