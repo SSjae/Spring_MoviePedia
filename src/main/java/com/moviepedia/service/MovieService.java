@@ -30,4 +30,8 @@ public interface MovieService {
 
 	ArrayList<MovieDTO> similarMovie(String moviecode, String genre);
 
+	void likeup(String moviecode);
+
+	void likedown(String moviecode);
+
 }

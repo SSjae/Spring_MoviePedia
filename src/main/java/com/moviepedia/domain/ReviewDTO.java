@@ -7,7 +7,7 @@ public class ReviewDTO {
 	private int reviewnum;
     private String useremail;
     private String moviecode;
-    private String reviewtitle;
     private String reviewcontent;
-    private int reviewstar;
+    private double reviewstar;
+    private String reviewdate;
 }

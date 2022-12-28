@@ -32,7 +32,7 @@
 							<span class="star">
 								★★★★★
 								<span>★★★★★</span>
-								<input type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
+								<input id="star" type="range" oninput="drawStar(this)" value="0" step="1" min="0" max="10">
 							</span>
 						</div>
 						<div class="review-like">
@@ -46,7 +46,7 @@
 							</svg>
 							<span>보고싶어요</span>
 						</div>
-						<div class="review-comment">
+						<div class="review-comment" onclick="reviewModal()">
 							<svg class="pencil" width="24" height="24">
 								<path d="M3 17.2525V21.0025H6.75L17.81 9.9425L14.06 6.1925L3 17.2525ZM20.71 7.0425C21.1 6.6525 21.1 6.0225 20.71 5.6325L18.37 3.2925C17.98 2.9025 17.35 2.9025 16.96 3.2925L15.13 5.1225L18.88 8.8725L20.71 7.0425Z" fill="currentColor"></path>
 							</svg>
@@ -67,6 +67,12 @@
 					<span class="comment_len">0</span><span>/10000</span>
 					<input class="comment_btn" type='button' disabled="disabled" value='저장'/>	
 				</div>
+			</div>
+		</div>
+		<div class="info-comment">
+			<div class="no-comment">
+				<span>이 작품에 대한 이승재 님의 평가를 글로 남겨보세요.</span>
+				<button onclick="reviewModal()">코멘트 남기기</button>
 			</div>
 		</div>
 		<div class="info-main">

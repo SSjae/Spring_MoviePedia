@@ -71,4 +71,14 @@ public class MovieServiceImpl implements MovieService{
 	public ArrayList<MovieDTO> similarMovie(String moviecode, String genre) {
 		return mapper.similarMovie(moviecode, genre);
 	}
+
+	@Override
+	public void likeup(String moviecode) {
+		mapper.likeup(moviecode);
+	}
+	
+	@Override
+	public void likedown(String moviecode) {
+		mapper.likedown(moviecode);
+	}
 }

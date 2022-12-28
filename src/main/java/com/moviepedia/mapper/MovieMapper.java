@@ -31,4 +31,8 @@ public interface MovieMapper {
 	ArrayList<PhotoDTO> photos(String moviecode);
 
 	ArrayList<MovieDTO> similarMovie(@Param("moviecode")String moviecode, @Param("genre")String genre);
+
+	void likeup(String moviecode);
+
+	void likedown(String moviecode);
 }

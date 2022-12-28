@@ -47,4 +47,12 @@
 	<select id="similarMovie" resultType="com.moviepedia.domain.MovieDTO">
 		select * from movie where moviegenre like concat(#{genre},"%") and moviecode not in(#{moviecode}) order by movierelease desc
 	</select>
+	
+	<update id="likeup">
+		update movie set movielike = movielike + 1 where moviecode=#{moviecode}
+	</update>
+	
+	<update id="likedown">
+		update movie set movielike = movielike - 1 where moviecode=#{moviecode}
+	</update>
 </mapper>

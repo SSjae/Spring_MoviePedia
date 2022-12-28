@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.moviepedia.domain.LikeMovieDTO;
 import com.moviepedia.service.LikeMovieService;
+import com.moviepedia.service.MovieService;
 
 import lombok.Setter;
 
@@ -15,6 +16,9 @@ import lombok.Setter;
 public class LikeMovieController {
 	@Setter(onMethod_ = @Autowired)
 	private LikeMovieService lservice;
+	
+	@Setter(onMethod_ = @Autowired)
+	private MovieService mservice;
 	
 	// 보고싶어요를 했는지 안했는지 확인
 	@GetMapping("/likeOk")
@@ -37,9 +41,11 @@ public class LikeMovieController {
 		// status가 hate로 오면 보고싶어요 추가
 		if(status.equals("hate")) {
 			lservice.addLike(moviecode, useremail);
+			mservice.likeup(moviecode);
 			result = "ok";
 		} else {
 			lservice.removeLike(moviecode, useremail);
+			mservice.likedown(moviecode);
 			result = "no";
 		}
 		

@@ -138,10 +138,10 @@ $(".review-like").click(() => {
 })
 
 // 코멘트 모달 띄우고 닫기
-$(".review-comment").click(function(){
+const reviewModal = () => {
 	$(".modal").fadeIn();
 	$(".comment").focus();
-});
+}
   
 $(".x").click(() => {
 	$(".modal").fadeOut();
@@ -161,4 +161,31 @@ $(".comment").keyup((e) => {
 		$(".comment_btn").css("cursor", "pointer");
 		$(".comment_btn").removeAttr("disabled");
 	}
+})
+
+// 코멘트 작성
+$(".comment_btn").click(() => {
+	let useremail = $("#useremail").val();
+	let moviecode = $("#moviecode").val();
+	let reviewcontent = $(".comment").val();
+	let reviewstar = $("#star").val() / 2.0;
+	console.log(reviewstar)
+	
+	$.ajax({
+		url : ctx+"/review/addReview",
+		type : "POST",
+		data : JSON.stringify({"useremail":useremail,
+				"moviecode":moviecode,
+				"reviewcontent":reviewcontent,
+				"reviewstar":reviewstar
+			}),
+		contentType:"application/json; charset=utf-8",
+		success : function(result) {
+			console.log(result);
+			$(".modal").fadeOut();
+		},
+		error : function() {
+			console.log("서버 ");
+		}
+	})
 })
