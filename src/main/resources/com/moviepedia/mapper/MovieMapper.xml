@@ -55,4 +55,8 @@
 	<update id="likedown">
 		update movie set movielike = movielike - 1 where moviecode=#{moviecode}
 	</update>
+	
+	<update id="updateStar">
+		update movie set moviestar = #{avg} where moviecode=#{moviecode}
+	</update>
 </mapper>

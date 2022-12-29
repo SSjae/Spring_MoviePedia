@@ -16,7 +16,11 @@
 		select count(*) from review where moviecode=#{moviecode}
 	</select>
 	
-	<update id="reviewUp">
-		update movie set reviewcnt = 
-	</update>
+	<select id="reviewAvg" resultType="_double">
+		select avg(reviewstar) from review where moviecode=#{moviecode}
+	</select>
+	
+	<select id="review" resultType="com.moviepedia.domain.ReviewDTO">
+		select * from review where moviecode=#{moviecode} and useremail=#{useremail}
+	</select>
 </mapper>

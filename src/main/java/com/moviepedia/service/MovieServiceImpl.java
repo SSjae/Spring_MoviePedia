@@ -81,4 +81,9 @@ public class MovieServiceImpl implements MovieService{
 	public void likedown(String moviecode) {
 		mapper.likedown(moviecode);
 	}
+	
+	@Override
+	public void updateStar(String moviecode, double avg) {
+		mapper.updateStar(moviecode, avg);
+	}
 }

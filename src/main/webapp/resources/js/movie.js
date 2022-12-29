@@ -53,27 +53,8 @@ $(".add").click((e) => {
 	})
 })
 
-// 별점 보이게 하기(메세지)
-let starMemo = [
-	"평가하기",
-	"최악이에요",
-	"싫어요",
-	"재미없어요",
-	"별로예요",
-	"부족해요",
-	"보통이에요",
-	"볼만해요",
-	"재미있어요",
-	"훌륭해요!",
-	"최고예요!"
-]
-
-const drawStar = (target) => {
-	$(".star span").css("width",target.value*10 + "%");
-	$(".starMemo").text(starMemo[target.value]);
-}
-
 // 로드 될 때 좋아요 있는지 없는지 확인
+// 로드 될 때 리뷰가 있는지 없는지 확인
 $(document).ready(() => {
 	$.ajax({
 		url : ctx+"/likemovie/likeOk",
@@ -93,7 +74,31 @@ $(document).ready(() => {
 			}
 		},
 		error : function() {
-			console.log("서버 ");
+			console.log("좋아요 로딩 ");
+		}
+	})
+	
+	$.ajax({
+		url : ctx+"/review/reviewOk",
+		type : "get",
+		data : {"moviecode":$("#moviecode").val(), "useremail":$("#useremail").val()},
+		dataType:"json",
+		success : function(result) {
+			console.log(result)
+			if(result) {
+				// ok 클래스 추가(리뷰가 있다는 뜻)
+				$(".review-comment").addClass("ok");
+				// 수정을 위해 모달에다가 작성한 리뷰 내용 추가
+				$(".star span").css("width",result.reviewstar * 2 * 10 + "%");
+				$("#star").val(result.reviewstar * 2);
+				$("#comment").val(result.reviewcontent);
+				$(".comment_len").text(result.reviewcontent.length);
+			} else {
+				console.log(result);
+				console.log("없다");
+			}
+		},
+		error : function() {
 		}
 	})
 })
@@ -139,16 +144,40 @@ $(".review-like").click(() => {
 
 // 코멘트 모달 띄우고 닫기
 const reviewModal = () => {
-	$(".modal").fadeIn();
-	$(".comment").focus();
+	if($(".review-comment").hasClass("ok")) {
+		
+	} else {
+		$(".modal").fadeIn();
+		$("#comment").focus();				
+	}
 }
-  
+
 $(".x").click(() => {
 	$(".modal").fadeOut();
 })
 
-$(".comment").keyup((e) => {
-	let content = $(".comment").val();
+// 별점 보이게 하기(메세지)
+let starMemo = [
+	"평가하기",
+	"최악이에요",
+	"싫어요",
+	"재미없어요",
+	"별로예요",
+	"부족해요",
+	"보통이에요",
+	"볼만해요",
+	"재미있어요",
+	"훌륭해요!",
+	"최고예요!"
+]
+
+const drawStar = (target) => {
+	$(".star span").css("width",target.value*10 + "%");
+	$(".starMemo").text(starMemo[target.value]);
+}
+
+$("#comment").keyup((e) => {
+	let content = $("#comment").val();
 	
 	if(content.length === 0 || content === "") {
 		$(".comment_len").text("0");
@@ -167,9 +196,8 @@ $(".comment").keyup((e) => {
 $(".comment_btn").click(() => {
 	let useremail = $("#useremail").val();
 	let moviecode = $("#moviecode").val();
-	let reviewcontent = $(".comment").val();
+	let reviewcontent = $("#comment").val();
 	let reviewstar = $("#star").val() / 2.0;
-	console.log(reviewstar)
 	
 	$.ajax({
 		url : ctx+"/review/addReview",
@@ -180,9 +208,16 @@ $(".comment_btn").click(() => {
 				"reviewstar":reviewstar
 			}),
 		contentType:"application/json; charset=utf-8",
+		dataType:"json",
 		success : function(result) {
-			console.log(result);
-			$(".modal").fadeOut();
+			if(result.check === "true") {
+				$("#starAvg").text(result.moviestar);
+				$("#rMemberCnt").text(result.rMemberCnt);
+				$(".modal").fadeOut();
+				$(".review-comment").addClass("ok");
+			} else {
+				alert("코멘트 작성이 실패하였습니다. 다시 시도해주세요");
+			}
 		},
 		error : function() {
 			console.log("서버 ");

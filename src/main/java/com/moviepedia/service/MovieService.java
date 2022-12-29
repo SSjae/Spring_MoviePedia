@@ -34,4 +34,6 @@ public interface MovieService {
 
 	void likedown(String moviecode);
 
+	void updateStar(String moviecode, double avg);
+
 }

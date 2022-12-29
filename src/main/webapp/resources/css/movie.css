@@ -9,7 +9,7 @@
 	background-color: white;
 	margin-top: 105px;
     border: 1px solid #e3e3e3;
-    padding: 11px 16px 15px;
+    padding: 11px 16px 11px;
     box-sizing: border-box;
 }
 
@@ -22,8 +22,8 @@
 .info-layer .info-head .head .poster {
 	float: left;
     box-sizing: border-box;
-    width: 182px;
-    height: 257px;
+    width: 162px;
+    height: 234px;
     border: solid 1px #e3e3e3;
     border-radius: 3px;
     background: #f8f8f8;
@@ -35,7 +35,7 @@
     box-sizing: border-box;
 	width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: fill;
     opacity: 1;
     border: solid 1px #fff;
     border-radius: 3px;
@@ -75,57 +75,15 @@
 
 .info-layer .info-head .text .text-review {
 	display: flex;
-    height: 97px;
+    height: 75px;
     align-items: center;
     font-size: 14px;
     color: rgb(41, 42, 50);
 }
 
-.info-layer .info-head .text .text-review .review-star {
-	border-right: 1px solid #EEEEEE;
-    width: 270px;
-    height: 66px;
-    text-align: center;
-    color: #787878;
-    font-size: 12px;
-}
-
-.info-layer .info-head .text .text-review .starMemo {
-	margin: 1px 0px -6px 0;
-}
-
-.info-layer .info-head .text .text-review .star {
-	position: relative;
-	font-size: 2.5rem;
-	color: #EEEEEE;
-}
-.info-layer .info-head .text .text-review .star {
-	position: relative;
-	font-size: 2.5rem;
-	color: #EEEEEE;
-}
-
-.info-layer .info-head .text .text-review .star input {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    opacity: 0;
-    cursor: pointer;
-}
-  
-.info-layer .info-head .text .text-review .star span {
-    width: 0;
-    position: absolute; 
-    left: 0;
-    color: #F9DE77;
-    overflow: hidden;
-    pointer-events: none;
-}
-
 .info-layer .info-head .text .text-review .review-like,
 .info-layer .info-head .text .text-review .review-comment {
-	margin-left: 35px;
+	margin-right: 40px;
 	display: flex;
     align-items: center;
     cursor: pointer;
@@ -139,6 +97,7 @@
 
 .info-layer .info-head .text .text-review .pencil {
     margin-right: 9px;
+    margin-left: 13px;
 }
 
 /* 코멘트 모달 */
@@ -154,13 +113,14 @@
 }
 
 .modal_content{
-	width: 500px;
-    height: 480px;
+	width: 515px;
+    height: 515px;
     background: #fff;
     border-radius: 10px;
     position: relative;
-    top: 25%;
-    left: 36%;
+    top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
     box-sizing: border-box;
     padding: 16px 20px 18px;
 }
@@ -201,11 +161,48 @@
 
 .modal .modal_content .modal_footer {
     display: flex;
-    justify-content: flex-end;
+	justify-content: space-between;
     align-items: center;
 }
 
-.modal .modal_content .modal_footer span {
+.modal .modal_content .modal_footer .review-star {
+	border-right: 1px solid #EEEEEE;
+    width: 270px;
+    height: 66px;
+    text-align: center;
+    color: #787878;
+    font-size: 12px;
+}
+
+.modal .modal_content .modal_footer .review-star .starMemo {
+	margin: 1px 0px -6px 0;
+}
+
+.modal .modal_content .modal_footer .review-star .star {
+	position: relative;
+	font-size: 2.5rem;
+	color: #EEEEEE;
+}
+
+.modal .modal_content .modal_footer .review-star .star > input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+  
+.modal .modal_content .modal_footer .review-star .star > span {
+    width: 0;
+    position: absolute; 
+    left: 0;
+    color: #F9DE77;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.modal .modal_content .modal_footer .modal_etc > span {
 	font-size: 13px;
     font-weight: 400;
     letter-spacing: -0.2px;
@@ -213,7 +210,7 @@
     line-height: 16px;
 }
 
-.modal .modal_content .modal_footer input {
+.modal .modal_content .modal_footer .modal_etc > input {
 	background: #F2F2F2;
     border: none;
     margin: 0 0px 0px 15px;

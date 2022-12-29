@@ -35,4 +35,6 @@ public interface MovieMapper {
 	void likeup(String moviecode);
 
 	void likedown(String moviecode);
+
+	void updateStar(@Param("moviecode")String moviecode, @Param("avg")double avg);
 }

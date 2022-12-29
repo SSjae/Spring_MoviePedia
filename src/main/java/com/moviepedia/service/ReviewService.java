@@ -10,6 +10,8 @@ public interface ReviewService {
 
 	boolean addReview(ReviewDTO review);
 
-	void reviewUp(String moviecode, double reviewstar);
+	double reviewAvg(String moviecode);
+
+	ReviewDTO review(String moviecode, String useremail);
 
 }

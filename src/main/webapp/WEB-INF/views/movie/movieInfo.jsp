@@ -25,16 +25,8 @@
 					<div class="text-title">${movie.movieKtitle }</div>
 					<div class="text-subTitle">${movie.movieEtitle == "" ? "" : movie.movieEtitle}</div>
 					<div class="text-etc">${movie.movierelease == "" ? "" : movie.movierelease += " ・ "}${movie.moviegenre } ・ ${movie.movienation }</div>
-					<div class="text-star">평균 ★${movie.moviestar} (${rMemberCnt}명)</div>
+					<div class="text-star">평균 ★<span id="starAvg">${movie.moviestar}</span> (<span id="rMemberCnt">${rMemberCnt}명</span>)</div>
 					<div class="text-review">
-						<div class="review-star">
-							<div class="starMemo">평가하기</div>
-							<span class="star">
-								★★★★★
-								<span>★★★★★</span>
-								<input id="star" type="range" oninput="drawStar(this)" value="0" step="1" min="0" max="10">
-							</span>
-						</div>
 						<div class="review-like">
 							<input id="useremail" type="hidden" value="${loginUser.useremail}">
 							<svg class="plus" width="24" height="24">
@@ -62,10 +54,20 @@
 					<span>${movie.movieKtitle}</span>
 					<img class="x" src="${cp}/resources/images/x.svg" alt="x">				
 				</div>
-				<textarea class="comment" maxlength="10000" placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요."></textarea>
+				<textarea id="comment" maxlength="10000" placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요."></textarea>
 				<div class="modal_footer">
-					<span class="comment_len">0</span><span>/10000</span>
-					<input class="comment_btn" type='button' disabled="disabled" value='저장'/>	
+					<div class="review-star">
+						<div class="starMemo">평가하기</div>
+						<span class="star">
+							★★★★★
+							<span>★★★★★</span>
+							<input id="star" type="range" oninput="drawStar(this)" value="0" step="1" min="0" max="10">
+						</span>
+					</div>
+					<div class="modal_etc">
+						<span class="comment_len">0</span><span>/10000</span>
+						<input class="comment_btn" type='button' disabled="disabled" value='저장'/>						
+					</div>
 				</div>
 			</div>
 		</div>
@@ -124,9 +126,9 @@
 			</div>
 			<hr>
 			<div>
-				<div class="main-text">리뷰</div>
+				<div class="main-text">코멘트</div>
 				<div class="reviews">
-				
+					
 				</div>
 			</div>
 			<hr>

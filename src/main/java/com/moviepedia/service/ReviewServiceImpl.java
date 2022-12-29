@@ -29,7 +29,12 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	@Override
-	public void reviewUp(String moviecode, double reviewstar) {
-		mapper.reviewUp(moviecode, reviewstar);
+	public double reviewAvg(String moviecode) {
+		return mapper.reviewAvg(moviecode);
+	}
+	
+	@Override
+	public ReviewDTO review(String moviecode, String useremail) {
+		return mapper.review(moviecode, useremail);
 	}
 }
