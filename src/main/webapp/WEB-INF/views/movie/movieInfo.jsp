@@ -29,6 +29,7 @@
 					<div class="text-review">
 						<div class="review-like">
 							<input id="useremail" type="hidden" value="${loginUser.useremail}">
+							<input id="username" type="hidden" value="${loginUser.username}">
 							<svg class="plus" width="24" height="24">
 								<path d="M20.5 13.0929H13.1428V20.5H10.8571V13.0929H3.5V10.8071H10.8571V3.5H13.1428V10.8071H20.5V13.0929Z" fill="currentColor"></path>
 							</svg>
@@ -72,9 +73,15 @@
 			</div>
 		</div>
 		<div class="info-comment">
-			<div class="no-comment">
-				<span>이 작품에 대한 이승재 님의 평가를 글로 남겨보세요.</span>
-				<button onclick="reviewModal()">코멘트 남기기</button>
+			<div class="ok-comment">
+				<div class="comment-SC">
+					<div>이승재님 평점<br>★4.5</div>
+					<div>내용</div>
+				</div>
+				<div class="comment-UD">
+					<div>수정</div>
+					<div>삭제</div>
+				</div>
 			</div>
 		</div>
 		<div class="info-main">

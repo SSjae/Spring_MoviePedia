@@ -53,6 +53,23 @@ $(".add").click((e) => {
 	})
 })
 
+// 리뷰가 등록 안되어있을 때
+const noReview = (username) => {
+	let content = "";
+	content += "<div class='no-comment'>";
+	content += "<span>이 작품에 대한 "+ username +" 님의 평가를 글로 남겨보세요.</span>";
+	content += "<button onclick='reviewModal()'>코멘트 남기기</button>";
+	content += "</div>"
+	$(".info-comment").append(content);
+}
+
+// 리뷰가 등록 되어 있을 때
+const okReview = () => {
+	
+}
+
+
+
 // 로드 될 때 좋아요 있는지 없는지 확인
 // 로드 될 때 리뷰가 있는지 없는지 확인
 $(document).ready(() => {
@@ -84,8 +101,10 @@ $(document).ready(() => {
 		data : {"moviecode":$("#moviecode").val(), "useremail":$("#useremail").val()},
 		dataType:"json",
 		success : function(result) {
-			console.log(result)
-			if(result) {
+			if(result.useremail === null) {
+				console.log("없다");
+				noReview($("#username").val());
+			} else {
 				// ok 클래스 추가(리뷰가 있다는 뜻)
 				$(".review-comment").addClass("ok");
 				// 수정을 위해 모달에다가 작성한 리뷰 내용 추가
@@ -93,12 +112,10 @@ $(document).ready(() => {
 				$("#star").val(result.reviewstar * 2);
 				$("#comment").val(result.reviewcontent);
 				$(".comment_len").text(result.reviewcontent.length);
-			} else {
-				console.log(result);
-				console.log("없다");
 			}
 		},
 		error : function() {
+			console.log("리뷰 로딩");
 		}
 	})
 })
@@ -176,6 +193,7 @@ const drawStar = (target) => {
 	$(".starMemo").text(starMemo[target.value]);
 }
 
+// 코멘트 모달 떠서 글자 한글자씩 입력했을 때
 $("#comment").keyup((e) => {
 	let content = $("#comment").val();
 	
@@ -211,6 +229,7 @@ $(".comment_btn").click(() => {
 		dataType:"json",
 		success : function(result) {
 			if(result.check === "true") {
+				// 평점, 리뷰 갯수, ok 클래스 삽입
 				$("#starAvg").text(result.moviestar);
 				$("#rMemberCnt").text(result.rMemberCnt);
 				$(".modal").fadeOut();

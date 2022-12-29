@@ -53,6 +53,9 @@ public class ReviewController {
 	@GetMapping("/reviewOk")
 	public ReviewDTO reviewOk(String moviecode, String useremail) {
 		ReviewDTO review = rservice.review(moviecode, useremail);
+		if(review == null) {
+			review = new ReviewDTO();
+		}
 		return review;
 	}
 }
