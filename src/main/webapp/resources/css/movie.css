@@ -270,18 +270,59 @@
 .info-layer .info-comment .ok-comment {
 	display: flex;
     justify-content: space-between;
-    padding: 0 50px;
+    padding: 0 20px;
+    height: 97px;
 }
 
 .info-layer .info-comment .ok-comment .comment-SC {
 	display: flex;
     align-items: center;
+}
+
+.info-layer .info-comment .ok-comment .comment-SC .S-star {
     text-align: center;
+    line-height: 27px;
+}
+
+.info-layer .info-comment .ok-comment .comment-SC .C-content {
+	width: 688px;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    line-height: 20px;
+    word-break: break-all;
+}
+
+.info-layer .info-comment .ok-comment .comment-SC .C-content .text {
+	word-break: break-all;
+    max-height: 60px;
+    margin: 0px;
+    padding: 0 25px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .info-layer .info-comment .ok-comment .comment-UD {
 	display: flex;
     align-items: center;
+}
+
+.info-layer .info-comment .ok-comment .comment-UD button {
+	background: none;
+    padding: 0px;
+    border: none;
+    margin: 0px;
+    cursor: pointer;
+    color: rgb(140, 140, 140);
+    margin-left: 20px;
+}
+
+.info-layer .info-comment .ok-comment .comment-UD img {
+	vertical-align: top;
+    margin: 2px 3px 0px 0px;
 }
 
 .info-layer .info-main {
