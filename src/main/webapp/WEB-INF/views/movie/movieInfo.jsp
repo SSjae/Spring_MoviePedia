@@ -73,24 +73,7 @@
 			</div>
 		</div>
 		<div class="info-comment">
-			<div class="ok-comment">
-				<div class="comment-SC">
-					<div class="S-star">이승재님 평점<br>★4.5</div>
-					<div class="C-content">
-						<div class="text">이 영화는 너무 좋아요ㅎㅎ</div>					
-					</div>
-				</div>
-				<div class="comment-UD">
-					<button>
-						<img alt="trash" src="${cp}/resources/images/trash.svg">
-						수정
-					</button>
-					<button>
-						<img alt="pencil" src="${cp}/resources/images/pencil.svg">
-						삭제
-					</button>
-				</div>
-			</div>
+		
 		</div>
 		<div class="info-main">
 			<div>

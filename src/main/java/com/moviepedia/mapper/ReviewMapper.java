@@ -12,7 +12,12 @@ public interface ReviewMapper {
 
 	boolean addReview(ReviewDTO review);
 
-	double reviewAvg(String moviecode);
+	boolean updateReview(ReviewDTO review);
+
+	boolean deleteReview(@Param("useremail")String useremail, @Param("moviecode")String moviecode);
+
+	String reviewAvg(String moviecode);
 
 	ReviewDTO review(@Param("moviecode")String moviecode, @Param("useremail")String useremail);
+
 }

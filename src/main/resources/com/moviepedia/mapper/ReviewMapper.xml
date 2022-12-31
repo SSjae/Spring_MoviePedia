@@ -7,6 +7,14 @@
 	<insert id="addReview">
 		insert into review(useremail, moviecode, reviewcontent, reviewstar) values(#{useremail}, #{moviecode}, #{reviewcontent}, #{reviewstar})
 	</insert>
+	
+	<update id="updateReview">
+		update review set reviewstar=#{reviewstar}, reviewcontent=#{reviewcontent} where moviecode=#{moviecode} and useremail=#{useremail}
+	</update>
+	
+	<delete id="deleteReview">
+		delete from review where moviecode=#{moviecode} and useremail=#{useremail}
+	</delete>
 
 	<select id="rtotal" resultType="_int">
 		select count(*) from review
@@ -16,7 +24,7 @@
 		select count(*) from review where moviecode=#{moviecode}
 	</select>
 	
-	<select id="reviewAvg" resultType="_double">
+	<select id="reviewAvg" resultType="string">
 		select avg(reviewstar) from review where moviecode=#{moviecode}
 	</select>
 	

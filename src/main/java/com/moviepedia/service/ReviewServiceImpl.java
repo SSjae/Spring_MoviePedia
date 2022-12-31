@@ -29,7 +29,17 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	@Override
-	public double reviewAvg(String moviecode) {
+	public boolean updateReview(ReviewDTO review) {
+		return mapper.updateReview(review);
+	}
+	
+	@Override
+	public boolean deleteReview(String useremail, String moviecode) {
+		return mapper.deleteReview(useremail, moviecode);
+	}
+	
+	@Override
+	public String reviewAvg(String moviecode) {
 		return mapper.reviewAvg(moviecode);
 	}
 	

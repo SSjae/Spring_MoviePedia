@@ -10,4 +10,5 @@ public class ReviewDTO {
     private String reviewcontent;
     private double reviewstar;
     private String reviewdate;
+    private boolean update;
 }

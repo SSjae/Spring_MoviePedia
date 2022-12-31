@@ -64,11 +64,21 @@ const noReview = (username) => {
 }
 
 // 리뷰가 등록 되어 있을 때
-const okReview = () => {
-	
+const okReview = (reviewstar, reviewcontent) => {
+	let content = "";
+	content += "<div class='ok-comment'>";
+	content += "<div class='comment-SC'>";
+	content += "<div class='S-star'>내 평점<br>★"+reviewstar+"</div>";
+	content += "<div class='C-content'>";
+	content += "<div class='text'>";
+	content += "<a href='#'>"+reviewcontent+"</a>";
+	content += "</div></div></div>";
+	content += "<div class='comment-UD'>";
+	content += "<button onclick='reviewUpModal()'><img alt='trash' src='"+ctx+"/resources/images/trash.svg'>수정</button>";
+	content += "<button onclick='reviewDelete()'><img alt='pencil' src='"+ctx+"/resources/images/pencil.svg'>삭제</button>";
+	content += "</div></div>";
+	$(".info-comment").append(content);
 }
-
-
 
 // 로드 될 때 좋아요 있는지 없는지 확인
 // 로드 될 때 리뷰가 있는지 없는지 확인
@@ -112,6 +122,7 @@ $(document).ready(() => {
 				$("#star").val(result.reviewstar * 2);
 				$("#comment").val(result.reviewcontent);
 				$(".comment_len").text(result.reviewcontent.length);
+				okReview(result.reviewstar, result.reviewcontent);
 			}
 		},
 		error : function() {
@@ -159,20 +170,6 @@ $(".review-like").click(() => {
 	})
 })
 
-// 코멘트 모달 띄우고 닫기
-const reviewModal = () => {
-	if($(".review-comment").hasClass("ok")) {
-		
-	} else {
-		$(".modal").fadeIn();
-		$("#comment").focus();				
-	}
-}
-
-$(".x").click(() => {
-	$(".modal").fadeOut();
-})
-
 // 별점 보이게 하기(메세지)
 let starMemo = [
 	"평가하기",
@@ -210,20 +207,42 @@ $("#comment").keyup((e) => {
 	}
 })
 
+// 코멘트 모달 띄우고 닫기
+const reviewModal = () => {
+	if($(".review-comment").hasClass("ok")) {
+		
+	} else {
+		$(".modal").fadeIn();
+		$("#comment").focus();				
+	}
+}
+
+// 수정 버튼
+const reviewUpModal = () => {
+	$(".modal").fadeIn();
+	$("#comment").focus();	
+}
+
+$(".x").click(() => {
+	$(".modal").fadeOut();
+})
+
 // 코멘트 작성
 $(".comment_btn").click(() => {
 	let useremail = $("#useremail").val();
 	let moviecode = $("#moviecode").val();
 	let reviewcontent = $("#comment").val();
 	let reviewstar = $("#star").val() / 2.0;
+	let status = $(".review-comment").hasClass("ok") ? true : false;
 	
 	$.ajax({
-		url : ctx+"/review/addReview",
+		url : ctx+"/review/auReview",
 		type : "POST",
 		data : JSON.stringify({"useremail":useremail,
 				"moviecode":moviecode,
 				"reviewcontent":reviewcontent,
-				"reviewstar":reviewstar
+				"reviewstar":reviewstar,
+				"update":status
 			}),
 		contentType:"application/json; charset=utf-8",
 		dataType:"json",
@@ -234,6 +253,9 @@ $(".comment_btn").click(() => {
 				$("#rMemberCnt").text(result.rMemberCnt);
 				$(".modal").fadeOut();
 				$(".review-comment").addClass("ok");
+				// 작성 성공하면 원래 있던 코멘트 달기 지우고 자기 코멘트 띄우게 하기
+				$(".info-comment").empty();
+				okReview(reviewstar, reviewcontent);
 			} else {
 				alert("코멘트 작성이 실패하였습니다. 다시 시도해주세요");
 			}
@@ -243,3 +265,36 @@ $(".comment_btn").click(() => {
 		}
 	})
 })
+
+// 리뷰 삭제 버튼
+const reviewDelete = () => {
+	let useremail = $("#useremail").val();
+	let moviecode = $("#moviecode").val();
+	
+	if(confirm("코멘트를 삭제하시겠어요?")) {
+		$.ajax({
+			url : ctx+"/review/deleteReview",
+			type : "POST",
+			data : JSON.stringify({"useremail":useremail,
+				"moviecode":moviecode }),
+			contentType:"application/json; charset=utf-8",
+			dataType:"json",
+			success : function(result) {
+				if(result.check === "true") {
+					// 평점, 리뷰 갯수, ok 클래스 제거
+					$("#starAvg").text(result.moviestar);
+					$("#rMemberCnt").text(result.rMemberCnt);
+					$(".review-comment").removeClass("ok");
+					// 삭제 성공하면 자기 코멘트 없애고 원래 있던 코멘트 달기 띄우기
+					$(".info-comment").empty();
+					noReview($("#username").val());
+				} else {
+					alert("코멘트 삭제 실패하였습니다. 다시 시도해주세요");
+				}
+			},
+			error : function() {
+				console.log("서버 ");
+			}
+		})		
+	}
+}
