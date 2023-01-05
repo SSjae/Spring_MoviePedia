@@ -1,5 +1,7 @@
 package com.moviepedia.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,5 +48,10 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public ReviewDTO review(String moviecode, String useremail) {
 		return mapper.review(moviecode, useremail);
+	}
+	
+	@Override
+	public List<ReviewDTO> allReviews(String moviecode) {
+		return mapper.allReviews(moviecode);
 	}
 }

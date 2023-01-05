@@ -16,6 +16,10 @@
 		select * from user where useremail=#{useremail} and userpw=#{userpw}
 	</select>
 	
+	<select id="getUser" resultType="com.moviepedia.domain.UserDTO">
+		select * from user where useremail=#{useremail}
+	</select>
+	
 	<update id="resetPw">
 		update user set userpw=#{userpw} where useremail=#{useremail}
 	</update>

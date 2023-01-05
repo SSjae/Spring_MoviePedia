@@ -11,4 +11,6 @@ public interface UserService {
 	UserDTO login(String useremail, String userpw);
 
 	boolean resetPw(String useremail, String userpw);
+
+	UserDTO getUser(String useremail);
 }

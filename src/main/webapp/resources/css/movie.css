@@ -42,7 +42,7 @@
 }
 
 .info-layer .info-head .text {
-    width: 745px;
+    width: 770px;
     float: right;
 }
 
@@ -469,6 +469,95 @@
 
 .info-layer .info-main .photos .slick-next {
 	right: -4px !important;
+}
+
+.info-layer .info-main .main-text span {
+    color: rgb(160, 160, 160);
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    line-height: 20px;
+}
+
+.info-layer .info-main .reviews {
+	margin: 0 16px 20px 16px;
+}
+
+.info-layer .info-main .reviews .review {
+	display: inline-block;
+    height: 180px;
+    background-color: rgb(242, 242, 242);
+    box-sizing: border-box;
+    padding: 0px 12px;
+    border-radius: 6px;
+    margin: 0 5px;
+}
+
+.info-layer .info-main .reviews .review a {
+	color: black;
+	text-decoration: none;
+}
+
+.info-layer .info-main .reviews .review .review-head {
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 57px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.info-layer .info-main .reviews .review .review-head .review-name {
+	display: flex;
+	align-items: center;
+	color: rgb(31, 31, 31);
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: -0.7px;
+    line-height: 22px;
+    margin-bottom: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.info-layer .info-main .reviews .review .review-head .review-name img {
+	width: 32px;
+    height: 32px;
+    margin-right: 10px;
+}
+
+.info-layer .info-main .reviews .review .review-head .review-star {
+	display: flex;
+    align-items: center;
+    background: rgb(255, 255, 255);
+    color: rgb(74, 74, 74);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+    line-height: 21px;
+    box-sizing: border-box;
+    min-width: 55px;
+    height: 26px;
+    padding: 0px 8px;
+    border: 1px solid rgb(234, 234, 234);
+    border-radius: 13px;
+}
+
+.info-layer .info-main .reviews .review .review-content  {
+	display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 9px 0 0 0;
+    word-break: break-all;
+}
+
+.info-layer .info-main .reviews-slick .slick-prev {
+	left: -6px !important;
+}
+
+.info-layer .info-main .reviews-slick .slick-next {
+	right: 0px !important;
 }
 
 .info-layer .info-main .similars {

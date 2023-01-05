@@ -32,4 +32,9 @@ public class UserServiceImpl implements UserService {
 	public boolean resetPw(String useremail, String userpw) {
 		return mapper.resetPw(useremail, userpw);
 	}
+	
+	@Override
+	public UserDTO getUser(String useremail) {
+		return mapper.getUser(useremail);
+	}
 }

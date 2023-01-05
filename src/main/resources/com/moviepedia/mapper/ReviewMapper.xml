@@ -31,4 +31,8 @@
 	<select id="review" resultType="com.moviepedia.domain.ReviewDTO">
 		select * from review where moviecode=#{moviecode} and useremail=#{useremail}
 	</select>
+	
+	<select id="allReviews" resultType="com.moviepedia.domain.ReviewDTO">
+		select * from review where moviecode=#{moviecode}
+	</select>
 </mapper>

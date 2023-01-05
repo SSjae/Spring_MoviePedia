@@ -122,12 +122,8 @@
 					</c:forEach>
 				</div>
 			</div>
-			<hr>
-			<div>
-				<div class="main-text">코멘트</div>
-				<div class="reviews">
-					
-				</div>
+			<div class="info-allComment">
+			
 			</div>
 			<hr>
 			<div>

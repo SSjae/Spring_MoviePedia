@@ -13,4 +13,6 @@ public interface UserMapper {
 	UserDTO login(@Param("useremail")String useremail, @Param("userpw")String userpw);
 
 	boolean resetPw(@Param("useremail")String useremail, @Param("userpw")String userpw);
+
+	UserDTO getUser(String useremail);
 }

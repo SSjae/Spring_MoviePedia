@@ -1,5 +1,7 @@
 package com.moviepedia.service;
 
+import java.util.List;
+
 import com.moviepedia.domain.ReviewDTO;
 
 public interface ReviewService {
@@ -17,5 +19,7 @@ public interface ReviewService {
 	String reviewAvg(String moviecode);
 
 	ReviewDTO review(String moviecode, String useremail);
+
+	List<ReviewDTO> allReviews(String moviecode);
 
 }

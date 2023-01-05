@@ -4,7 +4,7 @@ function getContextPath() {
 }
 let ctx = getContextPath();
 
-// 출연자 slick
+//출연자 slick
 $('.actors-slick').slick({
   infinite: false,
   arrows : true,
@@ -20,6 +20,16 @@ $('.photos-slick').slick({
   arrows : true,
   draggable : false,
   variableWidth: true,
+  speed: 300,
+  slidesToShow: 3,
+  slidesToScroll: 3
+ });
+
+// 코멘트 slick
+$('.reviews-slick').slick({
+  infinite: false,
+  arrows : true,
+  draggable : false,
   speed: 300,
   slidesToShow: 3,
   slidesToScroll: 3
@@ -52,6 +62,59 @@ $(".add").click((e) => {
 		}
 	})
 })
+
+// 코멘트가 있는지 없는지 확인 후 있으면 다시 그리고 없으면 안 그리기
+const allComment = () => {
+	let content = "";
+	let moviecode = $("#moviecode").val();
+	$.ajax({
+		url : ctx+"/review/allReview",
+		type : "get",
+		dataType:"json",
+		data : {"moviecode":$("#moviecode").val()},
+		success : function(result) {
+			if(result.length != 0) {
+				content += '<hr>';
+				content += '<div class="main-text">코멘트 <span>'+result.length+'</span><a href="'+ctx+'/review/reviewAll/'+moviecode+'">더보기</a></div>';
+				content += '<div class="reviews reviews-slick">';
+				for(let i = 0; i < result.length; i++) {
+					content += '<div class="review">';
+					content += 	'<div class="review-head">';
+					content += 		'<div class="review-name">';
+					content += 			'<img src="'+ctx+'/resources/images/profile.png" alt="프로필">';
+					content += 			result[i].username;
+					content += 		'</div>';
+					content += 		'<div class="review-star">★ '+result[i].reviewstar+'</div>';
+					content += 	'</div>';
+					content += 	'<a href="#">';
+					content += 		'<div class="review-content">';
+					content += 			result[i].reviewcontent;
+					content += 		'</div>';
+					content += 	'</a>';
+					content += '</div>';
+				}
+				content += '</div>';
+				$(".info-allComment").empty();
+				$(".info-allComment").append(content);
+			} else {
+				$(".info-allComment").empty();
+			}
+			
+			// 코멘트 slick
+			$('.reviews-slick').slick({
+			  infinite: false,
+			  arrows : true,
+			  draggable : false,
+			  speed: 300,
+			  slidesToShow: 3,
+			  slidesToScroll: 3
+			});
+		},
+		error : function() {
+			console.log("좋아요 로딩 ");
+		}
+	})
+}
 
 // 리뷰가 등록 안되어있을 때
 const noReview = (username) => {
@@ -129,6 +192,9 @@ $(document).ready(() => {
 			console.log("리뷰 로딩");
 		}
 	})
+	
+	// 이 영화에 코멘트가 있는 지 없는지에 따라 그려짐
+	allComment();
 })
 
 // 보고싶어요 클릭
@@ -256,6 +322,8 @@ $(".comment_btn").click(() => {
 				// 작성 성공하면 원래 있던 코멘트 달기 지우고 자기 코멘트 띄우게 하기
 				$(".info-comment").empty();
 				okReview(reviewstar, reviewcontent);
+				// 모든 코멘트 부분 다시 그리기
+				allComment();
 			} else {
 				alert("코멘트 작성이 실패하였습니다. 다시 시도해주세요");
 			}
@@ -288,6 +356,13 @@ const reviewDelete = () => {
 					// 삭제 성공하면 자기 코멘트 없애고 원래 있던 코멘트 달기 띄우기
 					$(".info-comment").empty();
 					noReview($("#username").val());
+					// 삭제가 됬으니 코멘트 모달에 있는 내용들 초기화
+					$(".star span").css("width","0%");
+					$("#star").val(0);
+					$("#comment").val("");
+					$(".comment_len").text("0");
+					// 모든 코멘트 부분 다시 그리기
+					allComment();
 				} else {
 					alert("코멘트 삭제 실패하였습니다. 다시 시도해주세요");
 				}

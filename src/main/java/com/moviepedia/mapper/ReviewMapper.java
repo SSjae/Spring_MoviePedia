@@ -1,5 +1,7 @@
 package com.moviepedia.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.moviepedia.domain.ReviewDTO;
@@ -19,5 +21,7 @@ public interface ReviewMapper {
 	String reviewAvg(String moviecode);
 
 	ReviewDTO review(@Param("moviecode")String moviecode, @Param("useremail")String useremail);
+
+	List<ReviewDTO> allReviews(String moviecode);
 
 }
