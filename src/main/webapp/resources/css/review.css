@@ -96,3 +96,279 @@
 	margin: 13px 0 35px 0;
     word-break: break-all;
 }
+
+/* reviewDetail */
+.reviewDetail {
+	background-color: white;
+}
+
+.detail-layer {
+	padding-top: 85px;
+    max-width: 1320px;
+    margin: 0 auto;
+    min-height: calc(100vh - 410px);
+}
+
+.detail-layer hr {
+	border: 0;
+	border-bottom: 1px solid #f0f0f0;
+	margin-bottom: 40px;
+}
+
+.detail-layer .detail-head {
+	display: flex;
+    justify-content: space-between;
+}
+
+.detail-layer .detail-head .head-content .content-1 {
+	display: flex;
+    align-items: center;
+}
+
+.detail-layer .detail-head .head-content .content-1 img {
+	width: 25px;
+    height: 25px;
+}
+
+.detail-layer .detail-head .head-content .content-1 .name {
+	font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    color: #4a4a4a;
+    line-height: 16px;
+    margin-left: 6px;
+}
+
+.detail-layer .detail-head .head-content .content-1 .date {
+	font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    color: #787878;
+    line-height: 16px;
+    margin-left: 6px;
+}
+
+.detail-layer .detail-head .head-content .content-2 {
+	color: black;
+	text-decoration: none;
+}
+
+.detail-layer .detail-head .head-content .content-2 .title {
+	color: #000;
+    font-size: 19px;
+    letter-spacing: -0.6px;
+    line-height: 21px;
+    margin-top: 13px;
+}
+
+.detail-layer .detail-head .head-content .content-2 .release {
+	color: #787878;
+    font-size: 15px;
+    letter-spacing: -0.2px;
+    line-height: 16px;
+    margin-top: 13px;
+}
+
+.detail-layer .detail-head .head-content .content-star {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    color: #4a4a4a;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+    font-size: 14px;
+    line-height: 14px;
+    box-sizing: border-box;
+    height: 28px;
+    width: 60px;
+    padding-right: 8px;
+    padding-left: 8px;
+    border: 1px solid #eaeaea;
+    border-radius: 13px;
+    margin-top: 10px;
+}
+
+.detail-layer .detail-head .head-img {
+	position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 100px;
+    height: 142px;
+    border: 0.5px solid rgba(0, 0, 0, 0.16);
+    border-radius: 3px;
+    background: rgb(248, 248, 248);
+}
+
+.detail-layer .detail-head .head-img img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	opacity: 1;
+}
+
+.detail-layer .detail-content {
+	position: relative;
+    color: #4a4a4a;
+    letter-spacing: -0.6px;
+    line-height: 25px;
+    margin: 30px 0px 40px 0px;
+    padding: 0 11px;
+}
+
+.detail-layer .detail-content .content {
+	font-size: 15px;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    line-height: 20px;
+    overflow: hidden;
+    word-break: break-word;
+    opacity: 1;
+}
+
+.detail-layer .detail-button {
+	display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.detail-layer .detail-button button {
+	background: none;
+    padding: 0px;
+    border: none;
+    cursor: pointer;
+    color: rgb(140, 140, 140);
+    margin-right: 11px;
+    margin-bottom: 10px;
+}
+
+.detail-layer .detail-button img {
+	vertical-align: top;
+    margin: 1px 3px 0px 0px;
+}
+
+/* 코멘트 모달 */
+.modal{ 
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 2;
+}
+
+.modal_content{
+	width: 515px;
+    height: 515px;
+    background: #fff;
+    border-radius: 10px;
+    position: relative;
+    top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 16px 20px 18px;
+}
+
+.x {
+	cursor: pointer;
+	padding-left: 15px;
+}
+
+.modal .modal_content .modal_head {
+	display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.modal .modal_content .modal_head span {
+    color: rgb(41, 42, 50);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 27px;
+    text-align: left;
+}
+
+.modal .modal_content textarea {
+	font-weight: 400;
+    font-size: 17px;
+    letter-spacing: -0.6px;
+    line-height: 21px;
+    width: 100%;
+    min-height: 360px;
+    border: 0px;
+    outline: none;
+    margin: 1px 0px;
+    resize: none;
+    overflow: auto;
+}
+
+.modal .modal_content .modal_footer {
+    display: flex;
+	justify-content: space-between;
+    align-items: center;
+}
+
+.modal .modal_content .modal_footer .review-star {
+	border-right: 1px solid #EEEEEE;
+    width: 270px;
+    height: 66px;
+    text-align: center;
+    color: #787878;
+    font-size: 12px;
+}
+
+.modal .modal_content .modal_footer .review-star .starMemo {
+	margin: 1px 0px -6px 0;
+}
+
+.modal .modal_content .modal_footer .review-star .star {
+	position: relative;
+	font-size: 2.5rem;
+	color: #EEEEEE;
+}
+
+.modal .modal_content .modal_footer .review-star .star > input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+  
+.modal .modal_content .modal_footer .review-star .star > span {
+    width: 0;
+    position: absolute; 
+    left: 0;
+    color: #F9DE77;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.modal .modal_content .modal_footer .modal_etc > span {
+	font-size: 13px;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    color: rgb(94, 94, 100);
+    line-height: 16px;
+}
+
+.modal .modal_content .modal_footer .modal_etc > input {
+	background: #F2F2F2;
+    border: none;
+    margin: 0 0px 0px 15px;
+    cursor: default;
+    position: relative;
+    z-index: 51;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    letter-spacing: -0.3px;
+    line-height: 18px;
+    height: 38px;
+    padding: 0px 40px;
+    border-radius: 7px;
+}

@@ -33,7 +33,7 @@ public class MovieController {
 	private ReviewService rservice;
 	
 	// 메인 페이지 넘어가기
-	// 영화 갯수, 리뷰 갯수, 개봉날짜(연도만)ㄴ
+	// 영화 갯수, 리뷰 갯수, 개봉날짜(연도만)
 	// top10(평점), top20(보고싶다), 선호 장르, 재개봉 영화, 한국 영화, 해외 영화
 	@GetMapping("/main")
 	public String main(HttpServletRequest req, Model model) {

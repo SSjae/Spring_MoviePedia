@@ -54,4 +54,9 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<ReviewDTO> allReviews(String moviecode) {
 		return mapper.allReviews(moviecode);
 	}
+	
+	@Override
+	public ReviewDTO getReview(String reviewnum) {
+		return mapper.getReview(reviewnum);
+	}
 }

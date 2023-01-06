@@ -28,7 +28,7 @@
 						</div>
 						<div class="review-star">★  ${review.reviewstar }</div>
 					</div>
-					<a href="#">
+					<a href="${cp}/review/reviewDetail/${review.reviewnum}/${review.moviecode}">
 						<div class="review-content">
 							${review.reviewcontent }
 						</div>					

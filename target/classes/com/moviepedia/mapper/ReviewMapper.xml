@@ -35,4 +35,8 @@
 	<select id="allReviews" resultType="com.moviepedia.domain.ReviewDTO">
 		select * from review where moviecode=#{moviecode}
 	</select>
+	
+	<select id="getReview" resultType="com.moviepedia.domain.ReviewDTO">
+		select * from review where reviewnum=#{reviewnum}
+	</select>
 </mapper>

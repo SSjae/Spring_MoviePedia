@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.moviepedia.domain.MovieDTO;
 import com.moviepedia.domain.ReviewDTO;
+import com.moviepedia.domain.UserDTO;
 import com.moviepedia.service.MovieService;
 import com.moviepedia.service.ReviewService;
 import com.moviepedia.service.UserService;
@@ -55,9 +56,11 @@ public class ReviewController {
 		
 		MovieDTO movie = mservice.movie(review.getMoviecode());
 		int rMemberCnt = rservice.rMemberCnt(review.getMoviecode());
+		ReviewDTO recentReview = rservice.review(review.getMoviecode(), review.getUseremail());
 		
 		Map<String, String> result = new HashMap<String, String>();
 		
+		result.put("reviewnum", Integer.toString(recentReview.getReviewnum()));
 		result.put("moviestar", Double.toString(movie.getMoviestar()));
 		result.put("rMemberCnt", Integer.toString(rMemberCnt));
 		result.put("check", Boolean.toString(check));
@@ -113,6 +116,7 @@ public class ReviewController {
 			result.put("reviewcontent", review.getReviewcontent());
 			result.put("reviewstar", Double.toString(review.getReviewstar()));
 			result.put("username", uservice.getUser(review.getUseremail()).getUsername());
+			result.put("moviecode", review.getMoviecode());
 			allReviews.add(result);
 		}
 		
@@ -120,7 +124,7 @@ public class ReviewController {
 	}
 	
 	// 모든 리뷰 보기 사이트로 가기
-	// 갈때 모든 리뷰의 리뷰넘, 컨텐트, 리뷰별점, 유저이름  가지고 가기
+	// 갈때 모든 리뷰의 리뷰넘, 컨텐트, 리뷰별점, 유저이름, 영화코드  가지고 가기
 	@GetMapping(value = "/reviewAll/{moviecode}")
 	public ModelAndView reviewAll(@PathVariable("moviecode")String moviecode) {
 		ModelAndView mav = new ModelAndView();
@@ -133,11 +137,57 @@ public class ReviewController {
 			result.put("reviewnum", Integer.toString(review.getReviewnum()));
 			result.put("reviewcontent", review.getReviewcontent());
 			result.put("reviewstar", Double.toString(review.getReviewstar()));
+			result.put("moviecode", moviecode);
 			result.put("username", uservice.getUser(review.getUseremail()).getUsername());
 			allReviews.add(result);
 		}
 		
 		mav.addObject("allReviews", allReviews);
 		return mav;
+	}
+	
+	// 리뷰 상세정보 페이지로 가기
+	// 갈때 그 리뷰DTO, 리뷰를 쓴 유저DTO, 영화 DTO, 개봉 연도만 넘기기
+	@GetMapping(value="/reviewDetail/{reviewnum}/{moviecode}")
+	public ModelAndView reviewDetail(@PathVariable("reviewnum")String reviewnum, @PathVariable("moviecode")String moviecode) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("review/reviewDetail");
+		
+		int mtotal = mservice.mtotal();
+		int rtotal = rservice.rtotal();
+		
+		ReviewDTO review = rservice.getReview(reviewnum);
+		MovieDTO movie = mservice.movie(moviecode);
+		UserDTO user = uservice.getUser(review.getUseremail());
+		
+		mav.addObject("mtotal", mtotal);
+		mav.addObject("rtotal", rtotal);
+		mav.addObject("review", review);
+		mav.addObject("movie", movie);
+		mav.addObject("user", user);
+		mav.addObject("release", release(movie));
+		
+		return mav;
+	}
+	
+	// 재개봉으로 인한 개봉날짜가 여러 개인 것중 맨 처음에 개봉한 연도만 뽑아내기 위한 메소드
+	public String release(MovieDTO movie) {
+		String result = "";
+		String release = movie.getMovierelease();
+		if(release.equals("")) {
+			result = "";
+		}
+		else if(release.length() == 7) {
+			// 1999 개봉
+			result = release.substring(release.length()-7, release.length()-3);
+		} else if (release.length() == 11) {
+			// 1999 .12 개봉
+			result = release.substring(release.length()-11, release.length()-7);
+		} else {
+			// 1999 .12.12 개봉
+			result = release.substring(release.length()-14, release.length()-10);				
+		}
+		
+		return result;
 	}
 }

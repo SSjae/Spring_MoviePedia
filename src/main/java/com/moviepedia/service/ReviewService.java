@@ -22,4 +22,6 @@ public interface ReviewService {
 
 	List<ReviewDTO> allReviews(String moviecode);
 
+	ReviewDTO getReview(String reviewnum);
+
 }

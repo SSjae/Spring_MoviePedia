@@ -24,4 +24,6 @@ public interface ReviewMapper {
 
 	List<ReviewDTO> allReviews(String moviecode);
 
+	ReviewDTO getReview(String reviewnum);
+
 }

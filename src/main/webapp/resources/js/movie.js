@@ -86,7 +86,7 @@ const allComment = () => {
 					content += 		'</div>';
 					content += 		'<div class="review-star">★ '+result[i].reviewstar+'</div>';
 					content += 	'</div>';
-					content += 	'<a href="#">';
+					content += 	'<a href="'+ctx+'/review/reviewDetail/'+result[i].reviewnum+'/'+result[i].moviecode+'">';
 					content += 		'<div class="review-content">';
 					content += 			result[i].reviewcontent;
 					content += 		'</div>';
@@ -127,18 +127,18 @@ const noReview = (username) => {
 }
 
 // 리뷰가 등록 되어 있을 때
-const okReview = (reviewstar, reviewcontent) => {
+const okReview = (reviewnum, reviewstar, reviewcontent, moviecode) => {
 	let content = "";
 	content += "<div class='ok-comment'>";
 	content += "<div class='comment-SC'>";
 	content += "<div class='S-star'>내 평점<br>★"+reviewstar+"</div>";
 	content += "<div class='C-content'>";
 	content += "<div class='text'>";
-	content += "<a href='#'>"+reviewcontent+"</a>";
+	content += "<a href='"+ctx+"/review/reviewDetail/"+reviewnum+"/"+moviecode+"'>"+reviewcontent+"</a>";
 	content += "</div></div></div>";
 	content += "<div class='comment-UD'>";
-	content += "<button onclick='reviewUpModal()'><img alt='trash' src='"+ctx+"/resources/images/trash.svg'>수정</button>";
-	content += "<button onclick='reviewDelete()'><img alt='pencil' src='"+ctx+"/resources/images/pencil.svg'>삭제</button>";
+	content += "<button onclick='reviewUpModal()'><img alt='trash' src='"+ctx+"/resources/images/pencil.svg'>수정</button>";
+	content += "<button onclick='reviewDelete()'><img alt='pencil' src='"+ctx+"/resources/images/trash.svg'>삭제</button>";
 	content += "</div></div>";
 	$(".info-comment").append(content);
 }
@@ -185,7 +185,7 @@ $(document).ready(() => {
 				$("#star").val(result.reviewstar * 2);
 				$("#comment").val(result.reviewcontent);
 				$(".comment_len").text(result.reviewcontent.length);
-				okReview(result.reviewstar, result.reviewcontent);
+				okReview(result.reviewnum, result.reviewstar, result.reviewcontent, result.moviecode);
 			}
 		},
 		error : function() {
@@ -293,7 +293,7 @@ $(".x").click(() => {
 	$(".modal").fadeOut();
 })
 
-// 코멘트 작성
+// 코멘트 작성 및 수정
 $(".comment_btn").click(() => {
 	let useremail = $("#useremail").val();
 	let moviecode = $("#moviecode").val();
@@ -321,7 +321,7 @@ $(".comment_btn").click(() => {
 				$(".review-comment").addClass("ok");
 				// 작성 성공하면 원래 있던 코멘트 달기 지우고 자기 코멘트 띄우게 하기
 				$(".info-comment").empty();
-				okReview(reviewstar, reviewcontent);
+				okReview(result.reviewnum, reviewstar, reviewcontent, moviecode);
 				// 모든 코멘트 부분 다시 그리기
 				allComment();
 			} else {
