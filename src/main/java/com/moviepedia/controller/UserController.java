@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.moviepedia.domain.UserDTO;
 import com.moviepedia.service.MovieService;
+import com.moviepedia.service.ReviewService;
 import com.moviepedia.service.UserService;
 
 import lombok.Setter;
@@ -38,6 +39,9 @@ public class UserController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private MovieService mservice;
+	
+	@Setter(onMethod_ = @Autowired)
+	private ReviewService rservice;
 	
 	@Setter(onMethod_ = @Autowired)
 	private JavaMailSender mailSender;
@@ -207,5 +211,22 @@ public class UserController {
 			}
 		}
 		return result;
+	}
+	
+	// myPage로 이동
+	@GetMapping("/myPage")
+	public String myPage(Model model) {
+		int mtotal = mservice.mtotal();
+		int rtotal = rservice.rtotal();
+		
+		// backProfile 랜덤을 위한 숫자 보냄
+		Random random = new Random();
+		int ran = random.nextInt(6)+1;
+
+		model.addAttribute("mtotal", mtotal);
+		model.addAttribute("rtotal", rtotal);
+		model.addAttribute("ran", ran);
+		
+		return "user/myPage";
 	}
 }

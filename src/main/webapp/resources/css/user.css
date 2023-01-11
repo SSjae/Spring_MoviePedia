@@ -383,3 +383,38 @@ header > .head-logo > img {
     margin: -4px 0px 0px 10px;
     display: none;
 }
+
+/* myPage.jsp */
+.myPage {
+	background-color: #F8F8F8;
+}
+
+.myPage-layer {
+	width: 640px;
+	height: 620px;
+    margin: 92px auto 0 auto;
+	background: rgb(255, 255, 255);
+    border-color: rgb(227, 227, 227) !important;
+    border-radius: 6px;
+}
+
+.myPage-layer .backProfile {
+    position: relative;
+	width: 100%;
+    height: 0;
+    padding-top: 32%;
+    margin: 0 0 -20px;
+    border-radius: 6px 6px 0 0;
+}
+
+.myPage-layer .backProfile:before {
+	content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-image: linear-gradient( -180deg,rgba(0,0,0,0.4) 0%,rgba(0,0,0,0) 100% );
+    height: 44px;
+    border-radius: 6px 6px 0 0;
+}

@@ -19,7 +19,7 @@
 					<span>${loginUser.username}님 환영합니다.</span>	
 				</li>
 				<li class="head-div">
-					<a href="#"><img src="${cp}/resources/images/profile.png" alt="프로필" /></a>		
+					<a href="${cp}/user/myPage"><img src="${cp}/resources/images/profile.png" alt="프로필" /></a>		
 				</li>
 			</ul>
 		</div>
