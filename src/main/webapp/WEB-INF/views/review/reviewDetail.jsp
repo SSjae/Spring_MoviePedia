@@ -19,7 +19,7 @@
 				<div class="content-1">
 					<img src="${cp }/resources/images/profile.png" alt="프로필">
 					<span class="name">${user.username }</span>
-					<span class="date">${review.reviewdate }</span>				
+					<span class="date">${reviewDateTime }</span>				
 				</div>
 				<a class="content-2" href="${cp}/movie/movieInfo?moviecode=${movie.moviecode}">
 					<div class="title">${movie.movieKtitle }</div>

@@ -1,6 +1,11 @@
 package com.moviepedia.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -157,12 +162,14 @@ public class ReviewController {
 		int rtotal = rservice.rtotal();
 		
 		ReviewDTO review = rservice.getReview(reviewnum);
+		String reviewDateTime = reviewDateTime(review.getReviewdate());
 		MovieDTO movie = mservice.movie(moviecode);
 		UserDTO user = uservice.getUser(review.getUseremail());
 		
 		mav.addObject("mtotal", mtotal);
 		mav.addObject("rtotal", rtotal);
 		mav.addObject("review", review);
+		mav.addObject("reviewDateTime", reviewDateTime);
 		mav.addObject("movie", movie);
 		mav.addObject("user", user);
 		mav.addObject("release", release(movie));
@@ -189,5 +196,58 @@ public class ReviewController {
 		}
 		
 		return result;
+	}
+	
+	// 리뷰 작성 경과를 구하는 메소드
+	public String reviewDateTime(String formatedReview) {
+		String result = "";
+		
+		// 현재 날짜/시간
+        LocalDateTime now = LocalDateTime.now();
+        
+        // 현재 날짜와 리뷰 작성한 날짜
+        String nowDate = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String reviewDate = formatedReview.substring(0, 10);
+        
+        // 현재 시간과 리뷰 작성한 시간
+        String nowTime = now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        String reviewTime = formatedReview.substring(11, 19);
+        
+        // 현재 날짜와 리뷰 작성한 날짜가 같을 때만 시간 비교 그 외에는 그냥 리뷰 작성한 날짜만 반환
+        if(nowDate.equals(reviewDate)) {       	
+        	try {
+        		// 현재 시간과 리뷰 작성한 시간을 Date 객체로 파싱
+        		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+				Date nowT = sdf.parse(nowTime);
+				Date reviewT = sdf.parse(reviewTime);
+
+        		// 파싱 후 시간을 getTime()으로 받아옴
+				long nowL = nowT.getTime();
+				long reviewL = reviewT.getTime();
+
+        		// 받아온 시간끼리 차를 해서 시간 차이를 구함
+				long diff = nowL - reviewL;
+
+        		// 시간 차이를 /1000, /(1000*60), /(1000*60*60)으로 각각 초,분,시를 구함
+				long diffSec = diff / 1000;
+				long diffMin = diff / (1000 * 60);
+				long diffHou = diff / (1000 * 60 * 60);
+				
+				// 분기를 이용해서 초가 60초 미만이면 몇초전, 분이 1분 60분 사이이면 몇분 전, 시가 1시간 24시간 사이이면 몇시간 전으로 반환
+				if(diffSec < 60) {
+					result = diffSec+"초 전";
+				} else if (1 <= diffMin && diffMin < 60) {
+					result = diffMin+"분 전";
+				} else {
+					result = diffHou+"시간 전";
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+        } else {
+        	result = reviewDate;
+        }
+        
+        return result;
 	}
 }
