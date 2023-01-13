@@ -24,7 +24,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.moviepedia.domain.LikeMovieDTO;
+import com.moviepedia.domain.MovieDTO;
+import com.moviepedia.domain.ReviewDTO;
 import com.moviepedia.domain.UserDTO;
+import com.moviepedia.service.LikeMovieService;
 import com.moviepedia.service.MovieService;
 import com.moviepedia.service.ReviewService;
 import com.moviepedia.service.UserService;
@@ -42,6 +46,9 @@ public class UserController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private ReviewService rservice;
+	
+	@Setter(onMethod_ = @Autowired)
+	private LikeMovieService lservice;
 	
 	@Setter(onMethod_ = @Autowired)
 	private JavaMailSender mailSender;
@@ -215,17 +222,37 @@ public class UserController {
 	
 	// myPage로 이동
 	@GetMapping("/myPage")
-	public String myPage(Model model) {
+	public String myPage(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		UserDTO user = (UserDTO) session.getAttribute("loginUser");
+		
 		int mtotal = mservice.mtotal();
 		int rtotal = rservice.rtotal();
 		
 		// backProfile 랜덤을 위한 숫자 보냄
 		Random random = new Random();
 		int ran = random.nextInt(6)+1;
+		
+		// 내가 평가한 reviewDTO, movieDTO
+		ArrayList<ReviewDTO> myReview = rservice.myReview(user.getUseremail());
+		ArrayList<MovieDTO> myReviewMovie = new ArrayList<MovieDTO>();
+		for(ReviewDTO review : myReview) {
+			myReviewMovie.add(mservice.movie(review.getMoviecode()));
+		}
+		
+		ArrayList<LikeMovieDTO> myLike = lservice.myLike(user.getUseremail());
+		ArrayList<MovieDTO> myLikeMovie = new ArrayList<MovieDTO>();
+		for(LikeMovieDTO like : myLike) {
+			myLikeMovie.add(mservice.movie(like.getMoviecode()));
+		}
 
 		model.addAttribute("mtotal", mtotal);
 		model.addAttribute("rtotal", rtotal);
 		model.addAttribute("ran", ran);
+		model.addAttribute("myReview", myReview);
+		model.addAttribute("myReviewMovie", myReviewMovie);
+		model.addAttribute("myLike", myLike);
+		model.addAttribute("myLikeMovie", myLikeMovie);
 		
 		return "user/myPage";
 	}

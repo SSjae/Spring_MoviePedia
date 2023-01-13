@@ -1,5 +1,6 @@
 package com.moviepedia.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +59,10 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public ReviewDTO getReview(String reviewnum) {
 		return mapper.getReview(reviewnum);
+	}
+	
+	@Override
+	public ArrayList<ReviewDTO> myReview(String useremail) {
+		return mapper.myReview(useremail);
 	}
 }

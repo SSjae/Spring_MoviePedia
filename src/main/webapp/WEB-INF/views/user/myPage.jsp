@@ -15,7 +15,23 @@
 	<c:import url="../import/header.jsp"></c:import>
 	<section class="myPage-layer">
 		<div class="backProfile" style="background: url(${cp}/resources/images/backProfile/backProfile_${ran}.jpg) no-repeat center; background-size: cover;">
-
+		
+		</div>
+		<div class="myPage-main">
+			<div class="profile">
+				<img src="${cp}/resources/images/profile.png" alt="프로필" />
+			</div>
+			<div class="myPage-name">
+				${loginUser.username}
+			</div>
+			<hr>
+			<div class="myPage-review">
+				<div class="text">평가<span>${myReview.size() }</span></div>
+			</div>
+			<hr>
+			<div class="myPage-like">
+				<div class="text">보고싶어요<span>${myLike.size() }</span></div>
+			</div>
 		</div>
 	</section> 
 	<c:import url="../import/footer.jsp">

@@ -1,5 +1,6 @@
 package com.moviepedia.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.moviepedia.domain.ReviewDTO;
@@ -23,5 +24,7 @@ public interface ReviewService {
 	List<ReviewDTO> allReviews(String moviecode);
 
 	ReviewDTO getReview(String reviewnum);
+
+	ArrayList<ReviewDTO> myReview(String useremail);
 
 }

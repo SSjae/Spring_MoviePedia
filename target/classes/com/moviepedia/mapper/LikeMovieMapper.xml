@@ -8,11 +8,15 @@
 		select * from likemovie where moviecode=#{moviecode} and useremail=#{useremail}
 	</select>
 	
-	<select id="addLike">
+	<insert id="addLike">
 		insert into likemovie(moviecode, useremail) values(#{moviecode}, #{useremail})
-	</select>
+	</insert>
 	
-	<select id="removeLike">
+	<delete id="removeLike">
 		delete from likemovie where moviecode=#{moviecode} and useremail=#{useremail}
+	</delete>
+	
+	<select id="myLike" resultType="com.moviepedia.domain.LikeMovieDTO">
+		select * from likemovie where useremail=#{useremail}
 	</select>
 </mapper>

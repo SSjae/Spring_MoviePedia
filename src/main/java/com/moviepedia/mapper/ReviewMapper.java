@@ -1,5 +1,6 @@
 package com.moviepedia.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -25,5 +26,7 @@ public interface ReviewMapper {
 	List<ReviewDTO> allReviews(String moviecode);
 
 	ReviewDTO getReview(String reviewnum);
+
+	ArrayList<ReviewDTO> myReview(String useremail);
 
 }

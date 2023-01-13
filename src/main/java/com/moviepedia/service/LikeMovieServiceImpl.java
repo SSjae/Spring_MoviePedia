@@ -1,5 +1,7 @@
 package com.moviepedia.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +27,11 @@ public class LikeMovieServiceImpl implements LikeMovieService {
 	
 	@Override
 	public void removeLike(String moviecode, String useremail) {
-		mapper.removeLike(moviecode, useremail);
-		
+		mapper.removeLike(moviecode, useremail);	
+	}
+	
+	@Override
+	public ArrayList<LikeMovieDTO> myLike(String useremail) {
+		return mapper.myLike(useremail);
 	}
 }

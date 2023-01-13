@@ -390,8 +390,8 @@ header > .head-logo > img {
 }
 
 .myPage-layer {
-	width: 640px;
-	height: 620px;
+	width: 700px;
+    height: 640px;
     margin: 92px auto 0 auto;
 	background: rgb(255, 255, 255);
     border-color: rgb(227, 227, 227) !important;
@@ -417,4 +417,51 @@ header > .head-logo > img {
     background-image: linear-gradient( -180deg,rgba(0,0,0,0.4) 0%,rgba(0,0,0,0) 100% );
     height: 44px;
     border-radius: 6px 6px 0 0;
+}
+
+.myPage-layer .myPage-main {
+	margin: 0 20px;
+}
+
+.myPage-layer .myPage-main .profile {
+	position: relative;
+    z-index: 1;
+}
+
+.myPage-layer .myPage-main .profile img {
+	width: 56px;
+    height: 56px;
+}
+
+.myPage-layer .myPage-main .myPage-name {
+	color: #000;
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: -0.9px;
+    line-height: 30px;
+    width: 100%;
+    word-break: break-all;
+}
+
+.myPage-layer .myPage-main hr {
+    border: 0;
+    border-bottom: 1px solid #f0f0f0;
+    margin: 13px 0 13px;
+}
+
+.myPage-layer .myPage-main .text {
+	color: rgb(0, 0, 0);
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: -0.7px;
+    line-height: 22px;
+}
+
+.myPage-layer .myPage-main .text span {
+    color: rgb(160, 160, 160);
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    line-height: 20px;
+    margin: 12px 0px 12px 6px;
 }
