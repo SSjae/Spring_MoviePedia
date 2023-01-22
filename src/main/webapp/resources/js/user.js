@@ -402,3 +402,96 @@ $(".findPw-bt").click((e) => {
 		}
 	})
 })
+
+// myPage-review slick
+$('.review-main').slick({
+	infinite: false,
+	arrows : true,
+	draggable : false,
+	variableWidth: true,
+	speed: 300,
+	slidesToShow: 5,
+	slidesToScroll: 5
+});
+
+// myPage-like slick
+$('.like-main').slick({
+	infinite: false,
+	arrows : true,
+	draggable : false,
+	variableWidth: true,
+	speed: 300,
+	slidesToShow: 5,
+	slidesToScroll: 5
+});
+
+// 회원 탈퇴 모달 띄우기
+$(".deleteUser").click((e) => {
+	e.preventDefault();
+	$(".modal").fadeIn();
+	$("#comment").focus();
+})
+
+$(".x").click(() => {
+	$(".modal").fadeOut();
+})
+
+// 회원탈퇴 이메일 인증 버튼
+authnum = 0;
+$("#delete-auth").click(() => {
+	let useremail = $("#useremail").val();
+	
+	var ctx = getContextPath();
+	$.ajax({
+		url : ctx+"/user/auth",
+		type : "get",
+		data : {"useremail":useremail},
+		success : function(result) {
+			console.log(result);
+			authnum = result;
+			alert("인증번호가 발송되었습니다.");
+			
+			// 이메일 인증 버튼 없애고 인증번호 창 보이기
+			$("#delete-auth").hide();
+			$(".authdiv").show();
+			// email-input 비활성
+			$("#useremail").attr("readonly","readonly");
+			$("#useremail").css("color", "gray");
+			$("#authnum").focus();
+		},
+		error : function() {
+			console.log("서버 ");
+		}
+	})
+})
+
+// 인증 버튼
+$("#delete-authbt").click((e) => {
+	e.preventDefault();
+	let value = $("#authnum").val();
+	
+	if(value === "") {
+		alert("인증 번호를 입력해주세요.")
+		$("#authnum").focus();
+	} else if (value === authnum) {
+		alert("이메일 인증이 완료되었습니다.");
+		// authnum-input 비활성
+		$("#authnum").attr("readonly","readonly");
+		$("#authnum").css("color", "gray");
+		// auth-button 비활성
+		$("#delete-authbt").css("background", "#F2F2F2");
+		$("#delete-authbt").css("cursor", "default");
+		$("#delete-authbt").attr("disabled","disabled");
+		// delete 버튼 show
+		$("#delete").show();
+	} else {
+		alert("이메일 인증에 실패하였습니다.");
+		$("#authnum").focus();
+	}
+	console.log(authnum)
+})
+
+// 탈퇴 버튼
+$("#delete").click(() => {
+	$("#deleteForm").submit();
+})

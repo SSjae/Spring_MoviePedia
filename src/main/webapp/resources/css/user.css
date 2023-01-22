@@ -390,8 +390,8 @@ header > .head-logo > img {
 }
 
 .myPage-layer {
-	width: 700px;
-    height: 640px;
+	width: 762px;
+    height: 100%;
     margin: 92px auto 0 auto;
 	background: rgb(255, 255, 255);
     border-color: rgb(227, 227, 227) !important;
@@ -433,7 +433,8 @@ header > .head-logo > img {
     height: 56px;
 }
 
-.myPage-layer .myPage-main .myPage-name {
+.myPage-layer .myPage-main .myPage-head .myPage-name {
+	display: inline;
 	color: #000;
     font-size: 25px;
     font-weight: 700;
@@ -443,10 +444,25 @@ header > .head-logo > img {
     word-break: break-all;
 }
 
+.myPage-layer .myPage-main .myPage-head .myPage-button {
+	display: inline-block;
+	float: right;
+}
+
+.myPage-layer .myPage-main .myPage-head .myPage-button a {
+	color: rgb(120, 120, 120);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    line-height: 40px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .myPage-layer .myPage-main hr {
     border: 0;
     border-bottom: 1px solid #f0f0f0;
-    margin: 13px 0 13px;
+    margin: 10px 0 10px;
 }
 
 .myPage-layer .myPage-main .text {
@@ -455,6 +471,7 @@ header > .head-logo > img {
     font-weight: 400;
     letter-spacing: -0.7px;
     line-height: 22px;
+    margin-bottom: 10px;
 }
 
 .myPage-layer .myPage-main .text span {
@@ -464,4 +481,229 @@ header > .head-logo > img {
     letter-spacing: -0.5px;
     line-height: 20px;
     margin: 12px 0px 12px 6px;
+}
+
+.myPage-layer .myPage-main .myPage-review .review-main .main {
+    width: 140px;
+    height: 242px;
+    padding: 0 5.4px 0 0;
+}
+
+.myPage-layer .myPage-main .myPage-review .review-main .main a {
+	color: black;
+	text-decoration: none;
+}
+
+.myPage-layer .myPage-main .myPage-review .review-main .main img {
+	position: relative;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid #eae9e8;
+    border-radius: 5px;
+}
+
+.myPage-layer .myPage-main .myPage-review .review-main .main .title {
+	color: rgb(41, 42, 50);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    line-height: 22px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.myPage-layer .myPage-main .myPage-review .review-main .main .rate {
+	color: rgb(255, 161, 54);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    line-height: 18px;
+    height: 18px;
+}
+
+.myPage-layer .myPage-main .myPage-like {
+	padding-bottom: 7px;
+}
+
+.myPage-layer .myPage-main .myPage-like .like-main .main {
+    width: 140px;
+    height: 242px;
+    padding: 0 5.4px 0 0;
+}
+
+.myPage-layer .myPage-main .myPage-like .like-main .main a {
+	color: black;
+	text-decoration: none;
+}
+
+.myPage-layer .myPage-main .myPage-like .like-main .main img {
+	position: relative;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid #eae9e8;
+    border-radius: 5px;
+}
+
+.myPage-layer .myPage-main .myPage-like .like-main .main .title {
+	color: rgb(41, 42, 50);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    line-height: 22px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.myPage-layer .myPage-main .myPage-like .like-main .main .rate {
+	color: rgb(120, 120, 120);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    line-height: 18px;
+    height: 18px;
+}
+
+.slick-prev {
+	left: -17px !important;
+}
+
+.slick-next {
+	right: -4px !important;
+}
+
+.slick-prev, .slick-next {
+    z-index: 1;
+    top: 46% !important;
+}
+
+.slick-prev:before, .slick-next:before {
+    font-size: 34px !important;
+    line-height: 0 !important;
+    color: rgb(0 0 0 / 20%) !important;
+}
+
+/* 회원 탈퇴 코멘트 모달 */
+.modal{ 
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 63;
+}
+
+.modal_content{
+	width: 515px;
+    height: 515px;
+    background: #fff;
+    border-radius: 10px;
+    position: relative;
+    top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 16px 20px 18px;
+}
+
+.x {
+	cursor: pointer;
+	padding-left: 15px;
+}
+
+.modal .modal_content .modal_head {
+	display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.modal .modal_content .modal_head span {
+    color: rgb(41, 42, 50);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 27px;
+    text-align: left;
+}
+
+.modal .modal_content .delete-content {
+    line-height: 24px;
+    color: #4a4a4a;
+    font-size: 16px;
+}
+
+.modal .modal_content .delete-content p {
+    margin: 11px 0 0;
+}
+
+.modal .modal_content #delete-auth {
+	display: inline-block;
+    background-color: #ff1563;
+    line-height: 40px;
+    font-size: 17px;
+    font-weight: 500;
+    height: 40px;
+    width: 100%;
+    border-radius: 6px;
+    margin: 17px 0 0;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.modal .modal_content .authdiv {
+	display: none;
+	margin: 17px 0 0;
+}
+
+.modal .modal_content .authdiv > #authnum {
+	width: 76%;
+    height: 41px;
+    margin-bottom: 10px;
+    border: none;
+    background: #F5f5f5;
+    border-radius: 6px;
+    padding: 0 12px;
+    caret-color: #FF2F62;
+}
+
+.modal .modal_content .authdiv > #authnum:focus {
+	outline: none;
+}
+
+.modal .modal_content .authdiv > #delete-authbt {
+    background-color: #ff1563;
+    width: 18%;
+    margin: 2px 0 0 0;
+    border-radius: 6px;
+    line-height: 39px;
+    font-size: 17px;
+    font-weight: 500;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.modal .modal_content #delete {
+	display: none;
+    background-color: #ff1563;
+    line-height: 40px;
+    font-size: 17px;
+    font-weight: 500;
+    height: 40px;
+    width: 100%;
+    border-radius: 6px;
+    margin: 17px 0 0;
+    border: none;
+    color: white;
+    cursor: pointer;
 }

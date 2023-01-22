@@ -43,7 +43,7 @@
 	<div class="modal">
 		<div class="modal_content">
 			<img class="x" src="${cp}/resources/images/x.svg" alt="x">
-			<iframe  width="390" height="500" frameborder=0 src="${cp}/user/findPw"></iframe>
+			<iframe width="390" height="500" frameborder=0 src="${cp}/user/findPw"></iframe>
 		</div>
 	</div>
 </body>

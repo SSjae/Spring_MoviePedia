@@ -256,4 +256,23 @@ public class UserController {
 		
 		return "user/myPage";
 	}
+	
+	// logout
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.removeAttribute("loginUser");
+		
+		return "user/login";
+	}
+	
+	// 회원탈퇴
+	@PostMapping("/delete")
+	public String delete(HttpServletRequest request, String useremail) {
+		HttpSession session = request.getSession();
+		session.removeAttribute("loginUser");
+		System.out.println(useremail);
+		
+		return "user/login";
+	}
 }
