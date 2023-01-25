@@ -13,4 +13,6 @@ public interface UserService {
 	boolean resetPw(String useremail, String userpw);
 
 	UserDTO getUser(String useremail);
+
+	void delete(String useremail);
 }

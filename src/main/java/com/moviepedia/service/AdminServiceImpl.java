@@ -120,9 +120,6 @@ public class AdminServiceImpl implements AdminService{
 				}
 			} catch (Exception e) {}
 		}
-		mapper.pdelete();
-		mapper.adelete();
-		mapper.mdelete();
 		
 		mapper.minsert(movie);
 		mapper.ainsert(actor);

@@ -23,4 +23,8 @@
 	<update id="resetPw">
 		update user set userpw=#{userpw} where useremail=#{useremail}
 	</update>
+	
+	<delete id="delete">
+		delete from user where useremail=#{useremail}
+	</delete>
 </mapper>

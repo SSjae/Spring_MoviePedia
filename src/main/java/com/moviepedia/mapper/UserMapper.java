@@ -15,4 +15,6 @@ public interface UserMapper {
 	boolean resetPw(@Param("useremail")String useremail, @Param("userpw")String userpw);
 
 	UserDTO getUser(String useremail);
+
+	void delete(String useremail);
 }

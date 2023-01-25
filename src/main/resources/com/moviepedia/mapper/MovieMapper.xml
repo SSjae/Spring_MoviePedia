@@ -13,11 +13,11 @@
 	</select>
 	
 	<select id="top10" resultType="com.moviepedia.domain.MovieDTO">
-		select * from movie order by moviestar desc limit 0,10
+		select * from movie order by moviestar desc, movierelease desc limit 0,10;
 	</select>
 	
 	<select id="likeTop20" resultType="com.moviepedia.domain.MovieDTO">
-		select * from movie order by movielike desc limit 0,20
+		select * from movie order by movielike desc, movierelease desc limit 0,20
 	</select>
 	
 	<select id="genreMovie" resultType="com.moviepedia.domain.MovieDTO">

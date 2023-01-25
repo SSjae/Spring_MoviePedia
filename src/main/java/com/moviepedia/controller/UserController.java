@@ -271,8 +271,25 @@ public class UserController {
 	public String delete(HttpServletRequest request, String useremail) {
 		HttpSession session = request.getSession();
 		session.removeAttribute("loginUser");
-		System.out.println(useremail);
 		
-		return "user/login";
+		// 이 유저의 모든 리뷰 DTO 받아오기
+		ArrayList<ReviewDTO> myReview = rservice.myReview(useremail);
+		// 이 유저의 모든 보고싶어요 DTO 받아오기
+		ArrayList<LikeMovieDTO> myLike = lservice.myLike(useremail);
+		
+		// 유저 삭제(제약조건으로 인해 그 유저의 리뷰, 보고싶어요도 같이 삭제)
+		uservice.delete(useremail);
+		
+		// 삭제 후 위에서 받은 리뷰 DTO의 각 영화의 전체 평점 평균을 구해서 그 영화 DTO에 적용
+		for(ReviewDTO review : myReview) {
+			double avg = rservice.reviewAvg(review.getMoviecode()) == null ? 0 : Double.parseDouble(rservice.reviewAvg(review.getMoviecode()));
+			mservice.updateStar(review.getMoviecode(), avg);
+		}
+		// 삭제 후 위에서 받은 보고싶어요 DTO의 각 영화의 갯수를 구해서 그 영화 DTO에 적용
+		for(LikeMovieDTO like : myLike) {
+			mservice.likedown(like.getMoviecode());
+		}
+		
+		return "redirect:/user/login";
 	}
 }
