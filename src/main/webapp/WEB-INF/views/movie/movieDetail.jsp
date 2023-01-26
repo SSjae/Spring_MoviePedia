@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="${cp}/resources/css/font.css">
 <link rel="stylesheet" href="${cp}/resources/css/import.css">
 <link rel="stylesheet" href="${cp}/resources/css/movie.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body class="movieDetail">
 	<c:import url="../import/header.jsp"></c:import>
@@ -51,5 +52,7 @@
 	</section>
 </body>
 <script src="http://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="${cp}/resources/js/movie.js"></script>
+<script type="text/javascript" src="${cp}/resources/js/import.js"></script>
 </html>

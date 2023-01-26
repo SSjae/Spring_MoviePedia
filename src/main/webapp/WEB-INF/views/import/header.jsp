@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="cp" value="${pageContext.request.contextPath}"/>
+<html>
 <body>
 	<header>
 		<div class="head">
@@ -13,7 +14,9 @@
 					<span>영화</span>				
 				</li>
 				<li class="head-input">
-					<input type="text" placeholder="영화, 인물을 검색해보세요."/>	
+					<form action="${cp}/movie/search" method="get">
+						<input name="keyword" id="search" type="text" placeholder="영화, 인물을 검색해보세요."/>						
+					</form>
 				</li>
 				<li class="head-span">
 					<span>${loginUser.username}님 환영합니다.</span>	

@@ -1,6 +1,8 @@
 package com.moviepedia.service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -85,5 +87,15 @@ public class MovieServiceImpl implements MovieService{
 	@Override
 	public void updateStar(String moviecode, double avg) {
 		mapper.updateStar(moviecode, avg);
+	}
+	
+	@Override
+	public List<Map<String, Object>> autocomplete(Map<String, Object> paramMap) {
+		return mapper.autocomplete(paramMap);
+	}
+	
+	@Override
+	public ArrayList<MovieDTO> search(String keyword) {
+		return mapper.search(keyword);
 	}
 }

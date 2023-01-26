@@ -154,3 +154,12 @@ footer .foot-2 .foot-etc > div {
     justify-content: space-between;
     width: 62px;
 }
+
+.ui-widget.ui-widget-content {
+    position: fixed;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+    line-height: 23px;
+    padding: 0px 0px 1px;
+}

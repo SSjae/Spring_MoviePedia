@@ -12,32 +12,31 @@
 <link rel="stylesheet" href="${cp}/resources/css/movie.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
-<body class="movieAll">
+<body class="searchResult">
 	<c:import url="../import/header.jsp"></c:import>
-	<section class="all-layer">
-		<div class="all-head">
+	<section class="search-layer">
+		<div class="search-head">
 			<div class="text">
-				${title }<span>${movies.size() }</span>
+				"${keyword}"의 검색결과
 			</div>
 		</div>
-		<div class="all-main">
-			<div class="allMovie">
-				<c:forEach items="${movies}" var="movie">
-					<div class="allMovie-main">
+		<div class="search-main">
+			<div class="searchResult">
+				<c:forEach items="${movies}" var="movie" varStatus="status">
+					<div class="main">
 						<a href="${cp}/movie/movieInfo?moviecode=${movie.moviecode}">
 							<img src="${movie.movieimg }" alt="img">
 							<span class="title">${movie.movieKtitle }</span>
+							<span class="year-nation">
+								${moviesRelease.get(status.index) == "" ? "" : moviesRelease.get(status.index) += " ・ "}${movie.movienation}
+							</span>
 							<span class="rate">평균 ★${movie.moviestar }</span>
 						</a>
 					</div>			
 				</c:forEach>
 			</div>
 		</div>
-	</section> 
-	<c:import url="../import/footer.jsp">
-		<c:param name="mtotal" value="${mtotal}"/>
-		<c:param name="rtotal" value="${rtotal}"/>
-	</c:import>
+	</section>
 </body>
 <script src="http://code.jquery.com/jquery-3.6.1.js"></script> 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

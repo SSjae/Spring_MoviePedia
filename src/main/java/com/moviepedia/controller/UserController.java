@@ -28,6 +28,7 @@ import com.moviepedia.domain.LikeMovieDTO;
 import com.moviepedia.domain.MovieDTO;
 import com.moviepedia.domain.ReviewDTO;
 import com.moviepedia.domain.UserDTO;
+import com.moviepedia.service.AdminService;
 import com.moviepedia.service.LikeMovieService;
 import com.moviepedia.service.MovieService;
 import com.moviepedia.service.ReviewService;
@@ -51,6 +52,9 @@ public class UserController {
 	private LikeMovieService lservice;
 	
 	@Setter(onMethod_ = @Autowired)
+	private AdminService aservice;
+	
+	@Setter(onMethod_ = @Autowired)
 	private JavaMailSender mailSender;
 	
 	@GetMapping({"/login","/findPw"})
@@ -60,6 +64,13 @@ public class UserController {
 	// 회원가입 페이지로 이동(모든 장르 데이터 넘겨야됨)
 	@GetMapping("/join")
 	public String replaceJoin(Model model) {
+		if(aservice.mtotal() == 0) {
+			model.addAttribute("msg", "영화 최신화가 필요합니다.");
+			model.addAttribute("url", "/");
+			
+			return "alert";
+		}
+		
 		// DB에서 모든 영화 장르만 가져옴(한 영화에 장르가 여러개)
 		ArrayList<String> list = mservice.allGenre();
 		

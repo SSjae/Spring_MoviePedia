@@ -2,6 +2,7 @@ package com.moviepedia.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.moviepedia.domain.ActorDTO;
@@ -82,6 +85,7 @@ public class MovieController {
 		movie.setMovienation(movie.getMovienation().replace(" , ", "/"));
 		ArrayList<ActorDTO> actors = mservice.actors(moviecode);
 		ArrayList<PhotoDTO> photos = mservice.photos(moviecode);
+		
 		int rMemberCnt = rservice.rMemberCnt(moviecode);
 
 		String genre = movie.getMoviegenre().split("/")[0];
@@ -145,6 +149,29 @@ public class MovieController {
 		model.addAttribute("title", title);
 		model.addAttribute("movies", movies);
 		return "movie/movieAll";
+	}
+	
+	// 영화 검색 자동 완성
+	@PostMapping("/autocomplete")
+	@ResponseBody
+	public Map<String, Object> autocomplete(@RequestParam Map<String, Object> paramMap) {
+		
+		List<Map<String, Object>> resultList = mservice.autocomplete(paramMap);
+		paramMap.put("resultList", resultList);
+		
+		return paramMap;
+	}
+	
+	// 영화 검색
+	@GetMapping("/search")
+	public String search(String keyword, Model model) {
+		ArrayList<MovieDTO> movies = mservice.search(keyword);
+		ArrayList<String> moviesRelease = relese(movies);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("movies", movies);
+		model.addAttribute("moviesRelease", moviesRelease);
+		
+		return "movie/searchResult";
 	}
 	
 	// 재개봉으로 인한 개봉날짜가 여러 개인 것중 맨 처음에 개봉한 연도만 뽑아내기 위한 메소드

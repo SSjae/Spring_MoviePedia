@@ -20,9 +20,9 @@
 		</foreach>
 	</insert>
 	<insert id="pinsert">
-		insert ignore into photo(photoimg, moviecode) values
+		insert ignore into photo values
 		<foreach collection="list" item="item" separator=",">
-			(#{item.photoimg}, #{item.moviecode})
+			(#{item.photocode}, #{item.photoimg}, #{item.moviecode})
 		</foreach>
 	</insert>
 	

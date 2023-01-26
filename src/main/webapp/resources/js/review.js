@@ -1,9 +1,3 @@
-// contextpath 꺼내오기
-function getContextPath() {
-	return sessionStorage.getItem("contextpath");
-}
-let ctx = getContextPath();
-
 //수정 버튼
 const reviewUpModal = () => {
 	$(".modal").fadeIn();

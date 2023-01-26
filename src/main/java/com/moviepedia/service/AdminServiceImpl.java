@@ -106,12 +106,15 @@ public class AdminServiceImpl implements AdminService{
 						Elements elemPhoto = docPhoto.select("#content .article .obj_section2.noline .photo .gallery_group > ul > li");
 						
 						for(int k = 0; k < elemPhoto.size(); k++) {
+							String a_href = elemPhoto.get(k).select("a").attr("href");
+							int index = a_href.indexOf("imageNid");
+							String photocode = a_href.substring(index+9, a_href.length()-4);
 							String photoimg = elemPhoto.get(k).select("a > img").attr("src");
 							PhotoDTO p = null;
 							
 							// 성인인증 포토 제외
 							if(!photoimg.equals("https://ssl.pstatic.net/static/movie/2012/06/adult_img221x150.png")) {
-								p = new PhotoDTO(photoimg, moviecode);								
+								p = new PhotoDTO(photocode, photoimg, moviecode);								
 							}
 							
 							photo.add(p);

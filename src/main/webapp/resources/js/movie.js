@@ -1,9 +1,3 @@
-// contextpath 꺼내오기
-function getContextPath() {
-	return sessionStorage.getItem("contextpath");
-}
-let ctx = getContextPath();
-
 //출연자 slick
 $('.actors-slick').slick({
   infinite: false,

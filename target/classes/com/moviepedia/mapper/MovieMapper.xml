@@ -48,6 +48,14 @@
 		select * from movie where moviegenre like concat(#{genre},"%") and moviecode not in(#{moviecode}) order by movierelease desc
 	</select>
 	
+	<select id="autocomplete" resultType="map">
+		select movieKtitle from movie where movieKtitle like concat("%", #{searchValue},"%")
+	</select>
+	
+	<select id="search" resultType="com.moviepedia.domain.MovieDTO">
+		select * from movie where movieKtitle like concat("%", #{keyword},"%") union select m.* from movie m, actor a where m.moviecode = a.moviecode and a.actorKname like concat("%", #{keyword},"%") order by movierelease desc
+	</select>
+	
 	<update id="likeup">
 		update movie set movielike = movielike + 1 where moviecode=#{moviecode}
 	</update>

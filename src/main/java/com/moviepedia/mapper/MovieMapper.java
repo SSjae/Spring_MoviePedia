@@ -1,6 +1,8 @@
 package com.moviepedia.mapper;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -37,4 +39,8 @@ public interface MovieMapper {
 	void likedown(String moviecode);
 
 	void updateStar(@Param("moviecode")String moviecode, @Param("avg")double avg);
+
+	List<Map<String, Object>> autocomplete(Map<String, Object> paramMap);
+
+	ArrayList<MovieDTO> search(String keyword);
 }
