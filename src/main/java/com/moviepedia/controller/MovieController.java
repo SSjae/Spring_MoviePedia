@@ -42,6 +42,14 @@ public class MovieController {
 	public String main(HttpServletRequest req, Model model) {
 		HttpSession session = req.getSession();
 		UserDTO loginUser = (UserDTO) session.getAttribute("loginUser");
+		
+		if(loginUser == null) {
+			model.addAttribute("msg", "로그인 후 접속 가능합니다.");
+			model.addAttribute("url", "user/login");
+			
+			return "alert";
+		}
+		
 		String[] genres = loginUser.getPrefergenre().split(",");
 		
 		int mtotal = mservice.mtotal();

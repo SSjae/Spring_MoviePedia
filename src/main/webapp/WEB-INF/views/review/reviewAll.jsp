@@ -13,6 +13,12 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body class="reviewAll">
+	<c:if test="${loginUser == null}">
+		<script>
+			alert("로그인 후 접속 가능합니다.");
+			location.href = "${cp}/user/login";
+		</script>
+	</c:if>
 	<c:import url="../import/header.jsp"></c:import>
 	<section class="all-layer">
 		<div class="all-header">

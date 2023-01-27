@@ -169,7 +169,6 @@ $(document).ready(() => {
 		dataType:"json",
 		success : function(result) {
 			if(result.useremail === null) {
-				console.log("없다");
 				noReview($("#username").val());
 			} else {
 				// ok 클래스 추가(리뷰가 있다는 뜻)

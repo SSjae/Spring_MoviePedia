@@ -15,6 +15,12 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 </head>
 <body class="myPage">
+	<c:if test="${loginUser == null}">
+		<script>
+			alert("로그인 후 접속 가능합니다.");
+			location.href = "${cp}/user/login";
+		</script>
+	</c:if>
 	<c:import url="../import/header.jsp"></c:import>
 	<section class="myPage-layer">
 		<div class="backProfile" style="background: url(${cp}/resources/images/backProfile/backProfile_${ran}.jpg) no-repeat center; background-size: cover;">
