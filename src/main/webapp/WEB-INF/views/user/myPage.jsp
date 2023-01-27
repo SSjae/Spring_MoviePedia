@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MoviePedia - ${loginUser.username }</title>
+<title>무비피디아 - ${loginUser.username }</title>
 <link rel="stylesheet" href="${cp}/resources/css/font.css">
 <link rel="stylesheet" href="${cp}/resources/css/import.css">
 <link rel="stylesheet" href="${cp}/resources/css/user.css">

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MoviePedia - ${movie.movieKtitle }</title>
+<title>무비피디아 - ${movie.movieKtitle }</title>
 <link rel="stylesheet" href="${cp}/resources/css/font.css">
 <link rel="stylesheet" href="${cp}/resources/css/import.css">
 <link rel="stylesheet" href="${cp}/resources/css/movie.css">

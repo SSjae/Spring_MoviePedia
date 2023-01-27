@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MoviePedia-admin</title>
+<title>무비피디아-관리자</title>
 <link rel="stylesheet" href="${cp}/resources/css/user.css">
 <style>
 	
