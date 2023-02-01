@@ -303,6 +303,79 @@
 	margin-right: 3px;
 }
 
+.detail-layer .detail-comment .comment-head {
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detail-layer .detail-comment .head-1 {
+	display: flex;
+    align-items: center;
+}
+
+.detail-layer .detail-comment .head-1 img {
+	width: 32px;
+	height: 32px;
+	margin-top: 15px;
+}
+
+.detail-layer .detail-comment .head-1 .name {
+	margin-left: 10px;
+	color: rgba(0, 0, 0, 0.8);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    line-height: 18px;
+}
+
+.detail-layer .detail-comment .head-2 .date {
+	color: rgb(140, 140, 140);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    line-height: 16px;
+}
+
+.detail-layer .detail-comment .comment-content {
+	display: flex;
+    padding-left: 43px;
+    padding-bottom: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detail-layer .detail-comment .comment-content span {
+	color: rgb(74, 74, 74);
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: -0.55px;
+    line-height: 22px;
+    white-space: pre-wrap;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+.detail-layer .detail-comment .comment-content .button {
+	display: flex;
+    justify-content: space-around;
+}
+
+.detail-layer .detail-comment .comment-content .button button {
+	width: 50%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #67686a;
+    letter-spacing: -0.3px;
+    line-height: 18px;
+    border-radius: 5px;
+    margin: 7px 10px 11px 0;
+}
+
 /* 코멘트 모달 */
 .modal{ 
     position: fixed;
@@ -414,6 +487,95 @@
 }
 
 .modal .modal_content .modal_footer .modal_etc > input {
+	background: #F2F2F2;
+    border: none;
+    margin: 0 0px 0px 15px;
+    cursor: default;
+    position: relative;
+    z-index: 51;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    letter-spacing: -0.3px;
+    line-height: 18px;
+    height: 38px;
+    padding: 0px 40px;
+    border-radius: 7px;
+}
+
+/* 리뷰 댓글 모달*/
+.comment_modal{ 
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 2;
+}
+
+.comment_modal_content{
+	width: 515px;
+    height: 515px;
+    background: #fff;
+    border-radius: 10px;
+    position: relative;
+    top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 16px 20px 18px;
+}
+
+.x {
+	cursor: pointer;
+	padding-left: 15px;
+}
+
+.comment_modal .comment_modal_content .comment_modal_head {
+	display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.comment_modal .comment_modal_content .comment_modal_head span {
+    color: rgb(41, 42, 50);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 27px;
+    text-align: left;
+}
+
+.comment_modal .comment_modal_content textarea {
+	font-weight: 400;
+    font-size: 17px;
+    letter-spacing: -0.6px;
+    line-height: 21px;
+    width: 100%;
+    min-height: 360px;
+    border: 0px;
+    outline: none;
+    margin: 1px 0px;
+    resize: none;
+    overflow: auto;
+}
+
+.comment_modal .comment_modal_content .comment_modal_footer {
+    display: flex;
+	justify-content: flex-end;
+    align-items: center;
+}
+
+.comment_modal .comment_modal_content .comment_modal_footer .comment_modal_etc > span {
+	font-size: 13px;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    color: rgb(94, 94, 100);
+    line-height: 16px;
+}
+
+.comment_modal .comment_modal_content .comment_modal_footer .comment_modal_etc > input {
 	background: #F2F2F2;
     border: none;
     margin: 0 0px 0px 15px;

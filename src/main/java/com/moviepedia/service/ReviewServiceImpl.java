@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.moviepedia.domain.CommentDTO;
+import com.moviepedia.domain.LikeReviewDTO;
 import com.moviepedia.domain.ReviewDTO;
 import com.moviepedia.mapper.ReviewMapper;
 
@@ -74,5 +76,40 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public int commentCnt(int reviewnum) {
 		return mapper.commentCnt(reviewnum);
+	}
+	
+	@Override
+	public LikeReviewDTO reviewLikeOk(String reviewnum, String useremail) {
+		return mapper.reviewLikeOk(reviewnum, useremail);
+	}
+	
+	@Override
+	public void addLike(String reviewnum, String useremail) {
+		mapper.addLike(reviewnum, useremail);
+	}
+	
+	@Override
+	public void removeLike(String reviewnum, String useremail) {
+		mapper.removeLike(reviewnum, useremail);
+	}
+	
+	@Override
+	public List<CommentDTO> allComments(String reviewnum) {
+		return mapper.allComments(reviewnum);
+	}
+	
+	@Override
+	public void comment(CommentDTO comment) {
+		mapper.comment(comment);
+	}
+	
+	@Override
+	public CommentDTO getComment(CommentDTO comment) {
+		return mapper.getComment(comment);
+	}
+	
+	@Override
+	public boolean deleteComment(String commentnum) {
+		return mapper.deleteComment(commentnum);
 	}
 }

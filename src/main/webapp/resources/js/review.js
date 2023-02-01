@@ -28,18 +28,6 @@ const drawStar = (target) => {
 	$(".starMemo").text(starMemo[target.value]);
 }
 
-//로드 될 때 리뷰 수정을 위해 모달에 미리 써놓기
-$(document).ready(() => {
-	let reviewstar = $("#reviewstar").val();
-	let reviewcontent = $("#reviewcontent").val();
-	let reviewcontentlength = $("#reviewcontentlength").val();
-	
-	$(".star span").css("width",reviewstar * 2 * 10 + "%");
-	$("#star").val(reviewstar * 2);
-	$("#comment").val(reviewcontent);
-	$(".comment_len").text(reviewcontentlength);
-})
-
 // 코멘트 모달 떠서 글자 한글자씩 입력했을 때
 $("#comment").keyup((e) => {
 	let content = $("#comment").val();
@@ -117,21 +105,225 @@ const reviewDelete = () => {
 	}
 }
 
-// 로드할 떄 리뷰 좋아요 있는지 없는지 확인
-$(document).ready(() => {
+// 댓글 코멘트 부분 그리기
+const comment = () => {
 	$.ajax({
-		url : ctx+"/review/reviewLikeOk",
+		url : ctx+"/review/commentOk",
 		type : "get",
-		data : {"reviewnum":$("#reviewnum").val(), "useremail":$("#useremail").val()},
+		data : {"reviewnum":$("#reviewnum").val()},
+		dataType:"json",
 		success : function(result) {
-			if(result === "ok") {				
-				
-			} else {
-				
+			let content = "";
+			if(result.length != 0) {
+				// 댓글이 있을 때
+				for(let i = 0; i < result.length; i++) {
+					content += '<div class="comment">';
+					content += 	'<div class="comment-head">';
+					content += 		'<div class="head-1">';
+					content += 			'<img src="'+ctx+'/resources/images/profile.png" alt="프로필">';
+					content += 			'<span class="name">'+result[i].username+'</span>';
+					content += 		'</div>';
+					content += 		'<div class="head-2">';
+					content += 			'<span class="date">'+result[i].commentdate+'</span>';
+					content += 		'</div>';
+					content += 	'</div>';
+					content += 	'<div class="comment-content">';
+					content += 		'<span>'+result[i].commentcontent+'</span>';
+					if($("#useremail").val() === result[i].useremail) {
+						content += '<input type="hidden" id="commentnum" value="'+result[i].commentnum+'"/>'
+						content += '<div class="button">';
+						content += 	'<button onclick="commentUpdate()"><img alt="trash" src="'+ctx+'/resources/images/pencil.svg">수정</button>';
+						content += 	'<button onclick="commentDelete()"><img alt="pencil" src="'+ctx+'/resources/images/trash.svg">삭제</button>';
+						content += '</div>'
+					}
+					content += 	'</div>';
+					content += 	'<hr>';
+					content += '</div>';
+				}
+				$(".detail-comment").append(content);
 			}
 		},
 		error : function() {
 			console.log("좋아요 로딩 ");
 		}
 	})
+}
+
+// 로드 될 때 리뷰 수정을 위해 모달에 미리 써놓기
+// 로드할 떄 리뷰 좋아요 있는지 없는지 확인
+// 로드할 때 리뷰 댓글 있는지 없는지 확인 있으면 직접 넣어주기
+$(document).ready(() => {
+	let reviewstar = $("#reviewstar").val();
+	let reviewcontent = $("#reviewcontent").val();
+	let reviewcontentlength = $("#reviewcontentlength").val();
+	
+	$(".star span").css("width",reviewstar * 2 * 10 + "%");
+	$("#star").val(reviewstar * 2);
+	$("#comment").val(reviewcontent);
+	$(".comment_len").text(reviewcontentlength);
+	
+	$.ajax({
+		url : ctx+"/review/reviewLikeOk",
+		type : "get",
+		data : {"reviewnum":$("#reviewnum").val(), "useremail":$("#useremail").val()},
+		success : function(result) {
+			if(result === "ok") {				
+				$(".likebtn").css("color","rgb(255, 47, 110)");
+				$(".likebtn svg path").attr("fill","#FF2F6E");
+				$(".likebtn").addClass("ok");
+			} else {
+				$(".likebtn").css("color","#87898B");
+				$(".likebtn svg path").attr("fill","#67686A");
+				$(".likebtn").addClass("no");
+			}
+		},
+		error : function() {
+			console.log("좋아요 로딩 ");
+		}
+	})
+	
+	comment();
 })
+
+// 리뷰 좋아요 클릭
+$(".likebtn").click(() => {
+	// ajax로 보낸 데이터인 status에 따라 보고싶어요 추가인지 취소인지 구별
+	let status = "";
+	if($(".likebtn").hasClass("ok")) {
+		// 이미 댓글 좋아요를 한 상태이면
+		status = "like";
+	} else {
+		// 댓글 좋아요를 한 상태가 아니면
+		status = "hate";
+	}
+	
+	$.ajax({
+		url : ctx+"/review/reviewLike",
+		type : "get",
+		data : {"status":status, "reviewnum":$("#reviewnum").val(), "useremail":$("#useremail").val()},
+		success : function(result) {
+			if(result === "ok") {				
+				// status가 hate로 가서 보고싶어요를 추가한 상태
+				$(".likebtn").css("color","rgb(255, 47, 110)");
+				$(".likebtn svg path").attr("fill","#FF2F6E");	
+				$(".likebtn").addClass("ok");	
+				$(".likebtn").removeClass("no");
+				$(".lCnt").text(Number($(".lCnt").text()) + 1);
+			} else {
+				// status가 like로 가서 보고싶어요를 취소한 상태
+				$(".likebtn").css("color","#67686A");
+				$(".likebtn svg path").attr("fill","#67686A");
+				$(".likebtn").addClass("no");
+				$(".likebtn").removeClass("ok");
+				$(".lCnt").text(Number($(".lCnt").text()) - 1);
+			}
+		},
+		error : function() {
+			console.log("서버 ");
+		}
+	})
+})
+
+// 댓글 클릭
+$(".commentbtn").click(() => {
+	$(".comment_modal").fadeIn();
+	$("#comment_comment").focus();
+})
+
+$(".x").click(() => {
+	$(".comment_modal").fadeOut();
+})
+
+// 코멘트 모달 떠서 글자 한글자씩 입력했을 때
+$("#comment_comment").keyup((e) => {
+	let content = $("#comment_comment").val();
+	
+	if(content.length === 0 || content === "") {
+		$(".comment_comment_len").text("0");
+		$(".comment_comment_btn").css("background", "#F2F2F2");
+		$(".comment_comment_btn").css("cursor", "default");
+		$(".comment_comment_btn").attr("disabled","disabled");
+	} else {
+		$(".comment_comment_len").text(content.length);
+		$(".comment_comment_btn").css("background", "rgb(255, 47, 110)");
+		$(".comment_comment_btn").css("cursor", "pointer");
+		$(".comment_comment_btn").removeAttr("disabled");
+	}
+})
+
+// 리뷰 댓글 작성
+$(".comment_comment_btn").click(() => {
+	let reviewnum = $("#reviewnum").val();
+	let useremail = $("#useremail").val();
+	let commentcontent = $("#comment_comment").val();
+	let content = "";
+	
+	$.ajax({
+		url : ctx+"/review/comment",
+		type : "POST",
+		data : JSON.stringify({"reviewnum":reviewnum,
+			"useremail":useremail,
+			"commentcontent":commentcontent
+		}),
+		contentType:"application/json; charset=utf-8",
+		dataType:"json",
+		success : function(result) {
+			$(".comment_modal").fadeOut();
+			
+			// 새로운 리뷰 댓글 그리기
+			content += '<div class="comment">';
+			content += 	'<div class="comment-head">';
+			content += 		'<div class="head-1">';
+			content += 			'<img src="'+ctx+'/resources/images/profile.png" alt="프로필">';
+			content += 			'<span class="name">'+result.username+'</span>';
+			content += 		'</div>';
+			content += 		'<div class="head-2">';
+			content += 			'<span class="date">'+result.commentdate+'</span>';
+			content += 		'</div>';
+			content += 	'</div>';
+			content += 	'<div class="comment-content">';
+			content += 		'<span>'+result.commentcontent+'</span>';
+			if($("#useremail").val() === result.useremail) {
+				content += '<input type="hidden" id="commentnum" value="'+result.commentnum+'"/>'
+				content += '<div class="button">';
+				content += 	'<button onclick="commentUpdate()"><img alt="trash" src="'+ctx+'/resources/images/pencil.svg">수정</button>';
+				content += 	'<button onclick="commentDelete()"><img alt="pencil" src="'+ctx+'/resources/images/trash.svg">삭제</button>';
+				content += '</div>'
+			}
+			content += 	'</div>';
+			content += 	'<hr>';
+			content += '</div>';
+
+			$(".detail-comment").append(content);
+			$(".cCnt").text(Number($(".cCnt").text()) + 1);
+		},
+		error : function() {
+			console.log("서버 ");
+		}
+	})
+})
+
+// 리뷰 댓글 삭제
+const commentDelete = () => {
+	if(confirm("댓글을 삭제하시겠어요?")) {
+		$.ajax({
+			url : ctx+"/review/deleteComment",
+			type : "get",
+			data : {"commentnum":$("#commentnum").val()},
+			success : function(result) {
+				if(result) {
+					$(".detail-comment").empty();
+					// 모든 댓글 부분 다시 그리기
+					comment();
+					
+					$(".cCnt").text(Number($(".cCnt").text()) - 1);
+				} else {
+					alert("댓글 삭제 실패하였습니다. 다시 시도해주세요");
+				}
+			},
+			error : function() {
+				console.log("서버 ");
+			}
+		})		
+	}
+}

@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.moviepedia.domain.CommentDTO;
+import com.moviepedia.domain.LikeReviewDTO;
 import com.moviepedia.domain.ReviewDTO;
 
 public interface ReviewMapper {
@@ -32,4 +34,18 @@ public interface ReviewMapper {
 	int reviewLikeCnt(int reviewnum);
 
 	int commentCnt(int reviewnum);
+
+	LikeReviewDTO reviewLikeOk(@Param("reviewnum")String reviewnum, @Param("useremail")String useremail);
+
+	void addLike(@Param("reviewnum")String reviewnum, @Param("useremail")String useremail);
+
+	void removeLike(@Param("reviewnum")String reviewnum, @Param("useremail")String useremail);
+
+	List<CommentDTO> allComments(String reviewnum);
+
+	void comment(CommentDTO comment);
+
+	CommentDTO getComment(CommentDTO comment);
+
+	boolean deleteComment(String commentnum);
 }

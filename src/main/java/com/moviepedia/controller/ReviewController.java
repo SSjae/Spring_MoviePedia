@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.moviepedia.domain.CommentDTO;
+import com.moviepedia.domain.LikeReviewDTO;
 import com.moviepedia.domain.MovieDTO;
 import com.moviepedia.domain.ReviewDTO;
 import com.moviepedia.domain.UserDTO;
@@ -181,6 +183,80 @@ public class ReviewController {
 		mav.addObject("commentcnt", Integer.toString(rservice.commentCnt(review.getReviewnum())));
 		
 		return mav;
+	}
+	
+	// 리뷰 좋아요가 있는지 없는지 확인
+	@GetMapping("/reviewLikeOk")
+	public String reviewLikeOk(String reviewnum, String useremail) {
+		LikeReviewDTO lreview = rservice.reviewLikeOk(reviewnum, useremail);
+		
+		String result = "no";
+		
+		if(lreview != null) {
+			result = "ok";
+		}
+		
+		return result;
+	}
+	
+	// 리뷰 좋아요 및 좋아요 취소
+	@GetMapping("/reviewLike")
+	public String reviewLike(String status, String reviewnum, String useremail) {
+		String result = "";
+
+		// status가 hate로 오면 댓글 좋아요 추가
+		if(status.equals("hate")) {
+			rservice.addLike(reviewnum, useremail);
+			result="ok";
+		} else {
+			rservice.removeLike(reviewnum, useremail);
+			result="no";
+		}
+		
+		return result;
+	}
+	
+	// 리뷰 댓글이 있는지 없는지
+	@GetMapping("/commentOk")
+	public List<Map<String, String>> commentOk(String reviewnum) {
+		List<CommentDTO> comments = rservice.allComments(reviewnum);
+		List<Map<String, String>> allComments = new ArrayList<Map<String,String>>();
+		for(CommentDTO comment : comments) {
+			Map<String, String> result = new HashMap<String, String>();
+			result.put("commentnum", Integer.toString(comment.getCommentnum()));
+			result.put("reviewnum", Integer.toString(comment.getReviewnum()));
+			result.put("useremail", comment.getUseremail());
+			result.put("username", uservice.getUser(comment.getUseremail()).getUsername());
+			result.put("commentcontent", comment.getCommentcontent());
+			result.put("commentdate", reviewDateTime(comment.getCommentdate()));
+			allComments.add(result);
+		}
+		
+		return allComments;
+	}
+	
+	// 리뷰 댓글 작성
+	@PostMapping("/comment")
+	public Map<String, String> comment(@RequestBody CommentDTO comment) {
+		rservice.comment(comment);
+		
+		CommentDTO nowComment = rservice.getComment(comment);
+		
+		Map<String, String> result = new HashMap<String, String>();
+		result.put("commentnum", Integer.toString(nowComment.getCommentnum()));
+		result.put("reviewnum", Integer.toString(nowComment.getReviewnum()));
+		result.put("useremail", nowComment.getUseremail());
+		result.put("username", uservice.getUser(nowComment.getUseremail()).getUsername());
+		result.put("commentcontent", nowComment.getCommentcontent());
+		result.put("commentdate", reviewDateTime(nowComment.getCommentdate()));
+		
+		return result;
+	}
+	
+	// 리뷰 댓글 삭제
+	@GetMapping("/deleteComment")
+	public boolean deleteComment(String commentnum) {
+		return rservice.deleteComment(commentnum);
 	}
 	
 	// 재개봉으로 인한 개봉날짜가 여러 개인 것중 맨 처음에 개봉한 연도만 뽑아내기 위한 메소드

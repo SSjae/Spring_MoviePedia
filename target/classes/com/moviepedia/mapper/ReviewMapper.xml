@@ -8,12 +8,28 @@
 		insert into review(useremail, moviecode, reviewcontent, reviewstar) values(#{useremail}, #{moviecode}, #{reviewcontent}, #{reviewstar})
 	</insert>
 	
+	<insert id="addLike">
+		insert into likereview(reviewnum, useremail) values(#{reviewnum}, #{useremail})
+	</insert>
+	
+	<insert id="comment">
+		insert into comment(reviewnum, useremail, commentcontent) values(#{reviewnum}, #{useremail}, #{commentcontent})
+	</insert>
+	
 	<update id="updateReview">
 		update review set reviewstar=#{reviewstar}, reviewcontent=#{reviewcontent} where moviecode=#{moviecode} and useremail=#{useremail}
 	</update>
 	
 	<delete id="deleteReview">
 		delete from review where moviecode=#{moviecode} and useremail=#{useremail}
+	</delete>
+	
+	<delete id="removeLike">
+		delete from likereview where reviewnum=#{reviewnum} and useremail=#{useremail}
+	</delete>
+	
+	<delete id="deleteComment">
+		delete from comment where commentnum=#{commentnum}
 	</delete>
 
 	<select id="rtotal" resultType="_int">
@@ -50,5 +66,17 @@
 	
 	<select id="commentCnt" resultType="_int">
 		select count(*) from comment where reviewnum=#{reviewnum}
+	</select>
+	
+	<select id="reviewLikeOk" resultType="com.moviepedia.domain.LikeReviewDTO">
+		select * from likereview where reviewnum=#{reviewnum} and useremail=#{useremail}
+	</select>
+	
+	<select id="allComments" resultType="com.moviepedia.domain.CommentDTO">
+		select * from comment where reviewnum=#{reviewnum}
+	</select>
+	
+	<select id="getComment" resultType="com.moviepedia.domain.CommentDTO">
+		select * from comment where reviewnum=#{reviewnum} and useremail=#{useremail}
 	</select>
 </mapper>
