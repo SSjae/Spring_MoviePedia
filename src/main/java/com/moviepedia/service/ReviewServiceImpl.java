@@ -65,4 +65,14 @@ public class ReviewServiceImpl implements ReviewService {
 	public ArrayList<ReviewDTO> myReview(String useremail) {
 		return mapper.myReview(useremail);
 	}
+	
+	@Override
+	public int reviewLikeCnt(int reviewnum) {
+		return mapper.reviewLikeCnt(reviewnum);
+	}
+	
+	@Override
+	public int commentCnt(int reviewnum) {
+		return mapper.commentCnt(reviewnum);
+	}
 }

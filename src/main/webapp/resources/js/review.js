@@ -116,3 +116,22 @@ const reviewDelete = () => {
 		})		
 	}
 }
+
+// 로드할 떄 리뷰 좋아요 있는지 없는지 확인
+$(document).ready(() => {
+	$.ajax({
+		url : ctx+"/review/reviewLikeOk",
+		type : "get",
+		data : {"reviewnum":$("#reviewnum").val(), "useremail":$("#useremail").val()},
+		success : function(result) {
+			if(result === "ok") {				
+				
+			} else {
+				
+			}
+		},
+		error : function() {
+			console.log("좋아요 로딩 ");
+		}
+	})
+})

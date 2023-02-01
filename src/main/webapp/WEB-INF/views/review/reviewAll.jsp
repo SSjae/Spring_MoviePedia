@@ -40,6 +40,12 @@
 							${review.reviewcontent }
 						</div>					
 					</a>
+					<div class="footer">
+						<div class="review-footer">
+							<img class="good" src="${cp}/resources/images/good.svg" alt="good">${review.reviewlikecnt}
+							<img src="${cp}/resources/images/comment.svg" alt="comment">${review.commentcnt}
+						</div>
+					</div>
 				</div>
 			</c:forEach>
 		</div>

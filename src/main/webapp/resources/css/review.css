@@ -42,6 +42,7 @@
     border-radius: 6px;
     overflow: hidden;
     margin: 0px 0px 20px;
+    padding-bottom: 5px;
 }
 
 .all-layer .all-main .all-review .review-head {
@@ -97,6 +98,25 @@
     word-break: break-all;
 }
 
+.all-layer .all-main .all-review .footer .review-footer {
+	display: flex;
+	align-items: center;
+    border-top: 1px solid #e5e5e5;
+    font-size: 14px;
+    padding: 7px 0px;
+    color: #787878;
+}
+
+.all-layer .all-main .all-review .footer .review-footer img {
+	width: 19px;
+	padding-left: 15px;
+    padding-right: 3px;
+}
+
+.all-layer .all-main .all-review .footer .review-footer .good {
+    padding-left: 0px !important;
+}
+
 /* reviewDetail */
 .reviewDetail {
 	background-color: white;
@@ -112,7 +132,6 @@
 .detail-layer hr {
 	border: 0;
 	border-bottom: 1px solid #f0f0f0;
-	margin-bottom: 40px;
 }
 
 .detail-layer .detail-head {
@@ -226,13 +245,19 @@
     opacity: 1;
 }
 
-.detail-layer .detail-button {
+.detail-layer .detail-footer {
 	display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: flex-end;
 }
 
-.detail-layer .detail-button button {
+.detail-layer .detail-footer .detail-cnt {
+	color: rgb(140, 140, 140);
+    margin-bottom: 6px;
+    font-size: 13px;
+}
+
+.detail-layer .detail-footer .detail-button button {
 	background: none;
     padding: 0px;
     border: none;
@@ -242,9 +267,40 @@
     margin-bottom: 10px;
 }
 
-.detail-layer .detail-button img {
+.detail-layer .detail-footer .detail-button img {
 	vertical-align: top;
     margin: 1px 3px 0px 0px;
+}
+
+.detail-layer .detail-button {
+	display: flex;
+    justify-content: space-around;
+}
+
+.detail-layer .detail-button button {
+	width: 50%;
+    height: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #67686a;
+    font-size: 15px;
+    letter-spacing: -0.3px;
+    line-height: 18px;
+    border-radius: 5px;
+    margin: 11px 8px 11px 0;
+}
+
+.detail-layer .detail-button button:hover {
+	background-color: rgba(41,42,50,0.08);
+    color: rgba(41,42,50,1);
+}
+
+.detail-layer .detail-button button svg {
+	margin-right: 3px;
 }
 
 /* 코멘트 모달 */

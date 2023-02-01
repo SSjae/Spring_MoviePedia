@@ -85,6 +85,12 @@ const allComment = () => {
 					content += 			result[i].reviewcontent;
 					content += 		'</div>';
 					content += 	'</a>';
+					content +=	'<div class="footer">';
+					content +=		'<div class="review-footer">';
+					content +=			'<img class="good" src="'+ctx+'/resources/images/good.svg" alt="good">'+result[i].reviewlikecnt;
+					content +=			'<img src="'+ctx+'/resources/images/comment.svg" alt="comment">'+result[i].commentcnt;
+					content +=		'</div>';
+					content +=	'</div>';
 					content += '</div>';
 				}
 				content += '</div>';

@@ -485,7 +485,7 @@
 
 .info-layer .info-main .reviews .review {
 	display: inline-block;
-    height: 180px;
+    height: 235px;
     background-color: rgb(242, 242, 242);
     box-sizing: border-box;
     padding: 0px 12px;
@@ -550,6 +550,31 @@
     text-overflow: ellipsis;
     margin: 9px 0 0 0;
     word-break: break-all;
+}
+
+.info-layer .info-main .reviews .review .footer {
+	position: absolute;
+    bottom: 14px;
+    width: 276px;
+}
+
+.info-layer .info-main .reviews .review .footer .review-footer {
+	display: flex;
+	align-items: center;
+    border-top: 1px solid #e5e5e5;
+    font-size: 14px;
+    padding: 7px 0px;
+    color: #787878;
+}
+
+.info-layer .info-main .reviews .review .footer .review-footer img {
+	width: 19px;
+	padding-left: 15px;
+    padding-right: 3px;
+}
+
+.info-layer .info-main .reviews .review .footer .review-footer .good {
+    padding-left: 0px !important;
 }
 
 .info-layer .info-main .reviews-slick .slick-prev {

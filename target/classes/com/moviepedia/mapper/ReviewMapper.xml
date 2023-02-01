@@ -43,4 +43,12 @@
 	<select id="myReview" resultType="com.moviepedia.domain.ReviewDTO">
 		select * from review where useremail=#{useremail}
 	</select>
+	
+	<select id="reviewLikeCnt" resultType="_int">
+		select count(*) from likereview where reviewnum=#{reviewnum}
+	</select>
+	
+	<select id="commentCnt" resultType="_int">
+		select count(*) from comment where reviewnum=#{reviewnum}
+	</select>
 </mapper>

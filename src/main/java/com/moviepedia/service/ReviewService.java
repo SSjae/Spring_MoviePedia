@@ -27,4 +27,8 @@ public interface ReviewService {
 
 	ArrayList<ReviewDTO> myReview(String useremail);
 
+	int reviewLikeCnt(int reviewnum);
+
+	int commentCnt(int reviewnum);
+
 }

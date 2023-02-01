@@ -122,6 +122,8 @@ public class ReviewController {
 			result.put("reviewstar", Double.toString(review.getReviewstar()));
 			result.put("username", uservice.getUser(review.getUseremail()).getUsername());
 			result.put("moviecode", review.getMoviecode());
+			result.put("reviewlikecnt", Integer.toString(rservice.reviewLikeCnt(review.getReviewnum())));
+			result.put("commentcnt", Integer.toString(rservice.commentCnt(review.getReviewnum())));
 			allReviews.add(result);
 		}
 		
@@ -144,6 +146,8 @@ public class ReviewController {
 			result.put("reviewstar", Double.toString(review.getReviewstar()));
 			result.put("moviecode", moviecode);
 			result.put("username", uservice.getUser(review.getUseremail()).getUsername());
+			result.put("reviewlikecnt", Integer.toString(rservice.reviewLikeCnt(review.getReviewnum())));
+			result.put("commentcnt", Integer.toString(rservice.commentCnt(review.getReviewnum())));
 			allReviews.add(result);
 		}
 		
@@ -152,13 +156,13 @@ public class ReviewController {
 	}
 	
 	// 리뷰 상세정보 페이지로 가기
-	// 갈때 그 리뷰DTO, 리뷰를 쓴 유저DTO, 영화 DTO, 개봉 연도만 넘기기
+	// 갈때 그 리뷰DTO, 리뷰를 쓴 유저DTO, 영화 DTO, 개봉 연도만 넘기기, likeReviewDTO, commentDTO 보내기
 	@GetMapping(value="/reviewDetail/{reviewnum}/{moviecode}")
 	public ModelAndView reviewDetail(@PathVariable("reviewnum")String reviewnum, @PathVariable("moviecode")String moviecode) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("review/reviewDetail");
 		
-		int mtotal = mservice.mtotal();
+		int mtotal = mservice.mtotal(); 
 		int rtotal = rservice.rtotal();
 		
 		ReviewDTO review = rservice.getReview(reviewnum);
@@ -173,6 +177,8 @@ public class ReviewController {
 		mav.addObject("movie", movie);
 		mav.addObject("user", user);
 		mav.addObject("release", release(movie));
+		mav.addObject("reviewlikecnt", Integer.toString(rservice.reviewLikeCnt(review.getReviewnum())));
+		mav.addObject("commentcnt", Integer.toString(rservice.commentCnt(review.getReviewnum())));
 		
 		return mav;
 	}
