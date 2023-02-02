@@ -48,7 +48,7 @@
 			<input id="useremail" type="hidden" value="${loginUser.useremail }"/>
 			<div class="detail-cnt">
 				좋아요 <span class="lCnt">${reviewlikecnt}</span>
-				댓글 <span class="cCnt">${commentcnt}</span>		
+				댓글 <span class="cCnt no">${commentcnt}</span>		
 			</div>
 			<c:if test="${loginUser.useremail == user.useremail }">
 				<div class="detail-button">

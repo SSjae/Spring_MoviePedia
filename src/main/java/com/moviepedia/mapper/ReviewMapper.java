@@ -48,4 +48,6 @@ public interface ReviewMapper {
 	CommentDTO getComment(CommentDTO comment);
 
 	boolean deleteComment(String commentnum);
+
+	void uComment(@Param("commentnum")String commentnum, @Param("commentcontent")String commentcontent);
 }

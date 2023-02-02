@@ -112,4 +112,9 @@ public class ReviewServiceImpl implements ReviewService {
 	public boolean deleteComment(String commentnum) {
 		return mapper.deleteComment(commentnum);
 	}
+	
+	@Override
+	public void uComment(String commentnum, String commentcontent) {
+		mapper.uComment(commentnum, commentcontent);
+	}
 }

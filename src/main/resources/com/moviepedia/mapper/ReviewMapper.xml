@@ -19,6 +19,10 @@
 	<update id="updateReview">
 		update review set reviewstar=#{reviewstar}, reviewcontent=#{reviewcontent} where moviecode=#{moviecode} and useremail=#{useremail}
 	</update>
+
+	<update id="uComment">
+		update comment set commentcontent=#{commentcontent} where commentnum=#{commentnum}
+	</update>
 	
 	<delete id="deleteReview">
 		delete from review where moviecode=#{moviecode} and useremail=#{useremail}

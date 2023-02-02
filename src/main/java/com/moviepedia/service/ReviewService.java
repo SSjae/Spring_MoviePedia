@@ -46,4 +46,6 @@ public interface ReviewService {
 	CommentDTO getComment(CommentDTO comment);
 
 	boolean deleteComment(String commentnum);
+
+	void uComment(String commentnum, String commentcontent);
 }

@@ -130,6 +130,10 @@ const comment = () => {
 					content += 	'<div class="comment-content">';
 					content += 		'<span>'+result[i].commentcontent+'</span>';
 					if($("#useremail").val() === result[i].useremail) {
+						$("#comment_comment").val(result[i].commentcontent);
+						$(".comment_comment_len").text(result[i].commentcontent.length);
+						$(".cCnt").addClass("ok");
+						$(".cCnt").removeClass("no");
 						content += '<input type="hidden" id="commentnum" value="'+result[i].commentnum+'"/>'
 						content += '<div class="button">';
 						content += 	'<button onclick="commentUpdate()"><img alt="trash" src="'+ctx+'/resources/images/pencil.svg">수정</button>';
@@ -251,71 +255,76 @@ $("#comment_comment").keyup((e) => {
 	}
 })
 
-// 리뷰 댓글 작성
+// 리뷰 댓글 작성 및 수정
 $(".comment_comment_btn").click(() => {
 	let reviewnum = $("#reviewnum").val();
 	let useremail = $("#useremail").val();
 	let commentcontent = $("#comment_comment").val();
-	let content = "";
 	
-	$.ajax({
-		url : ctx+"/review/comment",
-		type : "POST",
-		data : JSON.stringify({"reviewnum":reviewnum,
-			"useremail":useremail,
-			"commentcontent":commentcontent
-		}),
-		contentType:"application/json; charset=utf-8",
-		dataType:"json",
-		success : function(result) {
-			$(".comment_modal").fadeOut();
-			
-			// 새로운 리뷰 댓글 그리기
-			content += '<div class="comment">';
-			content += 	'<div class="comment-head">';
-			content += 		'<div class="head-1">';
-			content += 			'<img src="'+ctx+'/resources/images/profile.png" alt="프로필">';
-			content += 			'<span class="name">'+result.username+'</span>';
-			content += 		'</div>';
-			content += 		'<div class="head-2">';
-			content += 			'<span class="date">'+result.commentdate+'</span>';
-			content += 		'</div>';
-			content += 	'</div>';
-			content += 	'<div class="comment-content">';
-			content += 		'<span>'+result.commentcontent+'</span>';
-			if($("#useremail").val() === result.useremail) {
-				content += '<input type="hidden" id="commentnum" value="'+result.commentnum+'"/>'
-				content += '<div class="button">';
-				content += 	'<button onclick="commentUpdate()"><img alt="trash" src="'+ctx+'/resources/images/pencil.svg">수정</button>';
-				content += 	'<button onclick="commentDelete()"><img alt="pencil" src="'+ctx+'/resources/images/trash.svg">삭제</button>';
-				content += '</div>'
+	if($(".cCnt").hasClass("ok")) {
+		let commentnum = $("#commentnum").val();
+		// 댓글 수정
+		$.ajax({
+			url : ctx+"/review/uComment/"+commentnum,
+			type : "PUT",
+			data : JSON.stringify({"commentcontent":commentcontent}),
+			contentType:"application/json; charset=utf-8",
+			success : function(result) {
+				$(".comment_modal").fadeOut();
+				
+				$(".detail-comment").empty();
+				// 모든 댓글 부분 다시 그리기
+				comment();
+			},
+			error : function() {
+				console.log("서버 ");
 			}
-			content += 	'</div>';
-			content += 	'<hr>';
-			content += '</div>';
-
-			$(".detail-comment").append(content);
-			$(".cCnt").text(Number($(".cCnt").text()) + 1);
-		},
-		error : function() {
-			console.log("서버 ");
-		}
-	})
+		})
+	} else {
+		// 댓글 작성
+		$.ajax({
+			url : ctx+"/review/comment",
+			type : "POST",
+			data : JSON.stringify({"reviewnum":reviewnum,
+				"useremail":useremail,
+				"commentcontent":commentcontent
+			}),
+			contentType:"application/json; charset=utf-8",
+			dataType:"json",
+			success : function(result) {
+				$(".comment_modal").fadeOut();
+				
+				$(".detail-comment").empty();
+				// 모든 댓글 부분 다시 그리기
+				comment();
+				
+				$(".cCnt").text(Number($(".cCnt").text()) + 1);
+				$(".cCnt").addClass("ok");
+				$(".cCnt").removeClass("no");
+			},
+			error : function() {
+				console.log("서버 ");
+			}
+		})
+	}
+	
 })
 
 // 리뷰 댓글 삭제
 const commentDelete = () => {
+	let commentnum = $("#commentnum").val();
 	if(confirm("댓글을 삭제하시겠어요?")) {
 		$.ajax({
-			url : ctx+"/review/deleteComment",
-			type : "get",
-			data : {"commentnum":$("#commentnum").val()},
+			url : ctx+"/review/deleteComment/"+commentnum,
+			type : "delete",
 			success : function(result) {
 				if(result) {
 					$(".detail-comment").empty();
 					// 모든 댓글 부분 다시 그리기
 					comment();
-					
+
+					$(".cCnt").addClass("no");
+					$(".cCnt").removeClass("ok");
 					$(".cCnt").text(Number($(".cCnt").text()) - 1);
 				} else {
 					alert("댓글 삭제 실패하였습니다. 다시 시도해주세요");
@@ -326,4 +335,10 @@ const commentDelete = () => {
 			}
 		})		
 	}
+}
+
+// 리뷰 댓글 수정 모달 열기
+const commentUpdate = () => {
+	$(".comment_modal").fadeIn();
+	$("#comment_comment").focus();
 }
