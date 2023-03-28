@@ -25,6 +25,7 @@
 * API<br>
 ![Jsoup](https://img.shields.io/badge/Jsoup-6199D2?style=flat-square&logo=&logoColor=black)
 ![javax.mail](https://img.shields.io/badge/javax.mail-FAE100?style=flat-square&logo=&logoColor=black)
+![slick](https://img.shields.io/badge/slick-3D9DDD?style=flat-square&logo=&logoColor=black)
 ## 주요 개발기능
 * 관리자 영화 최신화(Jsoup을 이용한 네이버 영화 사이트 데이터 크롤링)
 * 회원가입, 로그인, 비밀번호 찾기
