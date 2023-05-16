@@ -8,4 +8,6 @@ public interface AdminService {
 	int atotal();
 	
 	int ptotal();
+
+	int vtotal();
 }

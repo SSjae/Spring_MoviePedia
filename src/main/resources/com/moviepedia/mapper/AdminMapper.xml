@@ -25,6 +25,12 @@
 			(#{item.photocode}, #{item.photoimg}, #{item.moviecode})
 		</foreach>
 	</insert>
+	<insert id="vinsert">
+		insert ignore into photo values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.photocode}, #{item.photoimg}, #{item.moviecode})
+		</foreach>
+	</insert>
 	
 	<select id="mtotal" resultType="_int">
 		select count(*) from movie
@@ -35,4 +41,11 @@
 	<select id="ptotal" resultType="_int">
 		select count(*) from photo
 	</select>
+	<select id="vtotal" resultType="_int">
+		select count(*) from video
+	</select>
+	
+	<update id="boxUpdate_0">
+		update movie set boxoffice = 0;
+	</update>
 </mapper>

@@ -143,6 +143,24 @@
             <artifactId>jsoup</artifactId>
             <version>1.8.3</version>
 		</dependency>	
+		
+		<!-- poi(엑셀) -->
+		<dependency>
+		  <groupId>org.apache.poi</groupId>
+		  <artifactId>poi</artifactId>
+		  <version>3.11</version>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.poi</groupId>
+		  <artifactId>poi-ooxml</artifactId> <!-- 엑셀 2007 이상 버전에서 사용 -->
+		  <version>3.11</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>commons-io</groupId>
+		  <artifactId>commons-io</artifactId>
+		  <version>2.4</version>
+		</dependency>
 
 		<!-- @Inject -->
 		<dependency>

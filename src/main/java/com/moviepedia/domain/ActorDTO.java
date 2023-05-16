@@ -15,15 +15,11 @@ public class ActorDTO {
 	@NonNull
     private String moviecode;
 	@NonNull
-    private String actorKname;
-	@NonNull
-    private String actorEname;
+    private String actorname;
 	@NonNull
     private String actorpart;
 	@NonNull
     private String actorrole;
-	@NonNull
-    private String actormovie;
 	@NonNull
     private String actorimg;
 }

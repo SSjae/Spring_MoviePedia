@@ -8,10 +8,14 @@ import lombok.RequiredArgsConstructor;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class PhotoDTO {
-	private int photonum;
+public class VideoDTO {
+	private int videonum;
 	@NonNull
     private String moviecode;
 	@NonNull
-	private String photoimg;
+	private String videoimg;
+	@NonNull
+	private String videoaddr;
+	@NonNull
+	private String videotitle;
 }

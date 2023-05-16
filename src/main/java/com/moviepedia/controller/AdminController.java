@@ -58,8 +58,9 @@ public class AdminController {
 		int mtotal = aservice.mtotal();
 		int atotal = aservice.atotal();
 		int ptotal = aservice.ptotal();
+		int vtotal = aservice.vtotal();
 		
-		model.addAttribute("msg", "영화 "+mtotal+"개, 출연자 "+atotal+"명, 포토 "+ptotal+"개 최신화가 완료되었습니다.");
+		model.addAttribute("msg", "영화 "+mtotal+"개, 출연자 "+atotal+"명, 포토 "+ptotal+"개, 동영상 "+vtotal+"개 최신화가 완료되었습니다.");
 		model.addAttribute("url", "admin/page");
 		return "alert";
 	}
