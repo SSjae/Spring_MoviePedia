@@ -1,6 +1,7 @@
 package com.moviepedia.service;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -47,6 +48,8 @@ public class AdminServiceImpl implements AdminService{
 		// 먼저 엑셀에서 영화 코드 읽어오기
         movieCodes = movieCodes();
         
+        System.out.println(movieCodes.size());
+        
         // 사이트에 있는 박스오피스 영화 코드 movieCodes에 중복 있는 거 제외하고 저장 및 따로도 저장
         boxOffices = boxOffices();
         movieCodes.addAll(boxOffices); // movieCodes 뒤에 boxOffices 붙이기
@@ -54,6 +57,9 @@ public class AdminServiceImpl implements AdminService{
         // 중복을 방지하기 위해 List -> Set -> List로 변경
         Set<String> set = new HashSet<String>(movieCodes);
         movieCodes = new ArrayList<String>(set);
+        
+        // boxOffice 포함한 것들도 엑셀에 저장
+        addExcel(movieCodes);
         
         // 이미 DB에 저장되어 있는 movieCodes 제외한 movieCodes
         movieCodes = codesDB(movieCodes);
@@ -188,5 +194,31 @@ public class AdminServiceImpl implements AdminService{
 		}
 		
 		return movieCodes;
+	}
+	
+	// boxOffice 포함한 것들도 엑셀에 저장
+	public void addExcel(List<String> movieCodes) {
+		ClassPathResource resource = new ClassPathResource("movieCodes.xlsx");
+
+		try {
+			// FileInputStream 으로 파일 읽기
+			FileInputStream inputStream = new FileInputStream(resource.getFile());
+			
+			// XSSFWorkbook 객체 생성하기
+			XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+			// XSSFSheet 객체 생성 - 첫번째 시트를 가져온다 
+			XSSFSheet sheet = workbook.getSheetAt(0);
+
+			// 1번째 Row 부터 데이터 삽입
+			for(int i = 0; i < movieCodes.size(); i++) {
+				XSSFRow row = sheet.createRow(i);		// row 생성
+				row.createCell(0).setCellValue(movieCodes.get(i));   // 칼럼을 생성한다
+			}
+
+			// FileOutputStream 으로 파일 저장하기
+			FileOutputStream out = new FileOutputStream(resource.getFile());
+			workbook.write(out);
+			out.close();
+		}catch (Exception e) {}	
 	}
 }
