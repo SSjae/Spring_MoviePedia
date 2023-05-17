@@ -28,6 +28,7 @@ import com.moviepedia.domain.PhotoDTO;
 import com.moviepedia.domain.VideoDTO;
 import com.moviepedia.mapper.AdminMapper;
 
+import lombok.NonNull;
 import lombok.Setter;
 
 @Service
@@ -66,7 +67,9 @@ public class AdminServiceImpl implements AdminService{
         // 영화 관련 정보 긁어오기
         if(movieCodes.size() != 0) {
         	for(int i = 0; i < 1; i++) {
+        		
         		String rankURL = "https://pedia.watcha.com/ko-KR/contents/" + movieCodes.get(i);
+        		// 영화 크롤링
         		String rankURL2 = "https://pedia.watcha.com/ko-KR/contents/" + movieCodes.get(i) + "/overview";
         		Document docRank = null;
         		Document docRank2 = null;
@@ -75,58 +78,48 @@ public class AdminServiceImpl implements AdminService{
         			docRank = Jsoup.connect(rankURL).get();
         			docRank2 = Jsoup.connect(rankURL2).get();
         			Elements elemRank = docRank.select("#root .css-99klbh");
-        			Iterator<Element> elemRank2 = docRank2.select("#root .css-18gwkcr .css-1y901al-Row ul").iterator();
+        			Elements elemRank2 = docRank2.select("#root .css-18gwkcr .css-1gkas1x-Grid ul dl");
         			
         			String movietitle = elemRank.select(".css-1p7n6er-Pane .css-171k8ad-Title").text();
-        			String movierelease = "";
-        			String movienation = "";
-        			String moviegenre = "";
-        			String movietime = "";
-        			String moviegrade = "";
-        			String moviedirector = elemRank.select(".css-1s8bs5j .css-13avw3k-PeopleUlRow ul li").attr("title");
-        			String moviesummary = "";
+        			String movierelease = elemRank2.get(1).select("dd").text();
+        			String movienation = elemRank2.get(2).select("dd").text();
+        			String moviegenre = elemRank2.get(3).select("dd").text();
+        			String movietime = elemRank2.get(4).select("dd").text();
+        			String moviegrade = elemRank2.get(5).select("dd").text();
+        			String moviedirector = elemRank.select(".css-1s8bs5j .css-13avw3k-PeopleUlRow ul li").get(0).select("a .css-zoy7di .css-17vuhtq").text();
+        			String moviesummary = elemRank2.get(6).select("dd").text();
         			String movieimg = elemRank.select(".css-10ofaaw .css-569z5v img").attr("src");
         			
-        			while(elemRank2.hasNext()) {
-        				switch (elemRank2.next().select("dl dt").text()) {
-						case "제작 연도":
-							movierelease = elemRank2.next().select("dl dd").text();
-							break;
-						case "국가":
-							movienation = elemRank2.next().select("dl dd").text();
-							break;
-						case "장르":
-							moviegenre = elemRank2.next().select("dl dd").text();
-							break;
-						case "상영시간":
-							movietime = elemRank2.next().select("dl dd").text();
-							break;
-						case "연령 등급":
-							moviegrade = elemRank2.next().select("dl dd").text();
-							break;
-						case "내용":
-							moviesummary = elemRank2.next().select("dl dd").text();
-							break;
-						default:
-							break;
-						}
-        			}
+        			MovieDTO m = new MovieDTO(movieCodes.get(i), movietitle, movierelease, movienation, moviegenre, movietime, moviegrade, moviedirector, moviesummary, movieimg);
         			
-        			System.out.println(movietitle);
-        			System.out.println(moviedirector);
-        			System.out.println(movieimg);
-        			System.out.println(movierelease);
-        			System.out.println(movienation);
-        			System.out.println(moviegenre);
-        			System.out.println(movietime);
-        			System.out.println(moviegrade);
-        			System.out.println(moviesummary);
+        			movie.add(m);
+        			
+        	        // movie insert 전 movie list에 있는 boxoffice인 애들 순서대로 숫자 부여
+//        			for(int j = 0; j < movieCodes.size(); j++) {
+//        				for(int k = 0; k < boxOffices.size(); k++) {
+//        					if(movie.get(j).getMoviecode().equals(boxOffices.get(k))) {
+//        						movie.get(j).setBoxoffice(k+1);
+//        					}
+//        				}
+//        			}
+        			
+        			// 액터 크롤링
+        			Elements actorSel = elemRank.select(".css-1s8bs5j .css-13avw3k-PeopleUlRow ul li");
+        			
+        			for(int l = 0; l < actorSel.size(); l++) {
+        				String actorcode = actorSel.get(l).select("a").attr("href").substring(14);
+        			    String actorname = actorSel.get(l).select("a .css-qkf9j .css-17vuhtq").text();
+        			    String actorpart = actorSel.get(l).select("a .css-qkf9j .css-1evnpxk-StyledSubtitle").text();
+        			    String actorimg = actorSel.get(l).select("a .css-cssveg .css-ck0t47-ProfilePhotoImage").attr("style");
+        			    
+        			    System.out.println(actorcode);
+        			    System.out.println(actorname);
+        			    System.out.println(actorpart);
+        			    System.out.println(actorimg);
+        			}
         		} catch (Exception e) {}
         	}
         }
-        
-        
-        // movie insert 전 movie list에 있는 boxoffice인 애들 순서대로 숫자 부여
         // 숫자 부여 후 movie insert
         // 나중에 main 페이지에서 boxoffice인 애들을 메인에 출력
 		

@@ -19,7 +19,5 @@ public class ActorDTO {
 	@NonNull
     private String actorpart;
 	@NonNull
-    private String actorrole;
-	@NonNull
     private String actorimg;
 }
