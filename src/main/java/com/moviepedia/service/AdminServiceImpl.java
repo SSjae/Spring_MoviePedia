@@ -48,8 +48,6 @@ public class AdminServiceImpl implements AdminService{
 		// 먼저 엑셀에서 영화 코드 읽어오기
         movieCodes = movieCodes();
         
-        System.out.println(movieCodes.size());
-        
         // 사이트에 있는 박스오피스 영화 코드 movieCodes에 중복 있는 거 제외하고 저장 및 따로도 저장
         boxOffices = boxOffices();
         movieCodes.addAll(boxOffices); // movieCodes 뒤에 boxOffices 붙이기
@@ -58,16 +56,75 @@ public class AdminServiceImpl implements AdminService{
         Set<String> set = new HashSet<String>(movieCodes);
         movieCodes = new ArrayList<String>(set);
         
-        // boxOffice 포함한 것들도 엑셀에 저장
-        addExcel(movieCodes);
-        
         // 이미 DB에 저장되어 있는 movieCodes 제외한 movieCodes
         movieCodes = codesDB(movieCodes);
         
         // insert 하기 전에 모든 boxoffice 0으로 변경 그래야 새로운 박스 오피스 가능
         mapper.boxUpdate_0();
         
-        // 영화 코드 긁어오기
+        // 모든 것이 DB에 저장되어 있으면 할 필요 없으니 if문으로 조건 검사 후
+        // 영화 관련 정보 긁어오기
+        if(movieCodes.size() != 0) {
+        	for(int i = 0; i < 1; i++) {
+        		String rankURL = "https://pedia.watcha.com/ko-KR/contents/" + movieCodes.get(i);
+        		String rankURL2 = "https://pedia.watcha.com/ko-KR/contents/" + movieCodes.get(i) + "/overview";
+        		Document docRank = null;
+        		Document docRank2 = null;
+        		
+        		try {
+        			docRank = Jsoup.connect(rankURL).get();
+        			docRank2 = Jsoup.connect(rankURL2).get();
+        			Elements elemRank = docRank.select("#root .css-99klbh");
+        			Iterator<Element> elemRank2 = docRank2.select("#root .css-18gwkcr .css-1y901al-Row ul").iterator();
+        			
+        			String movietitle = elemRank.select(".css-1p7n6er-Pane .css-171k8ad-Title").text();
+        			String movierelease = "";
+        			String movienation = "";
+        			String moviegenre = "";
+        			String movietime = "";
+        			String moviegrade = "";
+        			String moviedirector = elemRank.select(".css-1s8bs5j .css-13avw3k-PeopleUlRow ul li").attr("title");
+        			String moviesummary = "";
+        			String movieimg = elemRank.select(".css-10ofaaw .css-569z5v img").attr("src");
+        			
+        			while(elemRank2.hasNext()) {
+        				switch (elemRank2.next().select("dl dt").text()) {
+						case "제작 연도":
+							movierelease = elemRank2.next().select("dl dd").text();
+							break;
+						case "국가":
+							movienation = elemRank2.next().select("dl dd").text();
+							break;
+						case "장르":
+							moviegenre = elemRank2.next().select("dl dd").text();
+							break;
+						case "상영시간":
+							movietime = elemRank2.next().select("dl dd").text();
+							break;
+						case "연령 등급":
+							moviegrade = elemRank2.next().select("dl dd").text();
+							break;
+						case "내용":
+							moviesummary = elemRank2.next().select("dl dd").text();
+							break;
+						default:
+							break;
+						}
+        			}
+        			
+        			System.out.println(movietitle);
+        			System.out.println(moviedirector);
+        			System.out.println(movieimg);
+        			System.out.println(movierelease);
+        			System.out.println(movienation);
+        			System.out.println(moviegenre);
+        			System.out.println(movietime);
+        			System.out.println(moviegrade);
+        			System.out.println(moviesummary);
+        		} catch (Exception e) {}
+        	}
+        }
+        
         
         // movie insert 전 movie list에 있는 boxoffice인 애들 순서대로 숫자 부여
         // 숫자 부여 후 movie insert
@@ -194,31 +251,5 @@ public class AdminServiceImpl implements AdminService{
 		}
 		
 		return movieCodes;
-	}
-	
-	// boxOffice 포함한 것들도 엑셀에 저장
-	public void addExcel(List<String> movieCodes) {
-		ClassPathResource resource = new ClassPathResource("movieCodes.xlsx");
-
-		try {
-			// FileInputStream 으로 파일 읽기
-			FileInputStream inputStream = new FileInputStream(resource.getFile());
-			
-			// XSSFWorkbook 객체 생성하기
-			XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
-			// XSSFSheet 객체 생성 - 첫번째 시트를 가져온다 
-			XSSFSheet sheet = workbook.getSheetAt(0);
-
-			// 1번째 Row 부터 데이터 삽입
-			for(int i = 0; i < movieCodes.size(); i++) {
-				XSSFRow row = sheet.createRow(i);		// row 생성
-				row.createCell(0).setCellValue(movieCodes.get(i));   // 칼럼을 생성한다
-			}
-
-			// FileOutputStream 으로 파일 저장하기
-			FileOutputStream out = new FileOutputStream(resource.getFile());
-			workbook.write(out);
-			out.close();
-		}catch (Exception e) {}	
 	}
 }
