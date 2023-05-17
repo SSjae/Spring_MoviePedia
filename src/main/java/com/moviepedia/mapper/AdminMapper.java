@@ -25,4 +25,6 @@ public interface AdminMapper {
 	int vtotal();
 
 	void boxUpdate_0();
+
+	List<String> movieCodesDB();
 }

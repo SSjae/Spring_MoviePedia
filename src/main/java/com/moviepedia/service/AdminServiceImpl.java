@@ -2,13 +2,21 @@ package com.moviepedia.service;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -28,13 +36,13 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Override
 	public void recent() {
-        List<String> movieCodes = new ArrayList<String>();
-        List<String> boxOffices = new ArrayList<String>();
-        
         List<MovieDTO> movie = new ArrayList<MovieDTO>();
         List<ActorDTO> actor = new ArrayList<ActorDTO>();
         List<PhotoDTO> photo = new ArrayList<PhotoDTO>();
         List<VideoDTO> video = new ArrayList<VideoDTO>();
+
+        List<String> movieCodes = new ArrayList<String>();
+        List<String> boxOffices = new ArrayList<String>();
         
 		// 먼저 엑셀에서 영화 코드 읽어오기
         movieCodes = movieCodes();
@@ -42,18 +50,22 @@ public class AdminServiceImpl implements AdminService{
         // 사이트에 있는 박스오피스 영화 코드 movieCodes에 중복 있는 거 제외하고 저장 및 따로도 저장
         boxOffices = boxOffices();
         movieCodes.addAll(boxOffices); // movieCodes 뒤에 boxOffices 붙이기
-
-        // 다 모은 movieCodes와 DB에 저장되어 있는 movieCodes를 비교해서 중복하지 않은 거만 뽑아서 insert... 그럼 DB에서 중복 따로 안해도 됨
         
+        // 중복을 방지하기 위해 List -> Set -> List로 변경
+        Set<String> set = new HashSet<String>(movieCodes);
+        movieCodes = new ArrayList<String>(set);
         
-        // insert 하기 전에 모든 boxoffice 0으로 변경
+        // 이미 DB에 저장되어 있는 movieCodes 제외한 movieCodes
+        movieCodes = codesDB(movieCodes);
+        
+        // insert 하기 전에 모든 boxoffice 0으로 변경 그래야 새로운 박스 오피스 가능
         mapper.boxUpdate_0();
         
-        // movie insert 후 boxoffice인 애들 순서대로 숫자 부여
+        // 영화 코드 긁어오기
+        
+        // movie insert 전 movie list에 있는 boxoffice인 애들 순서대로 숫자 부여
+        // 숫자 부여 후 movie insert
         // 나중에 main 페이지에서 boxoffice인 애들을 메인에 출력
-        
-        
-        // 그 코드에 맞는 사이트 가서 데이터 긁어오기
 		
 //		mapper.minsert(movie);
 //		mapper.ainsert(actor);
@@ -133,7 +145,48 @@ public class AdminServiceImpl implements AdminService{
 	// 사이트에서 boxOffice movieCode 코드 긁어오기
 	public List<String> boxOffices() {
         List<String> boxOffices = new ArrayList<String>();
+        
+        String rankURL = "https://pedia.watcha.com/ko-KR";
+		Document docRank = null;
+		
+		try {
+			docRank = Jsoup.connect(rankURL).get();
+			Elements elemRank = docRank.select("#root .css-99klbh .css-119xxd7 ul");
+			
+			Iterator<Element> codeSel = elemRank.select("li a").iterator();
+			
+			while(codeSel.hasNext()) {
+				String code = codeSel.next().attr("href").substring(16);
+				
+				boxOffices.add(code);
+			}
+		} catch (Exception e) {}
 		
 		return boxOffices;
+	}
+	
+	// 다 모은 movieCodes와 DB에 저장되어 있는 movieCodes를 비교해서 중복하지 않은 거만 뽑아 반환
+	public List<String> codesDB(List<String> movieCodes) {
+        List<String> movieCodesDB = new ArrayList<String>();
+        movieCodesDB = mapper.movieCodesDB();
+        
+        // codes와 codesDB 두개를 합쳐서 중복된 값을 list로 따로 뽑아옴
+        List<String> list = new ArrayList<String>(movieCodes);
+        list.addAll(movieCodesDB);
+        
+        // 중복값 제거
+        List<String> distinctLi = list.stream().distinct().collect(Collectors.toList());
+
+        // 중복값 제거 된 값을 list에서 지움 그러면 중복값만 남음
+		for (String distinctElement : distinctLi) {
+			list.remove(distinctElement);
+		}
+		
+		// movieCodes에서 DB에 저장되어 있는 값 제거
+		for (String listValue : list) {
+			movieCodes.remove(listValue);
+		}
+		
+		return movieCodes;
 	}
 }

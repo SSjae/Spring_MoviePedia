@@ -44,6 +44,9 @@
 	<select id="vtotal" resultType="_int">
 		select count(*) from video
 	</select>
+	<select id="movieCodesDB" resultType="string">
+		select moviecode from movie
+	</select>
 	
 	<update id="boxUpdate_0">
 		update movie set boxoffice = 0;
