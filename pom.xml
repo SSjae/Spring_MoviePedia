@@ -161,6 +161,12 @@
 		  <artifactId>commons-io</artifactId>
 		  <version>2.4</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>org.seleniumhq.selenium</groupId>
+		    <artifactId>selenium-java</artifactId>
+		    <version>4.9.1</version>
+		</dependency>
 
 		<!-- @Inject -->
 		<dependency>
