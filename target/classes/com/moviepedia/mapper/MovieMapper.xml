@@ -12,6 +12,10 @@
 		select moviegenre from movie
 	</select>
 	
+	<select id="boxOffice" resultType="com.moviepedia.domain.MovieDTO">
+		select * from movie where boxoffice > 0 order by boxoffice asc;
+	</select>
+
 	<select id="top10" resultType="com.moviepedia.domain.MovieDTO">
 		select * from movie order by moviestar desc, movierelease desc limit 0,10;
 	</select>
@@ -25,11 +29,11 @@
 	</select>
 	
 	<select id="kMovie" resultType="com.moviepedia.domain.MovieDTO">
-		select * from movie where movienation like "%대한민국%" order by movierelease desc
+		select * from movie where movienation like "%한국%" order by movierelease desc
 	</select>
 	
 	<select id="fMovie" resultType="com.moviepedia.domain.MovieDTO">
-		select * from movie where movienation not like "%대한민국%" order by movierelease desc
+		select * from movie where movienation not like "%한국%" order by movierelease desc
 	</select>
 	
 	<select id="movie" resultType="com.moviepedia.domain.MovieDTO">
@@ -43,17 +47,21 @@
 	<select id="photos" resultType="com.moviepedia.domain.PhotoDTO">
 		select * from photo where moviecode=#{moviecode}
 	</select>
+
+	<select id="videos" resultType="com.moviepedia.domain.VideoDTO">
+		select * from video where moviecode=#{moviecode}
+	</select>
 	
 	<select id="similarMovie" resultType="com.moviepedia.domain.MovieDTO">
 		select * from movie where moviegenre like concat(#{genre},"%") and moviecode not in(#{moviecode}) order by movierelease desc
 	</select>
 	
 	<select id="autocomplete" resultType="map">
-		select movieKtitle from movie where movieKtitle like concat("%", #{searchValue},"%")
+		select movietitle from movie where movietitle like concat("%", #{searchValue},"%")
 	</select>
 	
 	<select id="search" resultType="com.moviepedia.domain.MovieDTO">
-		select * from movie where movieKtitle like concat("%", #{keyword},"%") union select m.* from movie m, actor a where m.moviecode = a.moviecode and a.actorKname like concat("%", #{keyword},"%") order by movierelease desc
+		select * from movie where movietitle like concat("%", #{keyword},"%") union select m.* from movie m, actor a where m.moviecode = a.moviecode and a.actorname like concat("%", #{keyword},"%") order by movierelease desc
 	</select>
 	
 	<update id="likeup">

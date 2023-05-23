@@ -29,8 +29,8 @@
 					<span class="date">${reviewDateTime }</span>				
 				</div>
 				<a class="content-2" href="${cp}/movie/movieInfo?moviecode=${movie.moviecode}">
-					<div class="title">${movie.movieKtitle }</div>
-					<div class="release">영화  ・ ${release }</div>
+					<div class="title">${movie.movietitle }</div>
+					<div class="release">영화  ・ ${movie.movierelease }</div>
 				</a>
 				<div class="content-star">★ ${review.reviewstar }</div>				
 			</div>
@@ -92,7 +92,7 @@
 		<input id="reviewcontentlength" type="hidden" value="${review.reviewcontent.length() }"/>
 		<div class="modal_content">
 			<div class="modal_head">
-				<span>${movie.movieKtitle}</span>
+				<span>${movie.movietitle}</span>
 				<img class="x" src="${cp}/resources/images/x.svg" alt="x">				
 			</div>
 			<textarea id="comment" maxlength="10000" placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요."></textarea>

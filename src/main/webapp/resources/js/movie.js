@@ -44,7 +44,7 @@ $(".add").click((e) => {
 				content += "<div class='similars-main'>";
 				content += "<a href="+ctx+"/movie/movieInfo?moviecode="+result[i].moviecode+">";
 				content += "<img src='"+result[i].movieimg+"'alt='img'>";
-				content += "<span class='title'>"+result[i].movieKtitle+"</span>";
+				content += "<span class='title'>"+result[i].movietitle+"</span>";
 				content += "<span class='rate'>평균 ★"+result[i].moviestar+"</span>";
 				content += "</a>"
 				content += "</div>"

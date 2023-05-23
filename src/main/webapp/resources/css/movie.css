@@ -52,30 +52,24 @@
 	font-weight: 700;
 }
 
-.info-layer .info-head .text .text-subTitle {
-	color: #767676;
-	font-size: 12px;
-	font-weight: 500;
-}
-
 .info-layer .info-head .text .text-etc {
 	color: #00000080;
-	font-size: 17px;
-	font-weight: 400;
-	margin-top: 12px;
+    font-size: 17px;
+    font-weight: 400;
+    margin-top: 10px;
 }
 
 .info-layer .info-head .text .text-star {
 	border-top: 1px solid rgb(237, 237, 237);
     border-bottom: 1px solid rgb(237, 237, 237);
-    margin-top: 15px;
+    margin-top: 18px;
     padding-top: 7px;
     padding-bottom: 9px;
 }
 
 .info-layer .info-head .text .text-review {
 	display: flex;
-    height: 75px;
+    height: 92px;
     align-items: center;
     font-size: 14px;
     color: rgb(41, 42, 50);

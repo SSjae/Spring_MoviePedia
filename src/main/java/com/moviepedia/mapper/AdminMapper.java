@@ -2,6 +2,8 @@ package com.moviepedia.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.moviepedia.domain.ActorDTO;
 import com.moviepedia.domain.MovieDTO;
 import com.moviepedia.domain.PhotoDTO;
@@ -25,6 +27,8 @@ public interface AdminMapper {
 	int vtotal();
 
 	void boxUpdate_0();
+	
+	void boxUpdate_1(@Param("boxoffice")String boxoffice, @Param("rank")int rank);
 
 	List<String> movieCodesDB();
 }

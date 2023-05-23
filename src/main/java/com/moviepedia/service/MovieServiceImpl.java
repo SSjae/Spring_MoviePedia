@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.moviepedia.domain.ActorDTO;
 import com.moviepedia.domain.MovieDTO;
 import com.moviepedia.domain.PhotoDTO;
+import com.moviepedia.domain.VideoDTO;
 import com.moviepedia.mapper.MovieMapper;
 
 import lombok.Setter;
@@ -27,6 +28,11 @@ public class MovieServiceImpl implements MovieService{
 	@Override
 	public int mtotal() {
 		return mapper.mtotal();
+	}
+	
+	@Override
+	public ArrayList<MovieDTO> boxOffice() {
+		return mapper.boxOffice();
 	}
 	
 	@Override
@@ -67,6 +73,11 @@ public class MovieServiceImpl implements MovieService{
 	@Override
 	public ArrayList<PhotoDTO> photos(String moviecode) {
 		return mapper.photos(moviecode);
+	}
+	
+	@Override
+	public ArrayList<VideoDTO> videos(String moviecode) {
+		return mapper.videos(moviecode);
 	}
 	
 	@Override

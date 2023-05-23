@@ -76,7 +76,7 @@ public class UserController {
 		
 		List<String> newList = new ArrayList<String>();
 		for(int i = 0; i < list.size(); i++) {
-			String[] result = list.get(i).split(", ");
+			String[] result = list.get(i).split("/");
 			for(int j = 0; j < result.length; j++){
 				// 장르가 여러개 있기 때문에 ", " 기준으로 짤라서 다시 리스트에 넣음
 				newList.add(result[j]);
@@ -85,7 +85,6 @@ public class UserController {
 		
 		// 중복 제거를 통해 모든 장르 뽑아냄
 		Set<String> set = new HashSet<String>(newList);
-		set.remove("");
 		
 		// 모든 장르 중에서 10개 이상인 것만 넘김
 		List<String> genres = new ArrayList<String>();

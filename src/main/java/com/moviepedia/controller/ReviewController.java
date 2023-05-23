@@ -180,7 +180,6 @@ public class ReviewController {
 		mav.addObject("reviewDateTime", reviewDateTime);
 		mav.addObject("movie", movie);
 		mav.addObject("user", user);
-		mav.addObject("release", release(movie));
 		mav.addObject("reviewlikecnt", Integer.toString(rservice.reviewLikeCnt(review.getReviewnum())));
 		mav.addObject("commentcnt", Integer.toString(rservice.commentCnt(review.getReviewnum())));
 		

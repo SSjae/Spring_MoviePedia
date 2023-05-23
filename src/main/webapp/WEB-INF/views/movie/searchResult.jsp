@@ -32,9 +32,9 @@
 					<div class="main">
 						<a href="${cp}/movie/movieInfo?moviecode=${movie.moviecode}">
 							<img src="${movie.movieimg }" alt="img">
-							<span class="title">${movie.movieKtitle }</span>
+							<span class="title">${movie.movietitle }</span>
 							<span class="year-nation">
-								${moviesRelease.get(status.index) == "" ? "" : moviesRelease.get(status.index) += " ・ "}${movie.movienation}
+								${movie.movierelease} ・ ${movie.movienation}
 							</span>
 							<span class="rate">평균 ★${movie.moviestar }</span>
 						</a>

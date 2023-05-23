@@ -5,30 +5,30 @@
   
 <mapper namespace="com.moviepedia.mapper.AdminMapper">
 	<insert id="minsert">
-		insert ignore into movie(moviecode, movieKtitle, movieEtitle, moviegenre, movienation, movietime, movierelease, moviedirector, moviegrade, movieimg, movieHsummary, movieCsummary) values
+		insert into movie(moviecode, movietitle, movierelease, movienation, moviegenre, movietime, moviegrade, moviedirector, moviesummary, movieimg) values
 		<foreach collection="list" item="item" separator=",">
-			(#{item.moviecode}, #{item.movieKtitle}, #{item.movieEtitle},
-			#{item.moviegenre}, #{item.movienation}, #{item.movietime}, #{item.movierelease},
-			#{item.moviedirector}, #{item.moviegrade}, #{item.movieimg}, #{item.movieHsummary}, #{item.movieCsummary})
+			(#{item.moviecode}, #{item.movietitle}, #{item.movierelease},
+			#{item.movienation}, #{item.moviegenre}, #{item.movietime}, #{item.moviegrade},
+			#{item.moviedirector}, #{item.moviesummary}, #{item.movieimg})
 		</foreach>
 	</insert>
 	<insert id="ainsert">
-		insert ignore into actor(actorcode, moviecode, actorKname, actorEname, actorpart, actorrole, actormovie, actorimg) values
+		insert into actor(actorcode, moviecode, actorname, actorpart, actorimg) values
 		<foreach collection="list" item="item" separator=",">
-			(#{item.actorcode}, #{item.moviecode}, #{item.actorKname}, #{item.actorEname},
-			#{item.actorpart}, #{item.actorrole}, #{item.actormovie}, #{item.actorimg})
+			(#{item.actorcode}, #{item.moviecode}, #{item.actorname},
+			#{item.actorpart}, #{item.actorimg})
 		</foreach>
 	</insert>
 	<insert id="pinsert">
-		insert ignore into photo values
+		insert into photo(moviecode, photoimg) values
 		<foreach collection="list" item="item" separator=",">
-			(#{item.photocode}, #{item.photoimg}, #{item.moviecode})
+			(#{item.moviecode}, #{item.photoimg})
 		</foreach>
 	</insert>
 	<insert id="vinsert">
-		insert ignore into photo values
+		insert into video(moviecode, videoimg, videoaddr, videotitle) values
 		<foreach collection="list" item="item" separator=",">
-			(#{item.photocode}, #{item.photoimg}, #{item.moviecode})
+			(#{item.moviecode}, #{item.videoimg}, #{item.videoaddr}, #{item.videotitle})
 		</foreach>
 	</insert>
 	
@@ -49,6 +49,9 @@
 	</select>
 	
 	<update id="boxUpdate_0">
-		update movie set boxoffice = 0;
+		update movie set boxoffice = 0
+	</update>
+	<update id="boxUpdate_1">
+		update movie set boxoffice = ${rank} where moviecode = #{boxoffice}
 	</update>
 </mapper>

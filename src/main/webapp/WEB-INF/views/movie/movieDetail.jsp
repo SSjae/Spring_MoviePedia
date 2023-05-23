@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>무비피디아 - ${movie.movieKtitle }</title>
+<title>무비피디아 - ${movie.movietitle }</title>
 <link rel="stylesheet" href="${cp}/resources/css/font.css">
 <link rel="stylesheet" href="${cp}/resources/css/import.css">
 <link rel="stylesheet" href="${cp}/resources/css/movie.css">
@@ -27,13 +27,13 @@
 		</div>
 		<div class="detail-main">
 			<div>
-				<span class="title">제목</span><span class="content">${movie.movieKtitle }</span>
+				<span class="title">제목</span><span class="content">${movie.movietitle }</span>
 			</div>
 			<div>
 				<span class="title">감독</span><span class="content">${movie.moviedirector }</span>
 			</div>
 			<div>
-				<span class="title">개봉 날짜</span><span class="content">${movie.movierelease }</span>
+				<span class="title">제작 연도</span><span class="content">${movie.movierelease }</span>
 			</div>
 			<div>
 				<span class="title">국가</span><span class="content">${movie.movienation }</span>
@@ -50,8 +50,7 @@
 			<div class="movieSummary">
 				<span class="title">내용</span>
 				<div class="content">
-					<div>${movie.movieHsummary == "" ? "" : movie.movieHsummary}</div>
-					<div>${movie.movieCsummary }</div>
+					<div>${movie.moviesummary }</div>
 				</div>
 			</div>
 		</div>

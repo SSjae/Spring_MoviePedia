@@ -7,12 +7,15 @@ import java.util.Map;
 import com.moviepedia.domain.ActorDTO;
 import com.moviepedia.domain.MovieDTO;
 import com.moviepedia.domain.PhotoDTO;
+import com.moviepedia.domain.VideoDTO;
 
 public interface MovieService {
 
 	ArrayList<String> allGenre();
 
 	int mtotal();
+
+	ArrayList<MovieDTO> boxOffice();
 
 	ArrayList<MovieDTO> top10();
 
@@ -29,6 +32,8 @@ public interface MovieService {
 	ArrayList<ActorDTO> actors(String moviecode);
 
 	ArrayList<PhotoDTO> photos(String moviecode);
+
+	ArrayList<VideoDTO> videos(String moviecode);
 
 	ArrayList<MovieDTO> similarMovie(String moviecode, String genre);
 

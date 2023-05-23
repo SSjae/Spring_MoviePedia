@@ -22,8 +22,8 @@ $("#search").autocomplete({
 						return {
                 			//label : 화면에 보여지는 텍스트
                 			//value : 실제 text태그에 들어갈 값
-							label: item.movieKtitle,
-							value: item.movieKtitle
+							label: item.movietitle,
+							value: item.movietitle
 						}
 					})
 				);

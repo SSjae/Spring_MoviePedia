@@ -72,7 +72,7 @@
 						<div class="main">
 							<a href="${cp}/movie/movieInfo?moviecode=${review.moviecode}">
 								<img src="${myReviewMovie.get(status.index).movieimg }" alt="img">
-								<div class="title">${myReviewMovie.get(status.index).movieKtitle }</div>
+								<div class="title">${myReviewMovie.get(status.index).movietitle }</div>
 								<div class="rate">평가함 ★${review.reviewstar }</div>
 							</a>
 						</div>
@@ -87,7 +87,7 @@
 						<div class="main">
 							<a href="${cp}/movie/movieInfo?moviecode=${like.moviecode}">
 								<img src="${myLikeMovie.get(status.index).movieimg }" alt="img">
-								<div class="title">${myLikeMovie.get(status.index).movieKtitle }</div>
+								<div class="title">${myLikeMovie.get(status.index).movietitle }</div>
 								<div class="rate">평균 ★${myLikeMovie.get(status.index).moviestar }</div>
 							</a>
 						</div>

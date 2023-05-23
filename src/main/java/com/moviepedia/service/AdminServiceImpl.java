@@ -1,10 +1,6 @@
 package com.moviepedia.service;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -23,12 +19,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -39,7 +29,6 @@ import com.moviepedia.domain.PhotoDTO;
 import com.moviepedia.domain.VideoDTO;
 import com.moviepedia.mapper.AdminMapper;
 
-import lombok.NonNull;
 import lombok.Setter;
 
 @Service
@@ -74,17 +63,22 @@ public class AdminServiceImpl implements AdminService{
         // insert 하기 전에 모든 boxoffice 0으로 변경 그래야 새로운 박스 오피스 가능
         mapper.boxUpdate_0();
         
+
+		System.out.println(boxOffices);
+        
         // 모든 것이 DB에 저장되어 있으면 할 필요 없으니 if문으로 조건 검사 후
         // 영화 관련 정보 긁어오기
         if(movieCodes.size() != 0) {
-        	for(int i = 1; i < 2; i++) {
+        	for(int i = 0; i < 50; i++) {
+        		System.out.println(movieCodes.get(i));
         		// 영화 크롤링
         		String movieURL = "https://pedia.watcha.com/ko-KR/contents/" + movieCodes.get(i);
         		String movieURL2 = "https://pedia.watcha.com/ko-KR/contents/" + movieCodes.get(i) + "/overview";
         		Document docMovie = null;
         		Document docMovie2 = null;
         		Document docActor = null;
-        		Document docPV = null;
+        		Document docPhoto = null;
+        		Document docVideo = null;
         		
         		try {
         			docMovie = Jsoup.connect(movieURL).get();
@@ -95,6 +89,7 @@ public class AdminServiceImpl implements AdminService{
         			String movietitle = movieSel.select(".css-1p7n6er-Pane .css-171k8ad-Title").text();
         			String movierelease = movieSel2.get(1).select("dd").text();
         			String movienation = movieSel2.get(2).select("dd").text();
+        			movienation = movienation.replace(",", "/");
         			String moviegenre = movieSel2.get(3).select("dd").text();
         			String movietime = movieSel2.get(4).select("dd").text();
         			String moviegrade = movieSel2.get(5).select("dd").text();
@@ -105,15 +100,6 @@ public class AdminServiceImpl implements AdminService{
         			MovieDTO m = new MovieDTO(movieCodes.get(i), movietitle, movierelease, movienation, moviegenre, movietime, moviegrade, moviedirector, moviesummary, movieimg);
         			
         			movie.add(m);
-        			
-        	        // movie insert 전 movie list에 있는 boxoffice인 애들 순서대로 숫자 부여
-//        			for(int j = 0; j < movieCodes.size(); j++) {
-//        				for(int k = 0; k < boxOffices.size(); k++) {
-//        					if(movie.get(j).getMoviecode().equals(boxOffices.get(k))) {
-//        						movie.get(j).setBoxoffice(k+1);
-//        					}
-//        				}
-//        			}
         			
         			// 액터 크롤링
         			String actorURL = "https://pedia.watcha.com/ko-KR/contents/" + movieCodes.get(i);
@@ -141,73 +127,46 @@ public class AdminServiceImpl implements AdminService{
         			    actor.add(a);
         			}
         			
-        			// 포토, 비디오 크롤링
-        			String pvURL = "https://pedia.watcha.com/ko-KR/contents/" + movieCodes.get(i);
-        			docPV = Jsoup.connect(pvURL).get();
-        			Elements pvSel = docPV.select("#root .css-5jq76 .css-99klbh .css-1s8bs5j .css-wpsvu8 .css-1tywu13");
+        			// 포토 크롤링
+        			String photoURL = "https://search.naver.com/search.naver?query=영화+"+movietitle+"+포토";
+        			docPhoto = Jsoup.connect(photoURL).get();
+        			Elements photoSel = docPhoto.select("#wrap #container #main_pack .cm_content_wrap .cm_pure_box .movie_photo_list ul li");
         			
-        			// 다운로드 받은 driver 위치 주소
-        			// 윈도우 환경
-        			String WEB_DRIVER_ID = "webdriver.chrome.driver"; // Properties 설정
-        		    String WEB_DRIVER_PATH = "C:/Users/ssjj0/Desktop/chromedriver_win32/chromedriver.exe"; // WebDriver 경로
-
-        			// chrome driver 세팅
-        			System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
+        			for(int x = 0; x < photoSel.size(); x++) {
+        				String photoimg = photoSel.get(x).select("a > img").attr("data-img-src");
+        				
+        				PhotoDTO p = new PhotoDTO(movieCodes.get(i), photoimg);
+        				
+        				photo.add(p);
+        			}
         			
-        			// 옵션 설정
-        			ChromeOptions options = new ChromeOptions();
-        	        options.addArguments("--lang=ko");
-        	        options.addArguments("--no-sandbox");
-        	        options.addArguments("--disable-dev-shm-usage");
-        	        options.addArguments("--disable-gpu");
-        	        options.setCapability("ignoreProtectedModeSettings", true);
-
-        			// 브라우저 선택시 파라미터로 옵션 전송
-        			WebDriver driver = new ChromeDriver(options);
-        			Thread.sleep(1000);
-        			
-        			//드라이버 연결 해제
-        			driver.close();
-    				//프로세스 종료
-    				driver.quit();
-        			
-//        			Elements photoSel = pvSel.get(0).select(".css-usdi1z ul li");
-//        			
-//        			for(int x = 0; x < photoSel.size(); x++) {
-//            			String photoimg = "";
-//            			
-//            			// photoimg 구하는 코드
-//        			    Pattern pattern = Pattern.compile("[(\"](.*?)[\")]");
-//            			Matcher matcher = pattern.matcher(photoSel.get(x).select(".css-1qwe0o7-StyledSelf span").attr("style"));
-//            			while (matcher.find()) {  // 일치하는 게 있다면  
-//            				photoimg = matcher.group(1);
-//            					    		    
-//            			    if(matcher.group(1) ==  null)
-//            			    	break;
-//            			}
-//            			
-//            			PhotoDTO p = new PhotoDTO(movieCodes.get(i), photoimg);
-//            			
-//            			photo.add(p);
-//        			}
-        			
-        			Elements videoSel = pvSel.get(1).select(".css-usdi1z ul li");
+        			// 비디오 크롤링
+        			String videoURL = "https://search.naver.com/search.naver?query=영화+"+movietitle+"+무비클립";
+        			docVideo = Jsoup.connect(videoURL).get();
+        			Elements videoSel = docVideo.select("#wrap #container #main_pack .cm_content_wrap ._sec_movie_clip_trailer .video_list ul li");
         			
         			for(int y = 0; y < videoSel.size(); y++) {
-        				String videoimg;
-            			String videoaddr = videoSel.get(y).select(".css-7wh3a0 a").attr("href");
-            			String videotitle = videoSel.get(y).select(".css-7wh3a0 a .css-xghows .css-1fucs4t-StyledText").text();
+        				String videoimg = videoSel.get(y).select("a .video_thumbnail img").attr("src");
+        				String videoaddr = videoSel.get(y).select("a").attr("href");
+        				String videotitle = videoSel.get(y).select("a .video_info .video_title").text();
+        				
+        				VideoDTO v = new VideoDTO(movieCodes.get(i), videoimg, videoaddr, videotitle);
+        				
+        				video.add(v);
         			}
         			
         		} catch (Exception e) {}
         	}
         }
-        // 나중에 main 페이지에서 boxoffice인 애들을 메인에 출력
 		
-//		mapper.minsert(movie);
-//		mapper.ainsert(actor);
-//		mapper.pinsert(photo);
-//		mapper.vinsert(video);
+		mapper.minsert(movie);
+		// movie insert 후  boxoffice인 애들 순서대로 숫자 업데이트
+		for(int k = 0; k < boxOffices.size(); k++) {
+			mapper.boxUpdate_1(boxOffices.get(k), k+1);
+		}
+		mapper.ainsert(actor);
+		mapper.pinsert(photo);
+		mapper.vinsert(video);
 	}
 
 	@Override
@@ -281,22 +240,22 @@ public class AdminServiceImpl implements AdminService{
 	
 	// 사이트에서 boxOffice movieCode 코드 긁어오기
 	public List<String> boxOffices() {
-        List<String> boxOffices = new ArrayList<String>();
-        
-        String rankURL = "https://pedia.watcha.com/ko-KR";
+List<String> boxOffices = new ArrayList<String>();
+	    
+	    String rankURL = "https://pedia.watcha.com/ko-KR";
 		Document docRank = null;
 		
 		try {
 			docRank = Jsoup.connect(rankURL).get();
-			Elements elemRank = docRank.select("#root .css-99klbh .css-119xxd7 ul");
+			Elements elemRank = docRank.select("#root .css-99klbh .css-7klu3x .w_exposed_cell");
+			Elements ele = elemRank.get(0).select(".css-1qq59e8 .css-9dnzub .css-119xxd7 ul li");
 			
-			Iterator<Element> codeSel = elemRank.select("li a").iterator();
-			
-			while(codeSel.hasNext()) {
-				String code = codeSel.next().attr("href").substring(16);
+			for(int z = 0; z < ele.size(); z++) {
+				String code = ele.get(z).select("a").attr("href").substring(16);
 				
 				boxOffices.add(code);
 			}
+			
 		} catch (Exception e) {}
 		
 		return boxOffices;
