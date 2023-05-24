@@ -26,22 +26,29 @@
 				"${keyword}"의 검색결과
 			</div>
 		</div>
-		<div class="search-main">
-			<div class="searchResult">
-				<c:forEach items="${movies}" var="movie" varStatus="status">
-					<div class="main">
-						<a href="${cp}/movie/movieInfo?moviecode=${movie.moviecode}">
-							<img src="${movie.movieimg }" alt="img">
-							<span class="title">${movie.movietitle }</span>
-							<span class="year-nation">
-								${movie.movierelease} ・ ${movie.movienation}
-							</span>
-							<span class="rate">평균 ★${movie.moviestar }</span>
-						</a>
-					</div>			
-				</c:forEach>
-			</div>
-		</div>
+		<c:choose>
+			<c:when test="${movies.size() == 0}">
+				<span class="noResult">검색 결과가 없습니다.</span>
+			</c:when>
+			<c:otherwise>
+				<div class="search-main">
+					<div class="searchResult">
+						<c:forEach items="${movies}" var="movie" varStatus="status">
+							<div class="main">
+								<a href="${cp}/movie/movieInfo?moviecode=${movie.moviecode}">
+									<img src="${movie.movieimg }" alt="img">
+									<span class="title">${movie.movietitle }</span>
+									<span class="year-nation">
+										${movie.movierelease} ・ ${movie.movienation}
+									</span>
+									<span class="rate">평균 ★${movie.moviestar }</span>
+								</a>
+							</div>			
+						</c:forEach>
+					</div>
+				</div>		
+			</c:otherwise>		
+		</c:choose>
 	</section>
 </body>
 <script src="http://code.jquery.com/jquery-3.6.1.js"></script> 

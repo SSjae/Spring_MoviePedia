@@ -14,7 +14,7 @@
 }
 
 .info-layer .info-head .head{
-	width: 961px;
+	width: 1001px;
 	height: 100%;
 	margin: 0 auto;
 }
@@ -42,7 +42,7 @@
 }
 
 .info-layer .info-head .text {
-    width: 770px;
+    width: 820px;
     float: right;
 }
 
@@ -221,7 +221,7 @@
 }
 
 .info-layer .info-comment {
-	max-width: 960px;
+	max-width: 1001px;
     background-color: white;
     margin: 22px auto -22px;
     border: 1px solid #e3e3e3;
@@ -325,7 +325,7 @@
 }
 
 .info-layer .info-main {
-	max-width: 960px;
+	max-width: 1001px;
 	background-color: white;
 	margin: 33px auto 0px;
 	border: 1px solid #e3e3e3;
@@ -463,6 +463,70 @@
 
 .info-layer .info-main .photos .slick-next {
 	right: -4px !important;
+	top: 54% !important;
+}
+
+.info-layer .info-main .photos .slick-prev {
+	right: -4px !important;
+	top: 54% !important;
+}
+
+.info-layer .info-main .videos {
+	text-align: center;
+	height: auto;
+    margin: 0 20px 20px 20px;
+}
+
+.info-layer .info-main .videos .videos-main .play {
+	display: flex;
+    width: 232.12px;
+    height: 130px;
+    background-color: rgba(0, 0, 0, 0.3);
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 123;
+}
+
+.info-layer .info-main .videos .videos-main .play img {
+	width: 24px;
+    height: 24px;
+	margin: 0;
+}
+
+.info-layer .info-main .videos .videos-main img {
+	width: 232.12px;
+	height: 130px;
+	margin-right: 11px;
+}
+
+.info-layer .info-main .videos .videos-main .videotitle {
+	font-size: 15px;
+    font-weight: 500;
+    float: left;
+    margin-top: 4px;
+    color: black;
+}
+
+.info-layer .info-main .videos .videos-main img {
+	height: 130px;
+	margin-right: 11px;
+}
+
+.info-layer .info-main .videos .slick-track {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-layer .info-main .videos .slick-next {
+	right: -4px !important;
+	top: 47% !important;
+}
+
+.info-layer .info-main .videos .slick-prev {
+	right: -4px !important;
+	top: 47% !important;
 }
 
 .info-layer .info-main .main-text span {
@@ -800,6 +864,10 @@
     line-height: 26px;
     width: 100%;
     height: 43px;
+}
+
+.search-layer .noResult {
+    margin: 53px;
 }
 
 .search-layer .search-head .text {

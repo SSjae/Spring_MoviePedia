@@ -15,8 +15,19 @@ $('.photos-slick').slick({
   draggable : false,
   variableWidth: true,
   speed: 300,
-  slidesToShow: 3,
-  slidesToScroll: 3
+  slidesToShow: 4,
+  slidesToScroll: 4
+ });
+
+//동영상 slick
+$('.videos-slick').slick({
+  infinite: false,
+  arrows : true,
+  draggable : false,
+  variableWidth: true,
+  speed: 300,
+  slidesToShow: 4,
+  slidesToScroll: 4
  });
 
 // 코멘트 slick
