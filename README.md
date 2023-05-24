@@ -8,7 +8,7 @@
 * Spring 프레임워크를 사용해 전보다 더 편리하고 쉽게 개발
 * REST를 이용한 다양하고 편리한 서버와 클라이언트 간의 통신
 * 많은 요소들을 Ajax로 구현을 해 동적인 웹 페이지 구현
-* 네이버 영화 사이트를 Jsoup을 이용해 여러가지 영화, 배우, 사진 데이터를 크롤링함 
+* 여러 사이트를 Jsoup을 이용해 여러가지 영화, 배우, 사진 데이터를 크롤링함 
 ## 개발환경
 * Front-End<br>
 ![HTML5](https://img.shields.io/badge/HTML5-%23E34F26.svg?style=flat-square&logo=html5&logoColor=white)
@@ -26,8 +26,9 @@
 ![Jsoup](https://img.shields.io/badge/Jsoup-6199D2?style=flat-square&logo=&logoColor=black)
 ![javax.mail](https://img.shields.io/badge/javax.mail-FAE100?style=flat-square&logo=&logoColor=black)
 ![slick](https://img.shields.io/badge/slick-3D9DDD?style=flat-square&logo=&logoColor=black)
+![ApachePOI](https://img.shields.io/badge/ApachePOI-%23F8DC75?style=flat-square&logo=&logoColor=black)
 ## 주요 개발기능
-* 관리자 영화 최신화(Jsoup을 이용한 네이버 영화 사이트 데이터 크롤링)
+* 관리자 영화 최신화(Jsoup을 이용한 데이터 크롤링)
 * 회원가입, 로그인, 비밀번호 찾기
 * javax.mail을 이용한 인증, Jsoup을 이용한 데이터 크롤링
 * 영화 정보 및 추천
