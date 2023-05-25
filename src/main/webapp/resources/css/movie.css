@@ -477,6 +477,10 @@
     margin: 0 20px 20px 20px;
 }
 
+.info-layer .info-main .videos .videos-main a {
+	text-decoration: none;
+}
+
 .info-layer .info-main .videos .videos-main .play {
 	display: flex;
     width: 232.12px;
@@ -501,11 +505,16 @@
 }
 
 .info-layer .info-main .videos .videos-main .videotitle {
-	font-size: 15px;
+    display: block;
+    width: 232.11px;
+    font-size: 15px;
     font-weight: 500;
-    float: left;
     margin-top: 4px;
     color: black;
+    text-align: left;
+    white-space: nowrap;
+	text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .info-layer .info-main .videos .videos-main img {
@@ -659,8 +668,8 @@
 }
 
 .info-layer .info-main .similars .similars-main img{
-	width: 174.12px;
-    height: 250px;
+	width: 183.2px;
+    height: 275px;
     border-radius: 5px;
 }
 

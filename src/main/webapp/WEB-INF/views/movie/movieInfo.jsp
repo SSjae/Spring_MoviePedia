@@ -129,7 +129,7 @@
 					</div>
 				</div>
 			</c:if>
-			<c:if test="${viedo.size() != 0}">
+			<c:if test="${videos.size() != 0}">
 				<hr>
 				<div>
 					<div class="main-text">동영상</div>

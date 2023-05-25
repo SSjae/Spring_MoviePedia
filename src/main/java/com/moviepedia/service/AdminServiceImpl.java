@@ -54,21 +54,17 @@ public class AdminServiceImpl implements AdminService{
         // 중복을 방지하기 위해 List -> Set -> List로 변경
         Set<String> set = new HashSet<String>(movieCodes);
         movieCodes = new ArrayList<String>(set);
-        
+
         // 이미 DB에 저장되어 있는 movieCodes 제외한 movieCodes
         movieCodes = codesDB(movieCodes);
         
         // insert 하기 전에 모든 boxoffice 0으로 변경 그래야 새로운 박스 오피스 가능
         mapper.boxUpdate_0();
-        
-
-		System.out.println(boxOffices);
-        
+		
         // 모든 것이 DB에 저장되어 있으면 할 필요 없으니 if문으로 조건 검사 후
         // 영화 관련 정보 긁어오기
         if(movieCodes.size() != 0) {
-        	for(int i = 0; i < 50; i++) {
-        		System.out.println(movieCodes.get(i));
+        	for(int i = 0; i < movieCodes.size(); i++) {
         		// 영화 크롤링
         		String movieURL = "https://pedia.watcha.com/ko-KR/contents/" + movieCodes.get(i);
         		String movieURL2 = "https://pedia.watcha.com/ko-KR/contents/" + movieCodes.get(i) + "/overview";
@@ -152,8 +148,8 @@ public class AdminServiceImpl implements AdminService{
         				
         				video.add(v);
         			}
-        			
         		} catch (Exception e) {}
+        		System.out.println(i);
         	}
         }
 		
@@ -238,7 +234,7 @@ public class AdminServiceImpl implements AdminService{
 	
 	// 사이트에서 boxOffice movieCode 코드 긁어오기
 	public List<String> boxOffices() {
-List<String> boxOffices = new ArrayList<String>();
+		List<String> boxOffices = new ArrayList<String>();
 	    
 	    String rankURL = "https://pedia.watcha.com/ko-KR";
 		Document docRank = null;
@@ -246,8 +242,8 @@ List<String> boxOffices = new ArrayList<String>();
 		try {
 			docRank = Jsoup.connect(rankURL).get();
 			Elements elemRank = docRank.select("#root .css-99klbh .css-7klu3x .w_exposed_cell");
-			Elements ele = elemRank.get(0).select(".css-1qq59e8 .css-9dnzub .css-119xxd7 ul li");
-			
+			Elements ele = elemRank.get(0).select(".css-1qq59e8 .css-119xxd7 ul li");
+
 			for(int z = 0; z < ele.size(); z++) {
 				String code = ele.get(z).select("a").attr("href").substring(16);
 				
