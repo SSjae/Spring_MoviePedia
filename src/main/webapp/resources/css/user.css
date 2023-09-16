@@ -707,3 +707,152 @@ header > .head-logo > img {
     color: white;
     cursor: pointer;
 }
+
+/* ratingLike.jsp */
+.ratingLike {
+	background-color: #F8F8F8;
+}
+
+.all-layer {
+	display: flex;
+	max-width: 1000px;
+    background-color: white;
+    margin: 105px auto 0px;
+    border: 1px solid #e3e3e3;
+    border-radius: 6px;
+    padding: 8px 0 0;
+}
+
+.all-layer .review {
+	width: 500px;
+}
+
+.all-layer .review .text {
+	font-size: 22px;
+    font-weight: 700;
+    color: #292a32;
+    letter-spacing: -0.4px;
+    margin: 0 0 0 20px;
+}
+
+.all-layer .review .text span {
+	color: #a0a0a0;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    margin: 0px 0px 0px 7px;
+}
+
+.all-layer .review .review-main {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.all-layer .review .review-main .main {
+    width: 140px;
+    height: 242px;
+    padding: 0 5.4px 0 0;
+}
+
+.all-layer .review .review-main .main a {
+	color: black;
+	text-decoration: none;
+}
+
+.all-layer .review .review-main .main img {
+	position: relative;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid #eae9e8;
+    border-radius: 5px;
+}
+
+.all-layer .review .review-main .main .title {
+	color: rgb(41, 42, 50);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    line-height: 22px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.all-layer .review .review-main .main .rate {
+	color: rgb(255, 161, 54);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    line-height: 18px;
+    height: 18px;
+}
+
+.all-layer .like {
+	width: 500px;
+}
+
+.all-layer .like .text {
+	font-size: 22px;
+    font-weight: 700;
+    color: #292a32;
+    letter-spacing: -0.4px;
+    margin: 0 0 0 20px;
+}
+
+.all-layer .like .text span {
+	color: #a0a0a0;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    margin: 0px 0px 0px 7px;
+}
+
+.all-layer .like .like-main {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.all-layer .like .like-main .main {
+    width: 140px;
+    height: 242px;
+    padding: 0 5.4px 0 0;
+}
+
+.all-layer .like .like-main .main a {
+	color: black;
+	text-decoration: none;
+}
+
+.all-layer .like .like-main .main img {
+	position: relative;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid #eae9e8;
+    border-radius: 5px;
+}
+
+.all-layer .like .like-main .main .title {
+	color: rgb(41, 42, 50);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    line-height: 22px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.all-layer .like .like-main .main .rate {
+	color: rgb(120, 120, 120);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    line-height: 18px;
+    height: 18px;
+}

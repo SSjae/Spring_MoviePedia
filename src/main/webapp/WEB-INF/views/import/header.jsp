@@ -10,8 +10,11 @@
 				<li class="head-img">
 					<a href="${cp}/movie/main"><img src="${cp}/resources/images/logo.png" alt="로고" /></a>				
 				</li>
-				<li class="head-span">
-					<span>영화</span>				
+				<li class="head-menu">
+					<a href="${cp}/movie/main"><span>홈</span></a>
+					<span>장르</span>		
+					<a href="${cp}/user/reviewLike"><span>평가 및 보고싶어요</span></a>
+					<a href="${cp}/user/myPage"><span>마이페이지</span></a>
 				</li>
 				<li class="head-input">
 					<form action="${cp}/movie/search" method="get">

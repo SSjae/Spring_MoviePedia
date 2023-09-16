@@ -267,6 +267,38 @@ public class UserController {
 		return "user/myPage";
 	}
 	
+	// 평가 및 보고싶어요 이동
+	@GetMapping("/reviewLike")
+	public String ratingLike(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		UserDTO user = (UserDTO) session.getAttribute("loginUser");
+		
+		int mtotal = mservice.mtotal();
+		int rtotal = rservice.rtotal();
+		
+		// 내가 평가한 reviewDTO, movieDTO
+		ArrayList<ReviewDTO> myReview = rservice.myReview(user.getUseremail());
+		ArrayList<MovieDTO> myReviewMovie = new ArrayList<MovieDTO>();
+		for(ReviewDTO review : myReview) {
+			myReviewMovie.add(mservice.movie(review.getMoviecode()));
+		}
+		
+		ArrayList<LikeMovieDTO> myLike = lservice.myLike(user.getUseremail());
+		ArrayList<MovieDTO> myLikeMovie = new ArrayList<MovieDTO>();
+		for(LikeMovieDTO like : myLike) {
+			myLikeMovie.add(mservice.movie(like.getMoviecode()));
+		}
+
+		model.addAttribute("mtotal", mtotal);
+		model.addAttribute("rtotal", rtotal);
+		model.addAttribute("myReview", myReview);
+		model.addAttribute("myReviewMovie", myReviewMovie);
+		model.addAttribute("myLike", myLike);
+		model.addAttribute("myLikeMovie", myLikeMovie);
+		
+		return "user/reviewLike";
+	}
+	
 	// logout
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {

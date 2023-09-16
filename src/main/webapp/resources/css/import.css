@@ -40,6 +40,22 @@ header .head ul .head-img img {
     height: 43px;
 }
 
+header .head ul .head-menu {
+    display: flex;
+    width: 22%;
+    justify-content: space-between;
+	margin: 0px 0px 0px 9px;
+}
+
+header .head ul .head-menu a {
+	text-decoration: none;
+}
+
+header .head ul .head-menu span {
+	color: #353535;
+    font-size: 15px;
+}
+
 header .head ul .head-span {
 	margin-left: 9px;
     margin-top: -2px;
