@@ -937,13 +937,95 @@
     font-weight: 400;
 }
 
+/* genre.jsp */
+.slick-prev {
+	left: -29px !important;
+}
 
+.slick-next {
+	right: -15px !important;
+}
 
+.slick-prev, .slick-next {
+    z-index: 1;
+    top: 39% !important;
+}
 
+.slick-prev:before, .slick-next:before {
+    font-size: 34px !important;
+    line-height: 0 !important;
+    color: rgb(0 0 0 / 20%) !important;
+}
 
+.genre-layer {
+	padding-top: 85px;
+    max-width: 1320px;
+    margin: 0 auto;
+}
 
+.genre-layer .card .card-text {
+	font-size: 22px;
+	font-weight: 700;
+	color: #292a32;
+	letter-spacing: -0.4px;
+    line-height: 30px;
+    padding: 12px 0 14px 8px;
+}
 
+.genre-layer .card .card-text span {
+	color: #a0a0a0;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    margin: 0px 0px 0px 7px;
+}
 
+.genre-layer .card .card-text a {
+	float: right;
+    text-decoration: none;
+    color: #74747B;
+    font-size: 15px;
+    font-weight: normal;
+    margin-right: 14px;
+}
 
+.genre-layer .card .card-main .genre {
+	width: 222px;
+	height: 420px;
+	padding: 0 8px;
+	box-sizing: border-box;
+}
 
+.genre-layer .card .card-main .genre a {
+    text-decoration: none;
+}
 
+.genre-layer .card .card-main .genre img{
+	width: 100%;
+	height: 300px;
+	border-radius: 5px;
+}
+
+.genre-layer .card .card-main .genre .title{
+	display: block;
+	color: #292a32;
+    font-size: 16px;
+    font-weight: 520;
+    margin-bottom: 3px;
+    margin-top: 5px;
+}
+
+.genre-layer .card .card-main .genre .year-nation {
+	display: block;
+	color: #292a32;
+    font-size: 14px;
+    font-weight: 400;
+    padding-bottom: 1px
+}
+
+.genre-layer .card .card-main .genre .rate {
+	display: block;
+	color: #555765;
+    font-size: 14px;
+    font-weight: 400;
+}

@@ -40,6 +40,41 @@ $('.reviews-slick').slick({
   slidesToScroll: 3
  });
 
+// 장르별 영화 slick
+$('.genre-movie').slick({
+  infinite: false,
+  arrows : true,
+  draggable : false,
+  speed: 300,
+  slidesToShow: 6,
+  slidesToScroll: 6,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+  ]
+});
+
 // 더보기를 눌렀을 때 나머지 출력
 $(".add").click((e) => {
 	e.preventDefault();

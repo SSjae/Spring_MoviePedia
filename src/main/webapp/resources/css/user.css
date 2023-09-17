@@ -720,7 +720,7 @@ header > .head-logo > img {
     margin: 105px auto 0px;
     border: 1px solid #e3e3e3;
     border-radius: 6px;
-    padding: 8px 0 0;
+	padding: 12px 7px 0px 0px;
 }
 
 .all-layer .review {
@@ -746,12 +746,13 @@ header > .head-logo > img {
 .all-layer .review .review-main {
     display: flex;
     flex-wrap: wrap;
+    margin: 11px 0 0 20px;
 }
 
 .all-layer .review .review-main .main {
-    width: 140px;
-    height: 242px;
-    padding: 0 5.4px 0 0;
+    width: 150px;
+    height: 271px;
+    padding: 0 9.4px 0 0;
 }
 
 .all-layer .review .review-main .main a {
@@ -791,7 +792,7 @@ header > .head-logo > img {
 }
 
 .all-layer .like {
-	width: 500px;
+	width: 503px;
 }
 
 .all-layer .like .text {
@@ -799,7 +800,7 @@ header > .head-logo > img {
     font-weight: 700;
     color: #292a32;
     letter-spacing: -0.4px;
-    margin: 0 0 0 20px;
+    margin: 0 0 0 15px;
 }
 
 .all-layer .like .text span {
@@ -813,12 +814,13 @@ header > .head-logo > img {
 .all-layer .like .like-main {
     display: flex;
     flex-wrap: wrap;
+    margin: 11px 0 0 15px;
 }
 
 .all-layer .like .like-main .main {
-    width: 140px;
-    height: 242px;
-    padding: 0 5.4px 0 0;
+    width: 150px;
+    height: 271px;
+    padding: 0 9.4px 0 0;
 }
 
 .all-layer .like .like-main .main a {

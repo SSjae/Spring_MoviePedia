@@ -1,8 +1,10 @@
 package com.moviepedia.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -175,5 +177,41 @@ public class MovieController {
 		model.addAttribute("movies", movies);
 		
 		return "movie/searchResult";
+	}
+	
+	// 장르별 영화
+	@GetMapping("/genre")
+	public String search(Model model) {
+		int mtotal = mservice.mtotal();
+		int rtotal = rservice.rtotal();
+		
+		// DB에서 모든 영화 장르만 가져옴(한 영화에 장르가 여러개)
+		ArrayList<String> list = mservice.allGenre();
+		
+		List<String> newList = new ArrayList<String>();
+		for(int i = 0; i < list.size(); i++) {
+			String[] result = list.get(i).split("/");
+			for(int j = 0; j < result.length; j++){
+				// 장르가 여러개 있기 때문에 ", " 기준으로 짤라서 다시 리스트에 넣음
+				newList.add(result[j]);
+			}
+		}
+		
+		// 중복 제거를 통해 모든 장르 뽑아냄
+		Set<String> genres = new HashSet<String>(newList);
+		
+		ArrayList<MainMovieListDTO> movieLists = new ArrayList<MainMovieListDTO>();
+		
+		for (String genre : genres) {
+			ArrayList<MovieDTO> genreMovie = mservice.genreMovie(genre);
+			movieLists.add(new MainMovieListDTO(genre, genreMovie, genre, true));
+		}
+
+		model.addAttribute("mtotal", mtotal);
+		model.addAttribute("rtotal", rtotal);
+		model.addAttribute("genres", genres);
+		model.addAttribute("movieLists", movieLists);
+		
+		return "movie/genre";
 	}
 }
