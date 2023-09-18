@@ -23,13 +23,14 @@
 	</c:if>
 	<c:import url="../import/header.jsp"></c:import>
 	<section class="genre-layer">
-		<c:forEach items="${genres }" var="genre">
-			<a href="#${genre }">${genre }</a>
-		</c:forEach>
-	
+		<div class="genre-href">
+			<c:forEach items="${genres }" var="genre">
+				<a href="#${genre }">${genre }</a>
+			</c:forEach>		
+		</div>
 		<c:forEach items="${movieLists}" var="movieLists">
+			<a id="${movieLists.title }"></a>
 			<div class="card">
-				<a id="${movieLists.title }"></a>
 				<div class="card-text">
 					${movieLists.title } 영화<span>${movieLists.movies.size() }</span><a href="${cp}/movie/movieAll?title=${movieLists.title}">${movieLists.all == false ? "" : "모두 보기 > "}</a>
 				</div>

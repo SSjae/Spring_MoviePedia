@@ -420,12 +420,12 @@
     letter-spacing: -1px;
 }
 
-.slick-track {
+.info-layer .slick-track {
     margin-left: 0 !important;
     margin-right: 0 !important;
 }
 
-.slick-prev {
+.info-layer .slick-prev {
 	left: -12px !important;
 }
 
@@ -433,12 +433,12 @@
 	right: 19px !important;
 }
 
-.slick-prev, .slick-next {
+.info-layer .slick-prev, .slick-next {
     z-index: 1;
     top: 51% !important;
 }
 
-.slick-prev:before, .slick-next:before {
+.info-layer .slick-prev:before, .slick-next:before {
     font-size: 23px !important;
     line-height: 0 !important;
     color: #e3e3e3 !important;
@@ -938,20 +938,20 @@
 }
 
 /* genre.jsp */
-.slick-prev {
+.genre-layer .slick-prev {
 	left: -29px !important;
 }
 
-.slick-next {
+.genre-layer .slick-next {
 	right: -15px !important;
 }
 
-.slick-prev, .slick-next {
+.genre-layer .slick-prev, .genre-layer .slick-next {
     z-index: 1;
     top: 39% !important;
 }
 
-.slick-prev:before, .slick-next:before {
+.genre-layer .slick-prev:before, .genre-layer .slick-next:before {
     font-size: 34px !important;
     line-height: 0 !important;
     color: rgb(0 0 0 / 20%) !important;
@@ -961,6 +961,22 @@
 	padding-top: 85px;
     max-width: 1320px;
     margin: 0 auto;
+}
+
+.genre-layer .genre-href {
+	display: flex;
+    width: 98.5%;
+    padding: 0 0 0px 8px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.genre-layer .genre-href a {
+	text-decoration: none;
+    color: #74747B;
+    font-size: 15px;
+    font-weight: normal;
+    margin: 0px 12px 5px 0;
 }
 
 .genre-layer .card .card-text {

@@ -1,6 +1,7 @@
 package com.moviepedia.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -198,7 +199,16 @@ public class MovieController {
 		}
 		
 		// 중복 제거를 통해 모든 장르 뽑아냄
-		Set<String> genres = new HashSet<String>(newList);
+		Set<String> set = new HashSet<String>(newList);
+		
+		// 모든 장르 중에서 6개 이상인 것만 넘김
+		List<String> genres = new ArrayList<String>();
+        for (String str : set) {
+        	// 갯수
+        	if(Collections.frequency(newList, str) >= 6) {
+        		genres.add(str);
+        	}
+        }
 		
 		ArrayList<MainMovieListDTO> movieLists = new ArrayList<MainMovieListDTO>();
 		
