@@ -25,6 +25,7 @@ import com.moviepedia.domain.MovieDTO;
 import com.moviepedia.domain.PhotoDTO;
 import com.moviepedia.domain.UserDTO;
 import com.moviepedia.domain.VideoDTO;
+import com.moviepedia.service.LikeMovieService;
 import com.moviepedia.service.MovieService;
 import com.moviepedia.service.ReviewService;
 
@@ -38,6 +39,9 @@ public class MovieController {
 
 	@Setter(onMethod_ = @Autowired)
 	private ReviewService rservice;
+	
+	@Setter(onMethod_ = @Autowired)
+	private LikeMovieService lservice;
 	
 	// 메인 페이지 넘어가기
 	// 영화 갯수, 리뷰 갯수, 개봉날짜(연도만)
@@ -99,6 +103,14 @@ public class MovieController {
 
 		String genre = movie.getMoviegenre().split("/")[0];
 		List<MovieDTO> similar = mservice.similarMovie(moviecode, genre);
+		
+		// graph
+		ArrayList<String> graphYear = new ArrayList<String>();
+		graphYear.addAll(rservice.reviewYear());
+		graphYear.addAll(lservice.likeMovieYear());
+		Set<String> al = new HashSet<String>(graphYear);
+		ArrayList<String> gYear = new ArrayList<>(al);
+		Collections.sort(gYear);
 
 		model.addAttribute("mtotal", mtotal);
 		model.addAttribute("rtotal", rtotal);
@@ -108,6 +120,7 @@ public class MovieController {
 		model.addAttribute("photos", photos);
 		model.addAttribute("videos", videos);
 		model.addAttribute("similar", similar);
+		model.addAttribute("gYear", gYear);
 		return "movie/movieInfo";
 	}
 	

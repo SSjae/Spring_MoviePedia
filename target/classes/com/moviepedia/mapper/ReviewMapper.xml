@@ -83,4 +83,8 @@
 	<select id="getComment" resultType="com.moviepedia.domain.CommentDTO">
 		select * from comment where reviewnum=#{reviewnum} and useremail=#{useremail}
 	</select>
+	
+	<select id="reviewYear" resultType="string">
+		select distinct year(reviewdate) from review;
+	</select>
 </mapper>

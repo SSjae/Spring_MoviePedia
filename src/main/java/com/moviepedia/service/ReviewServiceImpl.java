@@ -117,4 +117,9 @@ public class ReviewServiceImpl implements ReviewService {
 	public void uComment(String commentnum, String commentcontent) {
 		mapper.uComment(commentnum, commentcontent);
 	}
+	
+	@Override
+	public ArrayList<String> reviewYear() {
+		return mapper.reviewYear();
+	}
 }

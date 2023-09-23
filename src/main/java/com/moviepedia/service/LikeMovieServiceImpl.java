@@ -34,4 +34,9 @@ public class LikeMovieServiceImpl implements LikeMovieService {
 	public ArrayList<LikeMovieDTO> myLike(String useremail) {
 		return mapper.myLike(useremail);
 	}
+	
+	@Override
+	public ArrayList<String> likeMovieYear() {
+		return mapper.likeMovieYear();
+	}
 }

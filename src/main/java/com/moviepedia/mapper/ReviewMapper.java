@@ -50,4 +50,6 @@ public interface ReviewMapper {
 	boolean deleteComment(String commentnum);
 
 	void uComment(@Param("commentnum")String commentnum, @Param("commentcontent")String commentcontent);
+
+	ArrayList<String> reviewYear();
 }

@@ -46,5 +46,4 @@ public interface MovieService {
 	List<Map<String, Object>> autocomplete(Map<String, Object> paramMap);
 
 	ArrayList<MovieDTO> search(String keyword);
-
 }

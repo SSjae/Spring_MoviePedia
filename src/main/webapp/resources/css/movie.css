@@ -652,6 +652,55 @@
 	right: 0px !important;
 }
 
+.info-layer .info-main .gRadio {
+	display: flex;
+    justify-content: center;
+}
+
+.info-layer .info-main .gRadio p{
+	font-size: 15px;
+	line-height: 2rem;
+	padding: 0.2em 0.4em;
+}
+label {
+	vertical-align: middle;
+}
+
+[type="radio"] {
+  	vertical-align: middle;
+  	appearance: none;
+ 	border: max(2px, 0.1em) solid gray;
+  	border-radius: 50%;
+ 	width: 1.1em;
+  	height: 1.1em;
+    margin-right: 2px;
+}
+
+[type="radio"]:checked {
+	border: 0.4em solid #ff2f6e;
+}
+
+[type="radio"]:focus-visible {
+  outline: max(2px, 0.1em) dotted #ff2f6e;
+  outline-offset: max(2px, 0.1em);
+}
+
+[type="radio"]:hover {
+  box-shadow: 0 0 0 max(2px, 0.2em) lightgray;
+  cursor: pointer;
+}
+
+[type="radio"]:hover + label {
+  cursor: pointer;
+}
+
+.info-layer .info-main .graph #line-chart {
+	display: block !important;
+    height: 439px !important;
+    width: 850px !important;
+    margin: 8px auto 21px;
+}
+
 .info-layer .info-main .similars {
 	margin: 0 0 20px 24px;
 	display: flex;

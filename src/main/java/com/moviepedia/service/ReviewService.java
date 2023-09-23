@@ -48,4 +48,6 @@ public interface ReviewService {
 	boolean deleteComment(String commentnum);
 
 	void uComment(String commentnum, String commentcontent);
+
+	ArrayList<String> reviewYear();
 }

@@ -12,4 +12,6 @@ public interface LikeMovieService {
 	void removeLike(String moviecode, String useremail);
 
 	ArrayList<LikeMovieDTO> myLike(String useremail);
+
+	ArrayList<String> likeMovieYear();
 }

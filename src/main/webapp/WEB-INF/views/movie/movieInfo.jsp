@@ -152,6 +152,16 @@
 			
 			</div>
 			<input type="hidden" value="${movie.moviecode }" id="moviecode"/>
+			<hr>
+			<div class="graph">
+				<div class="main-text">평가 및 보고싶어요 현황</div>
+				<div class="gRadio">
+					<c:forEach items="${gYear}" var="year" varStatus="status">
+						<p><input type='radio' name='gYear' value='${year}' id='${year}' ${status.index == gYear.size()-1 ? 'checked' : ''}/><label for='${year}'>${year}</label></p>
+					</c:forEach>				
+				</div>
+				<canvas id="line-chart"></canvas>
+			</div>
 			<c:if test="${similar.size() != 0}">
 				<hr>
 				<div>
@@ -182,6 +192,7 @@
 <script src="http://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script type="text/javascript" src="${cp}/resources/js/movie.js"></script>
 <script type="text/javascript" src="${cp}/resources/js/import.js"></script>
 </html>
