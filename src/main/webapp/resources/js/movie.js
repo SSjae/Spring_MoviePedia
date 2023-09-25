@@ -240,6 +240,37 @@ $(document).ready(() => {
 	
 	// 이 영화에 코멘트가 있는 지 없는지에 따라 그려짐
 	allComment();
+
+	// 최근 연도의 그래프를 그리기 위해 값 가져옴
+	$.ajax({
+		url : ctx+"/movie/graph",
+		type : "get",
+		data : {"graphYear":$("#graphYear").val()},
+		dataType:"json",
+		success : function(result) {
+			new Chart(document.getElementById("line-chart"), {
+				type: 'line',
+				data: {
+					labels: result,
+					datasets: [{
+						data: [10,1,2,6,8,7,9,4,5,1,0,4],
+						label: "보고싶어요",
+						borderColor: "#3e95cd",
+						fill: false
+					}, {
+						data: [10,5,6,7,8,9,0,2,3,4,7,5],
+						label: "코멘트",
+						borderColor: "#8e5ea2",
+						fill: false
+					}
+					]
+				}
+			});
+		},
+		error : function() {
+			console.log("그래프 초기");
+		}
+	})
 })
 
 // 보고싶어요 클릭
@@ -418,23 +449,3 @@ const reviewDelete = () => {
 		})		
 	}
 }
-
-// graph
-new Chart(document.getElementById("line-chart"), {
-  type: 'line',
-  data: {
-    labels: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-    datasets: [{ 
-        data: [10,1,2,6,8,7,9,4,5,1,0,4],
-        label: "보고싶어요",
-        borderColor: "#3e95cd",
-        fill: false
-      }, { 
-        data: [10,5,6,7,8,9,0,2,3,4,7,5],
-        label: "코멘트",
-        borderColor: "#8e5ea2",
-        fill: false
-      }
-    ]
-  }
-});

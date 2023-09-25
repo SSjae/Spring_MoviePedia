@@ -2,6 +2,7 @@ package com.moviepedia.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -52,4 +53,8 @@ public interface ReviewMapper {
 	void uComment(@Param("commentnum")String commentnum, @Param("commentcontent")String commentcontent);
 
 	ArrayList<String> reviewYear();
+
+    ArrayList<String> reviewMonth(String yearInit);
+
+	List<Map<String, Integer>> reviewGCnt(String graphYear);
 }

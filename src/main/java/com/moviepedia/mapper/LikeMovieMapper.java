@@ -16,4 +16,6 @@ public interface LikeMovieMapper {
 	ArrayList<LikeMovieDTO> myLike(String useremail);
 
 	ArrayList<String> likeMovieYear();
+
+	ArrayList<String> likeMovieMonth(String yearInit);
 }

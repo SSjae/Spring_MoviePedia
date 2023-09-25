@@ -87,4 +87,8 @@
 	<select id="reviewYear" resultType="string">
 		select distinct year(reviewdate) from review;
 	</select>
+
+	<select id="reviewGCnt" resultType="map">
+		select month(reviewdate) as month, count(*) as cnt from review where year(reviewdate) = #{graphYear} group by month(reviewdate) order by month(reviewdate);
+	</select>
 </mapper>

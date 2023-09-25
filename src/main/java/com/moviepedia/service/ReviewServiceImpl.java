@@ -2,6 +2,7 @@ package com.moviepedia.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -121,5 +122,10 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public ArrayList<String> reviewYear() {
 		return mapper.reviewYear();
+	}
+
+	@Override
+	public List<Map<String, Integer>> reviewGCnt(String graphYear) {
+		return mapper.reviewGCnt(graphYear);
 	}
 }

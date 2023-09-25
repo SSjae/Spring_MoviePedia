@@ -153,6 +153,7 @@
 			</div>
 			<input type="hidden" value="${movie.moviecode }" id="moviecode"/>
 			<hr>
+			<input type="hidden" value="${yearInit }" id="graphYear"/>
 			<div class="graph">
 				<div class="main-text">평가 및 보고싶어요 현황</div>
 				<div class="gRadio">

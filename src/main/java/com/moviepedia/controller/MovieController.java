@@ -1,5 +1,6 @@
 package com.moviepedia.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -110,6 +111,8 @@ public class MovieController {
 		graphYear.addAll(lservice.likeMovieYear());
 		Set<String> al = new HashSet<String>(graphYear);
 		ArrayList<String> gYear = new ArrayList<>(al);
+		Collections.sort(gYear, Collections.reverseOrder());
+		String yearInit = gYear.get(0);
 		Collections.sort(gYear);
 
 		model.addAttribute("mtotal", mtotal);
@@ -121,6 +124,8 @@ public class MovieController {
 		model.addAttribute("videos", videos);
 		model.addAttribute("similar", similar);
 		model.addAttribute("gYear", gYear);
+		model.addAttribute("yearInit", yearInit);
+
 		return "movie/movieInfo";
 	}
 	
@@ -236,5 +241,40 @@ public class MovieController {
 		model.addAttribute("movieLists", movieLists);
 		
 		return "movie/genre";
+	}
+
+	// 초기에 그래프를 그리기 위한 정보(ajax)
+	// 1. 리뷰, 보고싶어요 연도 중 제일 최근 꺼 찾기
+	// 2. 현재 연도보다 작으면 1 ~ 12, 현재 연도이면 현재 1 ~ 현재 월
+	// 3. 그 월에 맞는 구간에 리뷰, 보고싶어요 수 구하기
+	@GetMapping("/graph")
+	@ResponseBody
+	public ArrayList<String> graph(String graphYear) {
+		// 연도에 맞는 월
+		ArrayList<String> graphMonth = new ArrayList<String>();
+		LocalDate now = LocalDate.now();
+		int yearNow = now.getYear();
+		int monthValue = now.getMonthValue();
+
+		if(Integer.parseInt(graphYear) < yearNow) {
+			for(int i = 1; i <= 12; i++) {
+				graphMonth.add(Integer.toString(i));
+			}
+		} else {
+			for(int i = 1; i <= monthValue; i++) {
+				graphMonth.add(Integer.toString(i));
+			}
+		}
+
+		// 그 월에 맞는 수
+		// review
+		List<Map<String, Integer>> reviewGCnt = rservice.reviewGCnt(graphYear);
+
+		System.out.println(reviewGCnt.get(0).get("month"));
+		System.out.println(reviewGCnt.get(1).get("6"));
+		System.out.println(reviewGCnt.get(2).get("7"));
+
+
+		return graphMonth;
 	}
 }
