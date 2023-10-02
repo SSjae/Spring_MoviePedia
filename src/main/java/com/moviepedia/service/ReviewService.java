@@ -2,7 +2,6 @@ package com.moviepedia.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import com.moviepedia.domain.CommentDTO;
 import com.moviepedia.domain.LikeReviewDTO;
@@ -49,8 +48,4 @@ public interface ReviewService {
 	boolean deleteComment(String commentnum);
 
 	void uComment(String commentnum, String commentcontent);
-
-	ArrayList<String> reviewYear();
-
-	List<Map<String, Integer>> reviewGCnt(String graphYear);
 }

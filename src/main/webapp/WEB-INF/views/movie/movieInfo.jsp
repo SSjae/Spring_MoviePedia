@@ -153,16 +153,6 @@
 			</div>
 			<input type="hidden" value="${movie.moviecode }" id="moviecode"/>
 			<hr>
-			<input type="hidden" value="${yearInit }" id="graphYear"/>
-			<div class="graph">
-				<div class="main-text">평가 및 보고싶어요 현황</div>
-				<div class="gRadio">
-					<c:forEach items="${gYear}" var="year" varStatus="status">
-						<p><input type='radio' name='gYear' value='${year}' id='${year}' ${status.index == gYear.size()-1 ? 'checked' : ''}/><label for='${year}'>${year}</label></p>
-					</c:forEach>				
-				</div>
-				<canvas id="line-chart"></canvas>
-			</div>
 			<c:if test="${similar.size() != 0}">
 				<hr>
 				<div>
