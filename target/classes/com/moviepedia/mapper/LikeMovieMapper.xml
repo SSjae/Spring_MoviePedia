@@ -19,8 +19,4 @@
 	<select id="myLike" resultType="com.moviepedia.domain.LikeMovieDTO">
 		select * from likemovie where useremail=#{useremail}
 	</select>
-	
-	<select id="likeMovieYear" resultType="string">
-		select distinct year(likedate) from likemovie;
-	</select>
 </mapper>
