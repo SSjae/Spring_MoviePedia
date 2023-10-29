@@ -152,7 +152,11 @@
 			
 			</div>
 			<input type="hidden" value="${movie.moviecode }" id="moviecode"/>
-			<hr>
+			<div>
+				<hr>
+				<canvas id="myChart" width="500" height="150"></canvas>
+				<input type="hidden" value="${month }" id="month"/>
+			</div>
 			<c:if test="${similar.size() != 0}">
 				<hr>
 				<div>
@@ -186,4 +190,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script type="text/javascript" src="${cp}/resources/js/movie.js"></script>
 <script type="text/javascript" src="${cp}/resources/js/import.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 </html>

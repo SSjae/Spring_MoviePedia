@@ -19,4 +19,8 @@
 	<select id="myLike" resultType="com.moviepedia.domain.LikeMovieDTO">
 		select * from likemovie where useremail=#{useremail}
 	</select>
+	
+	<select id="lCnt" resultType="com.moviepedia.domain.LikeMovieCntDTO">
+		SELECT month(likedate) as month, COUNT(*) as cnt FROM likemovie where moviecode = #{moviecode} GROUP BY DATE_FORMAT(likedate, '%m') order by month;
+	</select>
 </mapper>

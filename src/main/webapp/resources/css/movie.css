@@ -1045,3 +1045,8 @@
     font-size: 14px;
     font-weight: 400;
 }
+
+#myChart {
+	margin: 8px 0 8px 23px;
+    width: 965px !important;
+}

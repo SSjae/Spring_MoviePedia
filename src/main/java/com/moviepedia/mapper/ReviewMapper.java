@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.moviepedia.domain.CommentDTO;
 import com.moviepedia.domain.LikeReviewDTO;
+import com.moviepedia.domain.ReviewCntDTO;
 import com.moviepedia.domain.ReviewDTO;
 
 public interface ReviewMapper {
@@ -50,4 +51,8 @@ public interface ReviewMapper {
 	boolean deleteComment(String commentnum);
 
 	void uComment(@Param("commentnum")String commentnum, @Param("commentcontent")String commentcontent);
+
+	ArrayList<ReviewCntDTO> rCnt(String moviecode);
+	
+	
 }

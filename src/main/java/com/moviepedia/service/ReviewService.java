@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.moviepedia.domain.CommentDTO;
 import com.moviepedia.domain.LikeReviewDTO;
+import com.moviepedia.domain.ReviewCntDTO;
 import com.moviepedia.domain.ReviewDTO;
 
 public interface ReviewService {
@@ -48,4 +49,6 @@ public interface ReviewService {
 	boolean deleteComment(String commentnum);
 
 	void uComment(String commentnum, String commentcontent);
+
+	ArrayList<ReviewCntDTO> rCnt(String moviecode);
 }

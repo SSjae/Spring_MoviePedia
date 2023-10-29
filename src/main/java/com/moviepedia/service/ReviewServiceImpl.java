@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.moviepedia.domain.CommentDTO;
 import com.moviepedia.domain.LikeReviewDTO;
+import com.moviepedia.domain.ReviewCntDTO;
 import com.moviepedia.domain.ReviewDTO;
 import com.moviepedia.mapper.ReviewMapper;
 
@@ -116,5 +117,10 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public void uComment(String commentnum, String commentcontent) {
 		mapper.uComment(commentnum, commentcontent);
+	}
+	
+	@Override
+	public ArrayList<ReviewCntDTO> rCnt(String moviecode) {
+		return mapper.rCnt(moviecode);
 	}
 }

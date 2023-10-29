@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.moviepedia.domain.LikeMovieCntDTO;
 import com.moviepedia.domain.LikeMovieDTO;
 import com.moviepedia.mapper.LikeMovieMapper;
 
@@ -33,5 +34,10 @@ public class LikeMovieServiceImpl implements LikeMovieService {
 	@Override
 	public ArrayList<LikeMovieDTO> myLike(String useremail) {
 		return mapper.myLike(useremail);
+	}
+	
+	@Override
+	public ArrayList<LikeMovieCntDTO> lCnt(String moviecode) {
+		return mapper.lCnt(moviecode);
 	}
 }

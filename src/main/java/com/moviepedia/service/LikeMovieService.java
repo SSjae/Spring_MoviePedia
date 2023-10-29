@@ -2,6 +2,7 @@ package com.moviepedia.service;
 
 import java.util.ArrayList;
 
+import com.moviepedia.domain.LikeMovieCntDTO;
 import com.moviepedia.domain.LikeMovieDTO;
 
 public interface LikeMovieService {
@@ -12,4 +13,6 @@ public interface LikeMovieService {
 	void removeLike(String moviecode, String useremail);
 
 	ArrayList<LikeMovieDTO> myLike(String useremail);
+
+	ArrayList<LikeMovieCntDTO> lCnt(String moviecode);
 }

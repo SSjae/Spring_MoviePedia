@@ -240,6 +240,43 @@ $(document).ready(() => {
 	
 	// 이 영화에 코멘트가 있는 지 없는지에 따라 그려짐
 	allComment();
+	
+	// 보고싶어요, 리뷰 현황 차트
+	$.ajax({
+		url : ctx+"/movie/chart",
+		type : "get",
+		data : {"moviecode":$("#moviecode").val()},
+		dataType:"json",
+		success : function(result) {
+			const myChart = new Chart(document.getElementById('myChart'), {
+			    type: 'line',
+			    data: {
+			        labels: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+			        datasets: [
+			        	{
+			        		label: '보고싶어요',
+			        		data: result.likeMovie,
+			        		fill: false,
+			        		borderWidth: 2,
+			        		borderColor: '#F3B0BB',
+			        		backgroundColor: '#F3B0BB'
+			        	},
+			        	{
+			                label: '코멘트',
+			                data: result.review,
+			        		fill: false,
+			                borderWidth: 2,
+			        		borderColor: '#E3385D',
+			                backgroundColor: '#E3385D'
+			            }
+			        ]
+			    }
+			});
+		},
+		error : function() {
+			console.log("리뷰 로딩");
+		}
+	})
 })
 
 // 보고싶어요 클릭
@@ -418,3 +455,4 @@ const reviewDelete = () => {
 		})		
 	}
 }
+

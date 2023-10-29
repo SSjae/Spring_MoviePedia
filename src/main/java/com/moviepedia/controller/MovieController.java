@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.moviepedia.domain.ActorDTO;
+import com.moviepedia.domain.LikeMovieCntDTO;
 import com.moviepedia.domain.MainMovieListDTO;
 import com.moviepedia.domain.MovieDTO;
 import com.moviepedia.domain.PhotoDTO;
+import com.moviepedia.domain.ReviewCntDTO;
 import com.moviepedia.domain.UserDTO;
 import com.moviepedia.domain.VideoDTO;
 import com.moviepedia.service.LikeMovieService;
@@ -98,7 +100,7 @@ public class MovieController {
 
 		String genre = movie.getMoviegenre().split("/")[0];
 		List<MovieDTO> similar = mservice.similarMovie(moviecode, genre);
-
+		
 		model.addAttribute("mtotal", mtotal);
 		model.addAttribute("rtotal", rtotal);
 		model.addAttribute("movie", movie);
@@ -120,6 +122,46 @@ public class MovieController {
 		model.addAttribute("movie", movie);
 		
 		return "movie/movieDetail";
+	}
+	
+	// 보고싶어요, 리뷰 현황
+	@GetMapping("/chart")
+	@ResponseBody
+	public Map<String, ArrayList<Integer>> chart(String moviecode) {
+		Map<String, ArrayList<Integer>> chart = new HashMap<String, ArrayList<Integer>>();
+		
+		ArrayList<Integer> likeMovieCnt = new ArrayList<Integer>();
+		ArrayList<Integer> reviewCnt = new ArrayList<Integer>();
+		
+		ArrayList<LikeMovieCntDTO> LC = lservice.lCnt(moviecode);
+		for(int i = 0; i < 12; i++) {
+			for(LikeMovieCntDTO lc : LC) {
+				if(lc.getMonth() == i+1) {
+					likeMovieCnt.add(i, lc.getCnt());
+					break;
+				} else {
+					likeMovieCnt.add(i, 0);
+				}
+			}
+		}
+		
+		ArrayList<ReviewCntDTO> RC = rservice.rCnt(moviecode);
+		for(int i = 0; i < 12; i++) {
+			for(ReviewCntDTO rc : RC) {
+				if(rc.getMonth() == i+1) {
+					reviewCnt.add(i, rc.getCnt());
+					break;
+				} else {
+					reviewCnt.add(i, 0);
+				}
+			}
+		}
+		
+		
+		chart.put("likeMovie", likeMovieCnt);
+		chart.put("review", reviewCnt);
+		
+		return chart;
 	}
 	
 	// 비슷한 장르 더보기

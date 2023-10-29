@@ -83,4 +83,8 @@
 	<select id="getComment" resultType="com.moviepedia.domain.CommentDTO">
 		select * from comment where reviewnum=#{reviewnum} and useremail=#{useremail}
 	</select>
+	
+	<select id="rCnt" resultType="com.moviepedia.domain.ReviewCntDTO">
+		SELECT month(reviewdate) as month, COUNT(*) as cnt FROM review where moviecode = #{moviecode} GROUP BY DATE_FORMAT(reviewdate, '%m') order by month;
+	</select>
 </mapper>
