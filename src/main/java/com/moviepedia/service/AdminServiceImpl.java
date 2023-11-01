@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -49,6 +47,7 @@ public class AdminServiceImpl implements AdminService{
         
         // 사이트에 있는 박스오피스 영화 코드 movieCodes에 중복 있는 거 제외하고 저장 및 따로도 저장
         boxOffices = boxOffices();
+        
         movieCodes.addAll(boxOffices); // movieCodes 뒤에 boxOffices 붙이기
         
         // 중복을 방지하기 위해 List -> Set -> List로 변경
@@ -75,55 +74,93 @@ public class AdminServiceImpl implements AdminService{
         		Document docVideo = null;
         		
         		try {
-        			docMovie = Jsoup.connect(movieURL).get();
-        			docMovie2 = Jsoup.connect(movieURL2).get();
-        			Elements movieSel = docMovie.select("#root .css-99klbh");
-        			Elements movieSel2 = docMovie2.select("#root .css-18gwkcr .css-1gkas1x-Grid ul dl");
-        			
-        			String movietitle = movieSel.select(".css-1p7n6er-Pane .css-171k8ad-Title").text();
+        			docMovie = Jsoup.connect(movieURL).userAgent("Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36")
+        			           							.header("scheme", "https")
+        			           							.header("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8")
+        			           							.header("accept-encoding", "gzip, deflate, br")
+        			           							.header("accept-language", "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7,es;q=0.6")
+        			           							.header("cache-control", "no-cache")
+        			           							.header("pragma", "no-cache")
+        			           							.header("upgrade-insecure-requests", "1")
+        			           							.get();
+        			docMovie2 = Jsoup.connect(movieURL2).userAgent("Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36")
+						        			           .header("scheme", "https")
+						        			           .header("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8")
+						        			           .header("accept-encoding", "gzip, deflate, br")
+						        			           .header("accept-language", "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7,es;q=0.6")
+						        			           .header("cache-control", "no-cache")
+						        			           .header("pragma", "no-cache")
+						        			           .header("upgrade-insecure-requests", "1")
+						        			           .get();
+        		
+        			Elements movieSel = docMovie.select("#root");
+        			Elements movieSel2 = docMovie2.select("#root .css-8ijtco-Main-setMainPaddingForXs-setMainPaddingForOverSm .css-1gkas1x-Grid ul dl");
+       			
+        			String movietitle = movieSel.select(".css-ysnb50-StyledWallpaperContainer .css-1tlhtfm-StyledTitle").text();
         			String movierelease = movieSel2.get(1).select("dd").text();
         			String movienation = movieSel2.get(2).select("dd").text();
         			movienation = movienation.replace(",", "/");
         			String moviegenre = movieSel2.get(3).select("dd").text();
         			String movietime = movieSel2.get(4).select("dd").text();
         			String moviegrade = movieSel2.get(5).select("dd").text();
-        			String moviedirector = movieSel.select(".css-1s8bs5j .css-13avw3k-PeopleUlRow ul li").get(0).select("a .css-zoy7di .css-17vuhtq").text();
         			String moviesummary = movieSel2.get(6).select("dd").text();
-        			String movieimg = movieSel.select(".css-10ofaaw .css-569z5v img").attr("src");
+        			String movieimg = movieSel.select(".css-kk84tq-StyledContentInfoSection .css-1hh6j5c-StyledLazyLoadingImage-posterStyle-LazyLoadingImg img").attr("src");
         			
-        			MovieDTO m = new MovieDTO(movieCodes.get(i), movietitle, movierelease, movienation, moviegenre, movietime, moviegrade, moviedirector, moviesummary, movieimg);
+        			MovieDTO m = new MovieDTO(movieCodes.get(i), movietitle, movierelease, movienation, moviegenre, movietime, moviegrade, moviesummary, movieimg);
         			
         			movie.add(m);
         			
-        			// 액터 크롤링
-        			String actorURL = "https://pedia.watcha.com/ko-KR/contents/" + movieCodes.get(i);
-        			docActor = Jsoup.connect(actorURL).get();
-        			Elements actorSel = docActor.select("#root .css-5jq76 .css-99klbh .css-1s8bs5j #content_credits .css-usdi1z ul li");
+        			movietitle = movietitle.replace(" ", "");
+        			System.out.println(movietitle + " - " + (i+1));
         			
-        			for(int l = 0; l < actorSel.size(); l++) {
-        				String actorcode = actorSel.get(l).select("a").attr("href").substring(14);
-        			    String actorname = actorSel.get(l).select("a .css-qkf9j .css-17vuhtq").text();
-        			    String actorpart = actorSel.get(l).select("a .css-qkf9j .css-1evnpxk-StyledSubtitle").text();
-        			    String actorimg = "";
-        			    
-        			    // actorimg 구하는 코드
-        			    Pattern pattern = Pattern.compile("[(](.*?)[)]");
-            			Matcher matcher = pattern.matcher(actorSel.get(l).select("a .css-cssveg .profilePhotoBlock style").html());
-            			while (matcher.find()) {  // 일치하는 게 있다면  
-            				actorimg = matcher.group(1);
-            					    		    
-            			    if(matcher.group(1) ==  null)
-            			    	break;
-            			}
-        			    
-        			    ActorDTO a = new ActorDTO(actorcode, movieCodes.get(i), actorname, actorpart, actorimg);
-        			    
-        			    actor.add(a);
+        			// 액터 크롤링
+        			String actorURL = "https://search.naver.com/search.naver?query=영화%20"+movietitle+"%20출연진";
+        			docActor = Jsoup.connect(actorURL).userAgent("Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36")
+							     			           .header("scheme", "https")
+							     			           .header("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8")
+							     			           .header("accept-encoding", "gzip, deflate, br")
+							     			           .header("accept-language", "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7,es;q=0.6")
+							     			           .header("cache-control", "no-cache")
+							     			           .header("pragma", "no-cache")
+							     			           .header("upgrade-insecure-requests", "1")
+							     			           .get();
+        			Elements actorSel = docActor.select("#wrap #container #main_pack .cm_content_wrap .sec_scroll_cast_member .cast_box");
+        			
+        			// 감독 먼저 따로 액터에 넣는다.
+        			String moviedirector = actorSel.get(0).select(".cast_list .item .title_box .name ._text").text();
+        			String moviedirectorpart = actorSel.get(0).select(".cast_list .item .title_box .sub_text ._text").text();
+        			String moviedirectorimg = actorSel.get(0).select(".cast_list .item .thumb img").attr("src");
+        			
+        			ActorDTO a = new ActorDTO(movieCodes.get(i), moviedirector, moviedirectorpart, moviedirectorimg);
+        			
+    			    actor.add(a);
+
+        			for(int l = 1; l < actorSel.size(); l++) {
+        				Elements s = actorSel.get(l).select(".cast_list li");
+        				for(int n = 0; n < s.size(); n++) {
+            			    String actorname = s.get(n).select(".item .title_box .name ._text").text();
+            			    String actorpart = s.get(n).select(".item .title_box .sub_text ._text").text();
+            			    String actorimg = s.get(n).select(".item .thumb img").attr("src");
+            			    
+            			    a = new ActorDTO(movieCodes.get(i), actorname, actorpart, actorimg);
+            			    
+            			    actor.add(a);
+        				}
         			}
         			
+        			System.out.println(actor.size());
+        			
         			// 포토 크롤링
-        			String photoURL = "https://search.naver.com/search.naver?query=영화+"+movietitle+"+포토";
-        			docPhoto = Jsoup.connect(photoURL).get();
+        			String photoURL = "https://search.naver.com/search.naver?query=영화%20"+movietitle+"%20포토";
+        			docPhoto = Jsoup.connect(photoURL).userAgent("Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36")
+							     			           .header("scheme", "https")
+							     			           .header("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8")
+							     			           .header("accept-encoding", "gzip, deflate, br")
+							     			           .header("accept-language", "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7,es;q=0.6")
+							     			           .header("cache-control", "no-cache")
+							     			           .header("pragma", "no-cache")
+							     			           .header("upgrade-insecure-requests", "1")
+							     			           .get();
         			Elements photoSel = docPhoto.select("#wrap #container #main_pack .cm_content_wrap .cm_pure_box .movie_photo_list ul li");
         			
         			for(int x = 0; x < photoSel.size(); x++) {
@@ -132,24 +169,39 @@ public class AdminServiceImpl implements AdminService{
         				PhotoDTO p = new PhotoDTO(movieCodes.get(i), photoimg);
         				
         				photo.add(p);
+        				
         			}
         			
+        			System.out.println(photo.size());
+        			
         			// 비디오 크롤링
-        			String videoURL = "https://search.naver.com/search.naver?query=영화+"+movietitle+"+무비클립";
-        			docVideo = Jsoup.connect(videoURL).get();
-        			Elements videoSel = docVideo.select("#wrap #container #main_pack .cm_content_wrap ._sec_movie_clip_trailer .video_list ul li");
+        			String videoURL = "https://search.naver.com/search.naver?query=영화%20"+movietitle+"%20예고편";
+        			docVideo = Jsoup.connect(videoURL).userAgent("Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36")
+							     			           .header("scheme", "https")
+							     			           .header("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8")
+							     			           .header("accept-encoding", "gzip, deflate, br")
+							     			           .header("accept-language", "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7,es;q=0.6")
+							     			           .header("cache-control", "no-cache")
+							     			           .header("pragma", "no-cache")
+							     			           .header("upgrade-insecure-requests", "1")
+							     			           .get();
+        			Elements videoSel = docVideo.select("#wrap #container #main_pack .cm_content_wrap ._sec_movie_clip_trailer .area_video_list_box ul li");
         			
         			for(int y = 0; y < videoSel.size(); y++) {
-        				String videoimg = videoSel.get(y).select("a .video_thumbnail img").attr("src");
-        				String videoaddr = videoSel.get(y).select("a").attr("href");
-        				String videotitle = videoSel.get(y).select("a .video_info .video_title").text();
+        				String videoimg = videoSel.get(y).select(".video_thmb a img").attr("src");
+        				String videoaddr = videoSel.get(y).select(".video_thmb a").attr("href");
+        				String videotitle = videoSel.get(y).select(".area_info a").text();
         				
         				VideoDTO v = new VideoDTO(movieCodes.get(i), videoimg, videoaddr, videotitle);
         				
         				video.add(v);
         			}
-        		} catch (Exception e) {}
-        		System.out.println(i);
+        			
+        			System.out.println(video.size());
+        			
+        		} catch (Exception e) {
+                    System.out.println("예외메시지 : " + e.getMessage());
+        		}
         	}
         }
 		
@@ -241,8 +293,8 @@ public class AdminServiceImpl implements AdminService{
 		
 		try {
 			docRank = Jsoup.connect(rankURL).get();
-			Elements elemRank = docRank.select("#root .css-99klbh .css-7klu3x .w_exposed_cell");
-			Elements ele = elemRank.get(0).select(".css-1qq59e8 .css-119xxd7 ul li");
+			Elements elemRank = docRank.select("#root .css-126e3ta-NavContainer .css-lifknt-Self .w_exposed_cell");
+			Elements ele = elemRank.get(0).select(".css-7v9338-StyledHorizontalScrollOuterContainer-createMediaQuery-createMediaQuery-createMediaQuery-createMediaQuery-createMediaQuery-createMediaQuery ul li");
 
 			for(int z = 0; z < ele.size(); z++) {
 				String code = ele.get(z).select("a").attr("href").substring(16);

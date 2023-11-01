@@ -11,8 +11,6 @@ import lombok.RequiredArgsConstructor;
 public class ActorDTO {
 	private int actornum;
 	@NonNull
-	private String actorcode;
-	@NonNull
     private String moviecode;
 	@NonNull
     private String actorname;

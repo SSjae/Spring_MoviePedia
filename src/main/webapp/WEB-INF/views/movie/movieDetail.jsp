@@ -30,9 +30,6 @@
 				<span class="title">제목</span><span class="content">${movie.movietitle }</span>
 			</div>
 			<div>
-				<span class="title">감독</span><span class="content">${movie.moviedirector }</span>
-			</div>
-			<div>
 				<span class="title">제작 연도</span><span class="content">${movie.movierelease }</span>
 			</div>
 			<div>

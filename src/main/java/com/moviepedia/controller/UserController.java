@@ -78,7 +78,7 @@ public class UserController {
 		for(int i = 0; i < list.size(); i++) {
 			String[] result = list.get(i).split("/");
 			for(int j = 0; j < result.length; j++){
-				// 장르가 여러개 있기 때문에 ", " 기준으로 짤라서 다시 리스트에 넣음
+				// 장르가 여러개 있기 때문에 "/" 기준으로 짤라서 다시 리스트에 넣음
 				newList.add(result[j]);
 			}
 		}

@@ -24,8 +24,6 @@ public class MovieDTO {
 	@NonNull
     private String moviegrade;
 	@NonNull
-    private String moviedirector;
-	@NonNull
     private String moviesummary;
 	@NonNull
     private String movieimg;

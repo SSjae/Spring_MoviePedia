@@ -154,6 +154,7 @@
 			<input type="hidden" value="${movie.moviecode }" id="moviecode"/>
 			<div>
 				<hr>
+				<div class="main-text">보고싶어요 및 코멘트 현황</div>
 				<canvas id="myChart" width="500" height="150"></canvas>
 				<input type="hidden" value="${month }" id="month"/>
 			</div>

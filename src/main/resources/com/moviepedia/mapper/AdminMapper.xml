@@ -5,17 +5,17 @@
   
 <mapper namespace="com.moviepedia.mapper.AdminMapper">
 	<insert id="minsert">
-		insert into movie(moviecode, movietitle, movierelease, movienation, moviegenre, movietime, moviegrade, moviedirector, moviesummary, movieimg) values
+		insert into movie(moviecode, movietitle, movierelease, movienation, moviegenre, movietime, moviegrade, moviesummary, movieimg) values
 		<foreach collection="list" item="item" separator=",">
 			(#{item.moviecode}, #{item.movietitle}, #{item.movierelease},
 			#{item.movienation}, #{item.moviegenre}, #{item.movietime}, #{item.moviegrade},
-			#{item.moviedirector}, #{item.moviesummary}, #{item.movieimg})
+			#{item.moviesummary}, #{item.movieimg})
 		</foreach>
 	</insert>
 	<insert id="ainsert">
-		insert into actor(actorcode, moviecode, actorname, actorpart, actorimg) values
+		insert into actor(moviecode, actorname, actorpart, actorimg) values
 		<foreach collection="list" item="item" separator=",">
-			(#{item.actorcode}, #{item.moviecode}, #{item.actorname},
+			(#{item.moviecode}, #{item.actorname},
 			#{item.actorpart}, #{item.actorimg})
 		</foreach>
 	</insert>
